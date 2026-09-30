@@ -1,6 +1,8 @@
 """milessic-themes: a tiny read-only API that serves theme stylesheets.
 
 GET /                          gallery page (every component, live theme switcher)
+GET /manifesto                 MANIFESTO.md rendered in a themed overlay
+GET /manifesto.md              MANIFESTO.md as raw markdown
 GET /health                    liveness probe
 GET /api/themes                registry: all themes + their URLs
 GET /api/themes/{key}          one theme
@@ -17,9 +19,10 @@ import os
 from functools import lru_cache
 from pathlib import Path
 
+import markdown
 from fastapi import FastAPI, HTTPException, Request
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.responses import FileResponse, JSONResponse, Response
+from fastapi.responses import FileResponse, HTMLResponse, JSONResponse, Response
 
 ROOT = Path(__file__).resolve().parent.parent
 THEMES_DIR = ROOT / "themes"
@@ -43,6 +46,14 @@ def registry() -> dict:
 @lru_cache
 def read(path: Path) -> str:
     return path.read_text()
+
+
+@lru_cache
+def manifesto_html() -> str:
+    body = markdown.markdown(read(ROOT / "MANIFESTO.md"), extensions=["fenced_code", "tables", "toc"])
+    # Tables pick up the shared component styling and scroll on narrow screens.
+    body = body.replace("<table>", '<div class="scroll-x"><table class="data">').replace("</table>", "</table></div>")
+    return read(ROOT / "manifesto.html").replace("{{content}}", body)
 
 
 def theme_or_404(key: str) -> dict:
@@ -81,6 +92,16 @@ def base_url(request: Request) -> str:
 @app.get("/", include_in_schema=False)
 def gallery():
     return FileResponse(ROOT / "index.html")
+
+
+@app.get("/manifesto", include_in_schema=False)
+def manifesto():
+    return HTMLResponse(manifesto_html())
+
+
+@app.get("/manifesto.md", include_in_schema=False)
+def manifesto_md(request: Request):
+    return asset(request, read(ROOT / "MANIFESTO.md"), "text/markdown")
 
 
 @app.get("/health")

@@ -27,6 +27,8 @@ given theme). Tests: `pytest`.
 | Method | Path                     | Returns                                                              |
 |--------|--------------------------|----------------------------------------------------------------------|
 | GET    | `/`                      | Gallery page                                                         |
+| GET    | `/manifesto`             | MANIFESTO.md rendered in an overlay wearing the current theme (`?theme=` works too) |
+| GET    | `/manifesto.md`          | MANIFESTO.md as raw markdown                                         |
 | GET    | `/health`                | `{"status": "ok", "version": "1.0.0"}`                               |
 | GET    | `/api/themes`            | Registry: version, default, `base_url`, `script_url`, themes[]       |
 | GET    | `/api/themes/{key}`      | One theme: key, label, scheme (`auto`/`light`/`dark`), description, `bundle_url`, `overlay_url` |
@@ -46,6 +48,7 @@ themes/base.css        tokens + component contract + system/light/dark
 themes/<key>.css       overlay, every selector scoped to [data-theme="<key>"]
 static/themes.js       client helper
 server/main.py         the API
+manifesto.html         /manifesto page template (markdown rendered server-side)
 index.html             gallery
 tests/                 API + contract tests
 ```

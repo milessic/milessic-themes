@@ -24,6 +24,18 @@ def test_gallery():
     assert r.status_code == 200 and "data-milessic-theme" in r.text
 
 
+def test_manifesto():
+    r = client.get("/manifesto")
+    assert r.status_code == 200 and r.headers["content-type"].startswith("text/html")
+    assert "data-milessic-theme" in r.text and "{{content}}" not in r.text
+    assert "<h1" in r.text and '<table class="data">' in r.text
+
+
+def test_manifesto_md():
+    r = client.get("/manifesto.md")
+    assert r.status_code == 200 and r.text == (ROOT / "MANIFESTO.md").read_text()
+
+
 def test_list_themes():
     body = client.get("/api/themes").json()
     assert body["version"] == REGISTRY["version"]
