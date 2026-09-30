@@ -1,0 +1,148 @@
+/* ------------------------------------------------------------------------
+   Bevel theme (mid-90s desktop): teal desktop, 3D bevels,
+   navy title bars and a taskbar at the bottom.
+   ------------------------------------------------------------------------ */
+:root[data-theme="bevel"] {
+  color-scheme: light;
+  --page: #008080;
+  --surface: #c0c0c0;
+  --surface-2: #d4d0c8;
+  --ink: #000000;
+  --ink-2: #000000;
+  --muted: #404040;
+  --line: #808080;
+  --line-strong: #000000;
+  --accent: #000080;
+  --accent-ink: #ffffff;
+  --danger: #800000;
+  --success-text: #006300;
+  --ring: #000000;
+  --radius: 0;
+  --raised: inset -1px -1px 0 #0a0a0a, inset 1px 1px 0 #ffffff, inset -2px -2px 0 #808080, inset 2px 2px 0 #dfdfdf;
+  --sunken: inset -1px -1px 0 #ffffff, inset 1px 1px 0 #808080, inset -2px -2px 0 #dfdfdf, inset 2px 2px 0 #0a0a0a;
+  --pressed: inset -1px -1px 0 #ffffff, inset 1px 1px 0 #0a0a0a, inset -2px -2px 0 #dfdfdf, inset 2px 2px 0 #808080;
+  font-family: "MS Sans Serif", "Microsoft Sans Serif", Tahoma, "Segoe UI", Geneva, sans-serif;
+}
+[data-theme="bevel"] body { font-size: 12px; background: var(--page); }
+[data-theme="bevel"] a { color: #0000ee; }
+[data-theme="bevel"] h1 { font-size: 1.35rem; }
+[data-theme="bevel"] h2 { font-size: 1rem; }
+[data-theme="bevel"] .page-head h1 { color: #fff; text-shadow: 1px 1px 0 #000; }
+[data-theme="bevel"] .page-head h1 .muted { color: #e0e0e0; }
+[data-theme="bevel"] .page-head label,
+[data-theme="bevel"] .legend { color: #fff; text-shadow: 1px 1px 0 #000; }
+[data-theme="bevel"] .page-head .btn.ghost { color: #000; text-shadow: none; }
+
+/* taskbar */
+[data-theme="bevel"] .topbar {
+  position: fixed; top: auto; bottom: 0; left: 0; right: 0; z-index: 10;
+  background: #c0c0c0; border: none; box-shadow: inset 0 1px 0 #dfdfdf, inset 0 2px 0 #fff;
+  padding: 4px 4px 3px; gap: 4px;
+}
+[data-theme="bevel"] .container { padding-bottom: 5rem; }
+[data-theme="bevel"] .brand {
+  color: #000; font-weight: 700; padding: .2rem .6rem; box-shadow: var(--raised); background: #c0c0c0; white-space: nowrap;
+}
+[data-theme="bevel"] .brand::before {
+  content: ""; display: inline-block; width: 12px; height: 12px; margin-right: 5px; vertical-align: -1px;
+  background: conic-gradient(#ff0000 0 25%, #00a000 0 50%, #ffcc00 0 75%, #0000ff 0);
+}
+[data-theme="bevel"] .nav { gap: 3px; }
+[data-theme="bevel"] .nav a {
+  color: #000; border-radius: 0; padding: .2rem .7rem; box-shadow: var(--raised); background: #c0c0c0; min-width: 90px;
+}
+[data-theme="bevel"] .nav a:hover { background: #c0c0c0; }
+[data-theme="bevel"] .nav a.active {
+  box-shadow: var(--pressed); font-weight: 700;
+  background: repeating-conic-gradient(#c0c0c0 0 25%, #ffffff 0 50%) 0 0 / 2px 2px;
+}
+[data-theme="bevel"] .topbar-end { box-shadow: var(--sunken); padding: 2px 4px 2px 8px; }
+[data-theme="bevel"] .topbar-end .muted { color: #000; }
+
+/* windows */
+[data-theme="bevel"] .card {
+  position: relative; background: #c0c0c0; border: none; box-shadow: var(--raised);
+  padding: 2.2rem 1rem 1rem;
+}
+[data-theme="bevel"] .card::before {
+  content: ""; position: absolute; left: 3px; right: 3px; top: 3px; height: 18px;
+  background: linear-gradient(90deg, #000080, #1084d0);
+}
+[data-theme="bevel"] .card::after {
+  content: "×"; position: absolute; right: 6px; top: 5px; width: 16px; height: 14px;
+  background: #c0c0c0; box-shadow: var(--raised); color: #000; font: 700 12px/13px Tahoma, sans-serif; text-align: center;
+}
+
+[data-theme="bevel"] .tile { background: #fff; border-radius: 0; box-shadow: var(--sunken); }
+
+/* controls */
+[data-theme="bevel"] .btn {
+  background: #c0c0c0; color: #000; border: none; border-radius: 0; box-shadow: var(--raised);
+  padding: .35rem 1rem; min-width: 75px; justify-content: center;
+}
+[data-theme="bevel"] .btn:hover { background: #c0c0c0; }
+[data-theme="bevel"] .btn:active { box-shadow: var(--pressed); }
+[data-theme="bevel"] .btn.primary { color: #000; background: #c0c0c0; outline: 1px solid #000; outline-offset: -1px; }
+[data-theme="bevel"] .btn.primary:hover { filter: none; }
+[data-theme="bevel"] .btn.ghost { box-shadow: var(--raised); background: #c0c0c0; }
+[data-theme="bevel"] .btn.danger { color: var(--danger); }
+[data-theme="bevel"] .btn.small { min-width: 0; padding: .15rem .6rem; }
+[data-theme="bevel"] .btn:focus-visible { outline: 1px dotted #000; outline-offset: -5px; }
+[data-theme="bevel"] input,
+[data-theme="bevel"] select,
+[data-theme="bevel"] textarea { background: #fff; color: #000; border: none; border-radius: 0; box-shadow: var(--sunken); padding: .35rem .5rem; }
+[data-theme="bevel"] input:focus-visible,
+[data-theme="bevel"] select:focus-visible,
+[data-theme="bevel"] textarea:focus-visible { outline: 1px dotted #000; outline-offset: -4px; }
+[data-theme="bevel"] input[type="checkbox"],
+[data-theme="bevel"] input[type="radio"] { accent-color: #000080; }
+[data-theme="bevel"] label { color: #000; }
+[data-theme="bevel"] .chip { border: none; border-radius: 0; box-shadow: var(--raised); background: #c0c0c0; color: #000; text-shadow: none; }
+[data-theme="bevel"] .chip.on { box-shadow: var(--pressed); background: repeating-conic-gradient(#c0c0c0 0 25%, #fff 0 50%) 0 0 / 2px 2px; color: #000; }
+[data-theme="bevel"] .segmented { border: none; border-radius: 0; gap: 2px; }
+[data-theme="bevel"] .segmented span { box-shadow: var(--raised); color: #000; display: block; }
+[data-theme="bevel"] .segmented input:checked + span { box-shadow: var(--pressed); background: #fff; color: #000; }
+[data-theme="bevel"] kbd { border: none; box-shadow: var(--raised); background: #c0c0c0; border-radius: 0; }
+[data-theme="bevel"] summary { color: #000; }
+
+/* list views */
+[data-theme="bevel"] .scroll-x { background: #fff; box-shadow: var(--sunken); padding: 2px; }
+[data-theme="bevel"] table.data { background: #fff; }
+[data-theme="bevel"] .data th {
+  color: #000; text-transform: none; letter-spacing: 0; font-size: .95em; font-weight: 400;
+  background: #c0c0c0; box-shadow: var(--raised); border: none; padding: .25rem .6rem;
+}
+[data-theme="bevel"] .data td { border-bottom: none; padding: .3rem .6rem; }
+[data-theme="bevel"] table.selectable tbody tr:hover { background: #fff; }
+[data-theme="bevel"] table.selectable tbody tr.selected { background: #000080; color: #fff; }
+[data-theme="bevel"] table.selectable tbody tr.selected .tag { background: #000080; color: #fff; border-color: #fff; }
+[data-theme="bevel"] .tag { background: #fff; border: 1px solid #808080; border-radius: 0; color: #000; }
+
+/* dialogs and tooltips */
+[data-theme="bevel"] .flash {
+  background: #c0c0c0; border: none !important; border-radius: 0; box-shadow: var(--raised); padding: .6rem .9rem .6rem 2.6rem; position: relative;
+}
+[data-theme="bevel"] .flash::before {
+  position: absolute; left: .7rem; top: 50%; transform: translateY(-50%); width: 1.3rem; height: 1.3rem;
+  border-radius: 50%; color: #fff; font-weight: 700; text-align: center; line-height: 1.3rem; font-size: .8rem;
+}
+[data-theme="bevel"] .flash.error::before { content: "✕"; background: #ff0000; }
+[data-theme="bevel"] .flash.info::before { content: "i"; background: #0000ff; font-family: Georgia, serif; }
+[data-theme="bevel"] .flash.success::before { content: "✓"; background: #008000; }
+[data-theme="bevel"] .tooltip { background: #ffffe1; color: #000; border: 1px solid #000; border-radius: 0; box-shadow: none; }
+[data-theme="bevel"] .secret { background: #fff; border-radius: 0; box-shadow: var(--sunken); }
+[data-theme="bevel"] .danger-zone { border-top: 1px solid #808080; box-shadow: 0 1px 0 #fff inset; }
+
+/* charts in sunken panels */
+[data-theme="bevel"] .distribution { box-shadow: var(--sunken); background: #fff; padding: 3px; height: 20px; }
+[data-theme="bevel"] .distribution .seg { border-radius: 0 !important; }
+
+[data-theme="bevel"] .card .legend { color: #000; text-shadow: none; }
+[data-theme="bevel"] .meter { border-radius: 0; box-shadow: var(--sunken); background: #fff; height: 10px; padding: 2px; }
+[data-theme="bevel"] .meter-fill {
+  border-radius: 0; background: repeating-linear-gradient(90deg, #000080 0 6px, transparent 6px 8px);
+}
+
+@media (max-width: 640px) {
+  [data-theme="bevel"] .nav a { min-width: 0; }
+}

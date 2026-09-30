@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="en" data-theme="system">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>milessic-themes</title>
+  <link rel="stylesheet" data-milessic-theme href="/css/bundle/system.css">
+  <script src="/js/themes.js"></script>
+</head>
+<body>
+<header class="topbar">
+  <a class="brand" href="/">milessic-themes</a>
+  <nav class="nav">
+    <a href="#components" class="active">Components</a>
+    <a href="#tables">Tables</a>
+    <a href="#charts">Charts</a>
+    <a href="/api/themes">API</a>
+  </nav>
+  <div class="topbar-end">
+    <span class="muted" id="current"></span>
+    <button class="btn ghost small" type="button">Log out</button>
+  </div>
+</header>
+
+<main class="container">
+  <div class="page-head">
+    <h1>Theme gallery <span class="muted small">every class in the component contract</span></h1>
+    <div class="filters">
+      <label>Search <input type="search" placeholder="Filter…"></label>
+      <button class="btn primary" type="button">Apply</button>
+    </div>
+  </div>
+
+  <div class="flash success" role="status">Theme saved.</div>
+  <div class="flash info" role="status">Pick a theme below; the page switches live.</div>
+  <div class="flash error" role="status">Something went wrong.</div>
+
+  <section class="card">
+    <h2>Theme</h2>
+    <div id="picker"></div>
+  </section>
+
+  <div class="grid-2" id="components">
+    <section class="card">
+      <h2>Buttons &amp; controls</h2>
+      <div class="stack">
+        <div class="row">
+          <button class="btn primary" type="button">Primary</button>
+          <button class="btn" type="button">Default</button>
+          <button class="btn ghost" type="button">Ghost</button>
+          <button class="btn danger" type="button">Danger</button>
+          <button class="btn small" type="button">Small</button>
+          <button class="btn" type="button" disabled>Disabled</button>
+        </div>
+        <div class="segmented" role="radiogroup" aria-label="Range">
+          <label><input type="radio" name="range" checked><span>7 days</span></label>
+          <label><input type="radio" name="range"><span>30 days</span></label>
+          <label><input type="radio" name="range"><span>90 days</span></label>
+        </div>
+        <div class="row">
+          <a class="chip on" href="#">All</a>
+          <a class="chip" href="#">Active</a>
+          <a class="chip" href="#">Archived</a>
+        </div>
+        <div class="row">
+          <span class="tag">tag</span>
+          <span class="status on">Active</span>
+          <span class="status off">Inactive</span>
+          <kbd>Ctrl</kbd> + <kbd>K</kbd>
+          <code>inline code</code>
+        </div>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>Form</h2>
+      <form class="stack" onsubmit="return false">
+        <label>Name <input type="text" value="Automation suite"></label>
+        <label>Kind
+          <select><option>Regression</option><option>Smoke</option></select>
+        </label>
+        <label>Notes <textarea rows="2">Some notes</textarea></label>
+        <label class="check"><input type="checkbox" checked> Enabled</label>
+        <div class="inline-form">
+          <label class="grow">Inline field <input type="text" placeholder="grows"></label>
+          <label>Color <input type="color" value="#2a78d6"></label>
+          <button class="btn primary" type="submit">Save</button>
+        </div>
+        <details>
+          <summary>Advanced</summary>
+          <div class="stack"><div class="secret mono">sk-demo-1234-5678</div></div>
+        </details>
+      </form>
+    </section>
+  </div>
+
+  <section class="card" id="tables">
+    <div class="section-head">
+      <h2>Table</h2>
+      <div class="toolbar"><button class="btn small" type="button">Export</button></div>
+    </div>
+    <div class="scroll-x">
+      <table class="data selectable">
+        <thead>
+          <tr>
+            <th aria-sort="ascending"><button class="sort-btn" type="button">Name</button></th>
+            <th><button class="sort-btn" type="button">Status</button></th>
+            <th>Result</th>
+            <th class="num">Stability</th>
+            <th class="actions">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td><span class="dot" style="--dot-color:#2a78d6"></span>Login works</td><td><span class="status on">Active</span></td><td><span class="badge tone-ok">Pass</span></td><td class="num"><span class="meter"><span class="meter-fill" style="width:96%"></span></span>96%</td><td class="actions"><button class="btn small ghost" type="button">Edit</button></td></tr>
+          <tr class="selected"><td><span class="dot" style="--dot-color:#d0763b"></span>Checkout flow</td><td><span class="status on">Active</span></td><td><span class="badge tone-fail">Fail</span></td><td class="num"><span class="meter"><span class="meter-fill tone-fail" style="width:41%"></span></span>41%</td><td class="actions"><button class="btn small ghost" type="button">Edit</button></td></tr>
+          <tr><td><span class="dot" style="--dot-color:#0ca30c"></span>Search results <span class="tag">smoke</span></td><td><span class="status on">Active</span></td><td><span class="badge tone-warn">Broken</span></td><td class="num"><span class="meter"><span class="meter-fill tone-warn" style="width:70%"></span></span>70%</td><td class="actions"><button class="btn small ghost" type="button">Edit</button></td></tr>
+          <tr class="dim"><td><span class="dot"></span>Legacy report</td><td><span class="status off">Inactive</span></td><td><span class="badge tone-neutral">Skip</span></td><td class="num">–</td><td class="actions"><button class="btn small ghost" type="button">Edit</button></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="card" id="charts">
+    <h2>Tiles, legend &amp; distribution</h2>
+    <div class="tiles">
+      <div class="tile"><span class="tile-label">Runs</span><span class="tile-value">1,284</span></div>
+      <div class="tile"><span class="tile-label">Pass rate</span><span class="tile-value">91%</span></div>
+      <div class="tile"><span class="tile-label">Flaky</span><span class="tile-value">7</span></div>
+    </div>
+    <ul class="legend">
+      <li><span class="swatch tone-ok"></span>Pass</li>
+      <li><span class="swatch tone-fail"></span>Fail</li>
+      <li><span class="swatch tone-warn"></span>Broken</li>
+      <li><span class="swatch tone-caution"></span>Infra</li>
+      <li><span class="swatch tone-neutral"></span>Skip</li>
+    </ul>
+    <div class="distribution" role="img" aria-label="Pass 70%, Fail 12%, Broken 8%, Infra 4%, Skip 6%">
+      <span class="seg tone-ok" style="flex:70"></span><span class="seg tone-fail" style="flex:12"></span><span class="seg tone-warn" style="flex:8"></span><span class="seg tone-caution" style="flex:4"></span><span class="seg tone-neutral" style="flex:6"></span>
+    </div>
+    <p><span class="tooltip static">Tooltip
+two lines</span></p>
+  </section>
+
+  <div class="split">
+    <section class="card empty">Nothing here yet.</section>
+    <section class="card danger-card">
+      <h2>Danger zone</h2>
+      <p class="warn-text">This cannot be undone.</p>
+      <div class="danger-zone"><button class="btn danger" type="button">Delete</button></div>
+    </section>
+  </div>
+</main>
+
+<script>
+  // /?theme=bevel opens the gallery in a given theme (handy for sharing and screenshots).
+  var requested = new URLSearchParams(location.search).get("theme");
+  if (requested) MilessicThemes.apply(requested);
+  var label = document.getElementById("current");
+  function show() { label.textContent = "theme: " + MilessicThemes.current(); }
+  document.addEventListener("milessic:themechange", show);
+  show();
+  MilessicThemes.mountPicker(document.getElementById("picker"));
+</script>
+</body>
+</html>

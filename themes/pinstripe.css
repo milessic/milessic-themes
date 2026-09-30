@@ -1,0 +1,127 @@
+/* ------------------------------------------------------------------------
+   Pinstripe theme (late-90s desktop)
+   ------------------------------------------------------------------------ */
+:root[data-theme="pinstripe"] {
+  color-scheme: light;
+  --page: #6e7fa6;
+  --surface: #dddddd;
+  --surface-2: #cccccc;
+  --ink: #000000;
+  --ink-2: #222222;
+  --muted: #555555;
+  --line: #999999;
+  --line-strong: #000000;
+  --accent: #3131ce;
+  --accent-ink: #ffffff;
+  --success-text: #006300;
+  --ring: #000000;
+  --radius: 0;
+  --pinstripe: repeating-linear-gradient(to bottom, #eeeeee 0 1px, #a5a5a5 1px 2px);
+  --bevel-out: inset 1px 1px 0 #ffffff, inset -1px -1px 0 #888888;
+  --bevel-in: inset 1px 1px 0 #888888, inset -1px -1px 0 #ffffff;
+  font-family: Charcoal, Chicago, Geneva, "Lucida Grande", system-ui, sans-serif;
+}
+[data-theme="pinstripe"] body {
+  font-size: 13px;
+  background-color: var(--page);
+  /* subtle dithered desktop pattern */
+  background-image: radial-gradient(rgba(255, 255, 255, .12) 1px, transparent 1px);
+  background-size: 3px 3px;
+}
+[data-theme="pinstripe"] h1,
+[data-theme="pinstripe"] h2 { font-weight: 700; letter-spacing: -.01em; }
+[data-theme="pinstripe"] a { color: #0000cc; }
+
+/* menu bar */
+[data-theme="pinstripe"] .topbar {
+  background: #ffffff; border-bottom: 1px solid #000; padding: .15rem 16px; gap: 1rem;
+  box-shadow: 0 1px 0 #888;
+}
+[data-theme="pinstripe"] .brand::before { content: "◆ "; }
+[data-theme="pinstripe"] .nav a { color: #000; border-radius: 0; padding: .2rem .6rem; }
+[data-theme="pinstripe"] .nav a:hover,
+[data-theme="pinstripe"] .nav a.active { background: var(--accent); color: #fff; font-weight: 400; }
+
+/* windows: pinstriped title bar with a close box */
+[data-theme="pinstripe"] .card {
+  position: relative; border: 1px solid #000; border-radius: 0; padding-top: 2.1rem;
+  box-shadow: var(--bevel-out), 2px 2px 0 rgba(0, 0, 0, .45);
+}
+[data-theme="pinstripe"] .card::before {
+  content: ""; position: absolute; left: 3px; right: 3px; top: 3px; height: 15px;
+  background: var(--pinstripe); border-bottom: 1px solid #888;
+}
+[data-theme="pinstripe"] .card::after {
+  content: ""; position: absolute; left: 10px; top: 4px; width: 11px; height: 11px;
+  background: #dddddd; border: 1px solid #000; box-shadow: inset 1px 1px 0 #fff, inset -1px -1px 0 #888;
+}
+
+[data-theme="pinstripe"] .card.empty { color: #000; }
+[data-theme="pinstripe"] .tile { border-radius: 0; background: #eeeeee; box-shadow: var(--bevel-in); }
+
+/* controls */
+[data-theme="pinstripe"] .btn {
+  border: 1px solid #000; border-radius: 4px; color: #000;
+  background: linear-gradient(#ffffff, #cfcfcf); box-shadow: inset -1px -1px 0 #999;
+}
+[data-theme="pinstripe"] .btn:hover { background: linear-gradient(#f4f4f4, #c4c4c4); }
+[data-theme="pinstripe"] .btn:active { background: #777; color: #fff; box-shadow: none; }
+[data-theme="pinstripe"] .btn.primary {
+  /* the default-button ring */
+  color: #000; background: linear-gradient(#ffffff, #cfcfcf);
+  box-shadow: inset -1px -1px 0 #999, 0 0 0 2px #dddddd, 0 0 0 4px #000;
+  margin: 3px;
+}
+[data-theme="pinstripe"] .btn.primary:hover { filter: none; background: linear-gradient(#f4f4f4, #c4c4c4); }
+[data-theme="pinstripe"] .btn.ghost { border-color: #000; background: linear-gradient(#ffffff, #cfcfcf); }
+[data-theme="pinstripe"] .btn.danger { color: #aa0000; }
+[data-theme="pinstripe"] input,
+[data-theme="pinstripe"] select,
+[data-theme="pinstripe"] textarea {
+  background: #ffffff; border: 1px solid #000; border-radius: 0; box-shadow: var(--bevel-in);
+}
+[data-theme="pinstripe"] select { border-radius: 3px; background: linear-gradient(#ffffff, #dddddd); box-shadow: 1px 1px 0 #555; }
+[data-theme="pinstripe"] input[type="checkbox"],
+[data-theme="pinstripe"] input[type="radio"] { accent-color: #000; }
+[data-theme="pinstripe"] label { color: #000; }
+[data-theme="pinstripe"] .segmented { border-radius: 4px; border-color: #000; background: linear-gradient(#ffffff, #cfcfcf); }
+[data-theme="pinstripe"] .segmented span { color: #000; }
+[data-theme="pinstripe"] .segmented input:checked + span { background: #777; color: #fff; }
+[data-theme="pinstripe"] .chip { border-color: #000; color: #000; border-radius: 3px; background: linear-gradient(#ffffff, #cfcfcf); }
+[data-theme="pinstripe"] .chip.on { background: #777; color: #fff; }
+[data-theme="pinstripe"] kbd { border-color: #000; border-radius: 3px; background: #fff; }
+
+/* list views */
+[data-theme="pinstripe"] table.data { background: #ffffff; border: 1px solid #000; }
+[data-theme="pinstripe"] .data th {
+  color: #000; text-transform: none; letter-spacing: 0; font-size: .85rem;
+  background: linear-gradient(#f4f4f4, #cccccc); border-bottom: 1px solid #000; border-right: 1px solid #999;
+}
+[data-theme="pinstripe"] .data td { border-bottom: 1px solid #e2e2e2; }
+[data-theme="pinstripe"] table.selectable tbody tr:hover { background: #eeeeff; }
+[data-theme="pinstripe"] table.selectable tbody tr.selected { background: #ccccff; }
+[data-theme="pinstripe"] .tag { border-radius: 0; background: #eeeeee; border: 1px solid #999; color: #000; }
+
+/* alerts and help balloons */
+[data-theme="pinstripe"] .flash {
+  border: 1px solid #000; border-radius: 0; background: #dddddd;
+  box-shadow: 0 0 0 2px #dddddd, 0 0 0 3px #000, 3px 3px 0 3px rgba(0, 0, 0, .35);
+  margin: 6px 6px 1rem;
+}
+[data-theme="pinstripe"] .flash::before { font-weight: 700; margin-right: .5rem; }
+[data-theme="pinstripe"] .flash.error::before { content: "⚠"; }
+[data-theme="pinstripe"] .flash.info::before { content: "ⓘ"; }
+[data-theme="pinstripe"] .flash.success::before { content: "✓"; }
+[data-theme="pinstripe"] .tooltip {
+  background: #ffffcc; color: #000; border: 1px solid #000; border-radius: 10px; box-shadow: 2px 2px 0 rgba(0, 0, 0, .4);
+}
+[data-theme="pinstripe"] .secret { border-radius: 0; background: #fff; border: 1px solid #000; box-shadow: var(--bevel-in); }
+[data-theme="pinstripe"] .danger-card { border-color: #000; }
+
+/* charts keep the result colors; frame them like the other bevelled controls */
+[data-theme="pinstripe"] .distribution { border: 1px solid #000; padding: 1px; background: #fff; height: 16px; }
+[data-theme="pinstripe"] .distribution .seg { border-radius: 0 !important; }
+
+[data-theme="pinstripe"] .meter { border-radius: 0; border: 1px solid #000; height: 8px; background: #fff; }
+[data-theme="pinstripe"] .meter-fill { border-radius: 0; }
+[data-theme="pinstripe"] .muted { color: #444; }
