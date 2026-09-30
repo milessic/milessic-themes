@@ -1,0 +1,14 @@
+{
+  "version": "1.0.0",
+  "default": "system",
+  "themes": [
+    {"key": "system",  "label": "System",          "scheme": "auto",  "overlay": false, "description": "Neutral light/dark palette that follows the OS setting."},
+    {"key": "light",   "label": "Light",           "scheme": "light", "overlay": false, "description": "Neutral light palette."},
+    {"key": "dark",    "label": "Dark",            "scheme": "dark",  "overlay": false, "description": "Neutral dark palette."},
+    {"key": "aurora",  "label": "Aurora",          "scheme": "auto",  "overlay": true,  "description": "Pastel wallpaper gradient, translucent menu bar, traffic-light windows."},
+    {"key": "pinstripe", "label": "Pinstripe",     "scheme": "light", "overlay": true,  "description": "Late-90s desktop: pinstriped title bars, bevelled controls."},
+    {"key": "onebit",  "label": "1-bit",           "scheme": "light", "overlay": true,  "description": "Early-80s desktop: 1-bit black and white, tones become fill patterns."},
+    {"key": "slate",   "label": "Slate",           "scheme": "auto",  "overlay": true,  "description": "Frosted tinted background, accent underline navigation."},
+    {"key": "bevel",   "label": "Bevel",           "scheme": "light", "overlay": true,  "description": "Mid-90s desktop: teal background, 3D bevels, navy title bars, bottom taskbar."}
+  ]
+}
