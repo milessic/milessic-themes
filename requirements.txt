@@ -1,5 +1,6 @@
 fastapi>=0.110
 uvicorn[standard]>=0.27
+markdown>=3.5
 
 # tests
 pytest>=8.0
