@@ -1,8 +1,8 @@
 # milessic-themes
 
-A tiny read-only API that serves a shared look (tokens, components and twelve
+A tiny read-only API that serves a shared look (tokens, components and thirteen
 themes: System, Light, Dark, Aurora, Pinstripe, 1-bit, Slate, Bevel,
-Parrots and Penguins in love, 2000s bubbles, super glass, CONSOLE)
+Rainbox, Robin's egg, 2000s bubbles, super glass, CONSOLE)
 so every project can share it.
 
 How to build an app on top of it: **[MANIFESTO.md](MANIFESTO.md)**.
