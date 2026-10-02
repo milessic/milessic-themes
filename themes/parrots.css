@@ -1,0 +1,116 @@
+/* ------------------------------------------------------------------------
+   Parrots and Penguins in love: tuxedo black and white meets macaw
+   plumage (scarlet, sunflower, jungle green, sky blue), with hearts.
+   ------------------------------------------------------------------------ */
+:root[data-theme="parrots"] {
+  color-scheme: light;
+  --page: #f3f8fb;
+  --surface: #ffffff;
+  --surface-2: #eef5f2;
+  --ink: #111111;
+  --ink-2: #363b40;
+  --muted: #6b737c;
+  --line: #dde7e3;
+  --line-strong: #b5c5bf;
+  --accent: #0f7d43;
+  --accent-ink: #ffffff;
+  --danger: #d62828;
+  --success-text: #0f7d43;
+  --ring: rgba(17, 17, 17, .10);
+  --tone-ok: #2a9d4b;
+  --tone-fail: #e63946;
+  --tone-warn: #f4842a;
+  --tone-caution: #ffc60a;
+  --tone-neutral: #a9b3b8;
+  --radius: 18px;
+  --plumage: linear-gradient(90deg, #e63946, #f4842a, #ffd60a, #2a9d4b, #1d6fd8);
+  --love: #ffe3ea;
+  font-family: "Nunito", "Quicksand", "Trebuchet MS", system-ui, sans-serif;
+}
+[data-theme="parrots"] body {
+  background:
+    radial-gradient(700px 420px at 0% 0%, rgba(42, 157, 75, .12), transparent 70%),
+    radial-gradient(700px 420px at 100% 0%, rgba(230, 57, 70, .10), transparent 70%),
+    radial-gradient(900px 500px at 50% 110%, rgba(29, 111, 216, .10), transparent 70%),
+    var(--page);
+  background-attachment: fixed;
+}
+[data-theme="parrots"] h1 { font-weight: 800; letter-spacing: -.01em; }
+[data-theme="parrots"] h1::after { content: " ♥"; color: #e63946; }
+[data-theme="parrots"] h2 { font-weight: 800; }
+
+/* tuxedo menu bar with a plumage hem */
+[data-theme="parrots"] .topbar { background: #111; border-bottom: none; }
+[data-theme="parrots"] .topbar::after {
+  content: ""; position: absolute; left: 0; right: 0; bottom: -4px; height: 4px; background: var(--plumage);
+}
+[data-theme="parrots"] .brand { color: #fff; }
+[data-theme="parrots"] .brand::before { content: "🐧♥🦜 "; }
+[data-theme="parrots"] .nav a { color: #e6e6e6; border-radius: 999px; }
+[data-theme="parrots"] .nav a:hover { background: rgba(255, 255, 255, .12); }
+[data-theme="parrots"] .nav a.active { background: #fff; color: #111; font-weight: 800; }
+[data-theme="parrots"] .topbar-end .muted { color: #b8b8b8; }
+[data-theme="parrots"] .topbar .btn.ghost { color: #fff; }
+[data-theme="parrots"] .topbar .btn.ghost:hover { background: rgba(255, 255, 255, .12); }
+
+/* cards: white belly, plumage stripe, a heart in the corner */
+[data-theme="parrots"] .card {
+  position: relative; border: 2px solid #111; padding-top: 1.5rem;
+  background: var(--plumage) top / 100% 6px no-repeat, var(--surface);
+  box-shadow: 4px 4px 0 #111;
+}
+[data-theme="parrots"] .card::after { content: "♥"; position: absolute; top: .55rem; right: .9rem; color: #e63946; font-size: 1.1rem; }
+[data-theme="parrots"] .card.empty::after { content: "🐧 ♥ 🦜"; position: static; display: block; margin-top: .5rem; }
+[data-theme="parrots"] .danger-card { border-color: var(--danger); box-shadow: 4px 4px 0 var(--danger); }
+
+[data-theme="parrots"] .tile { border-radius: 14px; border-left: 6px solid #2a9d4b; background: var(--surface-2); }
+[data-theme="parrots"] .tile:nth-child(4n+2) { border-left-color: #e63946; background: #fff1f2; }
+[data-theme="parrots"] .tile:nth-child(4n+3) { border-left-color: #ffc60a; background: #fff9e0; }
+[data-theme="parrots"] .tile:nth-child(4n+4) { border-left-color: #1d6fd8; background: #eef4ff; }
+[data-theme="parrots"] .tile-value { font-weight: 800; }
+
+/* controls: penguin outlines, parrot-green primary */
+[data-theme="parrots"] .btn { border: 2px solid #111; border-radius: 999px; font-weight: 700; padding: .35rem .95rem; }
+[data-theme="parrots"] .btn:hover { background: #fff7d6; }
+[data-theme="parrots"] .btn.primary { background: linear-gradient(135deg, #1f9d55, var(--accent)); border-color: #111; box-shadow: 2px 2px 0 #111; }
+[data-theme="parrots"] .btn.primary:active { transform: translate(2px, 2px); box-shadow: none; }
+[data-theme="parrots"] .btn.danger { border-color: var(--danger); }
+[data-theme="parrots"] .btn.danger:hover { background: var(--love); }
+[data-theme="parrots"] .btn.ghost { border-color: transparent; }
+[data-theme="parrots"] .btn.small { padding: .15rem .6rem; }
+[data-theme="parrots"] input,
+[data-theme="parrots"] select,
+[data-theme="parrots"] textarea { border: 2px solid var(--line-strong); border-radius: 12px; }
+[data-theme="parrots"] input:focus-visible,
+[data-theme="parrots"] select:focus-visible,
+[data-theme="parrots"] textarea:focus-visible { outline: none; border-color: #111; box-shadow: 0 0 0 3px #ffd60a; }
+[data-theme="parrots"] .btn:focus-visible { outline: 3px solid #ffd60a; outline-offset: 1px; }
+[data-theme="parrots"] input[type="color"] { padding: 2px; }
+[data-theme="parrots"] label { font-weight: 700; }
+[data-theme="parrots"] .segmented { border: 2px solid #111; border-radius: 999px; }
+[data-theme="parrots"] .segmented span { font-weight: 700; }
+[data-theme="parrots"] .segmented input:checked + span { background: #111; color: #fff; }
+[data-theme="parrots"] .chip { border: 2px solid #111; color: #111; font-weight: 700; }
+[data-theme="parrots"] .chip.on { background: #111; color: #fff; }
+[data-theme="parrots"] .tag { background: #fff9e0; color: #6b4e00; border: 1px solid #ffd60a; }
+[data-theme="parrots"] kbd { border: 2px solid #111; border-radius: 6px; box-shadow: 1px 1px 0 #111; }
+
+/* tables: lovestruck selection */
+[data-theme="parrots"] .data th { color: #111; font-weight: 800; border-bottom: 2px solid #111; }
+[data-theme="parrots"] table.selectable tbody tr:hover { background: #fff9e0; }
+[data-theme="parrots"] table.selectable tbody tr.selected { background: var(--love); }
+[data-theme="parrots"] table.selectable tbody tr.selected td:first-child::after { content: " ♥"; color: #e63946; }
+[data-theme="parrots"] .badge::before { border-radius: 50%; }
+[data-theme="parrots"] .swatch { border-radius: 50%; }
+[data-theme="parrots"] .meter { height: 8px; border-radius: 999px; border: 1px solid #111; }
+
+/* messages */
+[data-theme="parrots"] .flash { border: 2px solid #111; border-radius: 14px; font-weight: 600; }
+[data-theme="parrots"] .flash.success { border-left: 2px solid #111; background: #eaf7ee; }
+[data-theme="parrots"] .flash.success::before { content: "♥ "; color: #e63946; }
+[data-theme="parrots"] .flash.error { border-left: 2px solid #111; background: var(--love); }
+[data-theme="parrots"] .flash.error::before { content: "✕ "; color: var(--danger); }
+[data-theme="parrots"] .flash.info { border-left: 2px solid #111; background: #eef4ff; }
+[data-theme="parrots"] .flash.info::before { content: "🐧 "; }
+[data-theme="parrots"] .tooltip { background: #111; color: #fff; border-radius: 12px; border-bottom: 3px solid #ffd60a; }
+[data-theme="parrots"] .secret { background: #fff9e0; border: 2px dashed #111; }

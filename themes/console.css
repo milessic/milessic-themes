@@ -1,0 +1,136 @@
+/* ------------------------------------------------------------------------
+   CONSOLE: a green phosphor terminal. Black screen, scanlines, monospace,
+   [bracketed] buttons and inverse-video selection.
+   ------------------------------------------------------------------------ */
+:root[data-theme="console"] {
+  color-scheme: dark;
+  --page: #030603;
+  --surface: #050b05;
+  --surface-2: #0b1a0d;
+  --ink: #33ff66;
+  --ink-2: #2ad655;
+  --muted: #1f9a42;
+  --line: #164a20;
+  --line-strong: #2b7a3a;
+  --accent: #33ff66;
+  --accent-ink: #000000;
+  --danger: #ff5555;
+  --success-text: #33ff66;
+  --ring: #2b7a3a;
+  --tone-ok: #33ff66;
+  --tone-fail: #ff5555;
+  --tone-warn: #ffaa33;
+  --tone-caution: #ffee55;
+  --tone-neutral: #5a7a60;
+  --radius: 0;
+  --glow: 0 0 4px rgba(51, 255, 102, .55);
+  --font-mono: "IBM Plex Mono", "Cascadia Mono", "Fira Code", "DejaVu Sans Mono", ui-monospace, monospace;
+  font-family: var(--font-mono);
+}
+[data-theme="console"] body {
+  font-size: 14px; text-shadow: var(--glow);
+  background:
+    repeating-linear-gradient(rgba(0, 0, 0, 0) 0 2px, rgba(0, 0, 0, .28) 2px 3px),
+    radial-gradient(ellipse at center, #0a1a0c 0%, #020402 75%);
+  background-attachment: fixed;
+}
+[data-theme="console"] ::selection { background: var(--ink); color: #000; text-shadow: none; }
+[data-theme="console"] a { color: var(--ink); text-decoration: underline dotted; }
+[data-theme="console"] :is(.brand, .nav a, .chip, a.btn) { text-decoration: none; }
+[data-theme="console"] h1,
+[data-theme="console"] h2,
+[data-theme="console"] h3 { font-weight: 700; text-transform: uppercase; letter-spacing: .04em; }
+[data-theme="console"] h1::before { content: "> "; }
+[data-theme="console"] h1::after { content: "█"; margin-left: .2em; font-weight: 400; }
+[data-theme="console"] h1 .muted { text-transform: none; letter-spacing: 0; }
+[data-theme="console"] h2::before { content: "# "; color: var(--muted); }
+[data-theme="console"] h3 { color: var(--ink-2); }
+[data-theme="console"] h3::before { content: "## "; color: var(--muted); }
+[data-theme="console"] code { color: var(--tone-caution); }
+[data-theme="console"] kbd { border-radius: 0; border-color: var(--ink); }
+
+/* status line */
+[data-theme="console"] .topbar { background: #000; border-bottom: 1px dashed var(--line-strong); }
+[data-theme="console"] .brand { color: var(--ink); }
+[data-theme="console"] .brand::before { content: "root@"; color: var(--muted); }
+[data-theme="console"] .brand::after { content: ":~$"; color: var(--muted); }
+[data-theme="console"] .nav a { color: var(--ink-2); border-radius: 0; padding: .2rem .5rem; }
+[data-theme="console"] .nav a::before { content: "["; }
+[data-theme="console"] .nav a::after { content: "]"; }
+[data-theme="console"] .nav a:hover { background: var(--surface-2); }
+[data-theme="console"] .nav a.active { background: var(--ink); color: #000; text-shadow: none; }
+
+/* boxes drawn with double rules */
+[data-theme="console"] .card { border: 3px double var(--line-strong); background: rgba(0, 0, 0, .55); box-shadow: inset 0 0 24px rgba(51, 255, 102, .06); }
+[data-theme="console"] .danger-card { border-color: var(--danger); }
+[data-theme="console"] .tile { border: 1px dashed var(--line-strong); background: transparent; border-radius: 0; }
+[data-theme="console"] .tile-label { text-transform: uppercase; color: var(--muted); }
+[data-theme="console"] .tile-value { font-weight: 700; }
+
+/* controls */
+[data-theme="console"] .btn {
+  border: none; border-radius: 0; background: transparent; color: var(--ink); text-transform: uppercase;
+  padding: .3rem .4rem; gap: .35rem;
+}
+[data-theme="console"] .btn::before { content: "["; }
+[data-theme="console"] .btn::after { content: "]"; }
+[data-theme="console"] .btn:hover { background: var(--ink); color: #000; text-shadow: none; }
+[data-theme="console"] .btn.primary { background: var(--ink); color: #000; text-shadow: none; }
+[data-theme="console"] .btn.primary:hover { filter: none; background: #7dff9c; }
+[data-theme="console"] .btn.danger { color: var(--danger); text-shadow: 0 0 4px rgba(255, 85, 85, .55); }
+[data-theme="console"] .btn.danger:hover { background: var(--danger); color: #000; text-shadow: none; }
+[data-theme="console"] .btn.ghost { color: var(--ink-2); }
+[data-theme="console"] .btn.small { padding: .1rem .3rem; }
+[data-theme="console"] .btn[disabled]:hover { background: transparent; color: var(--ink); }
+[data-theme="console"] input,
+[data-theme="console"] select,
+[data-theme="console"] textarea {
+  background: #000; color: var(--ink); border: 1px solid var(--line-strong); border-radius: 0;
+  caret-color: var(--ink); text-shadow: var(--glow);
+}
+[data-theme="console"] input::placeholder,
+[data-theme="console"] textarea::placeholder { color: var(--muted); }
+[data-theme="console"] input:focus-visible,
+[data-theme="console"] select:focus-visible,
+[data-theme="console"] textarea:focus-visible,
+[data-theme="console"] .btn:focus-visible { outline: 1px solid var(--ink); outline-offset: 1px; }
+[data-theme="console"] input[type="checkbox"],
+[data-theme="console"] input[type="radio"] { accent-color: var(--ink); }
+[data-theme="console"] label { color: var(--ink-2); }
+[data-theme="console"] .segmented { border: 1px solid var(--line-strong); border-radius: 0; }
+[data-theme="console"] .segmented input:checked + span { background: var(--ink); color: #000; text-shadow: none; }
+[data-theme="console"] .chip { border-radius: 0; border: 1px solid var(--line-strong); color: var(--ink-2); }
+[data-theme="console"] .chip.on { background: var(--ink); border-color: var(--ink); color: #000; text-shadow: none; }
+[data-theme="console"] .tag { border-radius: 0; background: transparent; border: 1px solid var(--line-strong); color: var(--ink-2); }
+[data-theme="console"] summary { color: var(--ink); }
+
+/* tables: inverse-video selection */
+[data-theme="console"] .data th { color: var(--muted); border-bottom: 1px dashed var(--line-strong); }
+[data-theme="console"] .data td { border-bottom: 1px dotted var(--line); }
+[data-theme="console"] table.selectable tbody tr:hover { background: var(--surface-2); }
+[data-theme="console"] table.selectable tbody tr.selected { background: var(--ink); color: #000; text-shadow: none; }
+[data-theme="console"] table.selectable tbody tr.selected .tag { border-color: #000; color: #000; }
+[data-theme="console"] table.selectable tbody tr.selected .btn:hover { background: #000; color: var(--ink); }
+[data-theme="console"] table.selectable tbody tr.selected .badge::before,
+[data-theme="console"] table.selectable tbody tr.selected .dot,
+[data-theme="console"] table.selectable tbody tr.selected .meter { outline: 1px solid #000; }
+[data-theme="console"] .dot,
+[data-theme="console"] .badge::before,
+[data-theme="console"] .swatch { border-radius: 0; }
+[data-theme="console"] .distribution { gap: 1px; }
+[data-theme="console"] .distribution .seg { border-radius: 0 !important; background: repeating-linear-gradient(90deg, var(--tone) 0 6px, transparent 6px 8px); }
+[data-theme="console"] .meter { border-radius: 0; border: 1px solid var(--line-strong); background: #000; height: 10px; padding: 1px; }
+[data-theme="console"] .meter-fill { border-radius: 0; background: repeating-linear-gradient(90deg, var(--tone, var(--tone-ok)) 0 4px, transparent 4px 5px); }
+
+/* log lines */
+[data-theme="console"] .flash { border-radius: 0; background: rgba(0, 0, 0, .6); border: 1px solid var(--line-strong); }
+[data-theme="console"] .flash::before { font-weight: 700; margin-right: .5rem; }
+[data-theme="console"] .flash.success { border: 1px solid var(--tone-ok); }
+[data-theme="console"] .flash.success::before { content: "[  OK  ]"; color: var(--tone-ok); }
+[data-theme="console"] .flash.error { border: 1px solid var(--danger); }
+[data-theme="console"] .flash.error::before { content: "[ FAIL ]"; color: var(--danger); }
+[data-theme="console"] .flash.info { border: 1px solid var(--line-strong); }
+[data-theme="console"] .flash.info::before { content: "[ INFO ]"; color: var(--tone-caution); }
+[data-theme="console"] .tooltip { background: #000; color: var(--ink); border: 1px solid var(--ink); border-radius: 0; box-shadow: none; }
+[data-theme="console"] .secret { background: #000; border: 1px dashed var(--line-strong); border-radius: 0; }
+[data-theme="console"] .danger-zone { border-top: 1px dashed var(--danger); }
