@@ -62,3 +62,9 @@ tests/                 API + contract tests
 2. Add an entry to `themes/registry.json` and bump `version`.
 3. Add a `.tp-<key>` picker preview to `base.css` (a test enforces it).
 4. Check every component in the gallery: `/?theme=<key>`.
+
+## License
+
+Free for anyone to use, provided the app states its styling is taken from milessic-themes with a
+hyperlink to the milessic-themes server (https://THEMES-SERVER-URL). See [LICENSE](LICENSE) and
+[MANIFESTO.md §10](MANIFESTO.md#10-license-and-attribution).
