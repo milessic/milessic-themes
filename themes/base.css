@@ -100,6 +100,22 @@ kbd { font-family: inherit; font-size: .8em; border: 1px solid var(--line-strong
 .card.narrow { max-width: 560px; }
 .auth-card { width: 100%; max-width: 380px; }
 .card.empty { text-align: center; color: var(--ink-2); padding: 2rem; }
+/* window card: a .card with a real title bar; .window-close is a clickable <button> (your app closes it),
+   .window-title is optional. The bar is drawn in the card's top padding, so themes can restyle both */
+.card-window { position: relative; padding-top: 3rem; }
+.window-bar {
+  position: absolute; left: 0; right: 0; top: 0; height: 2rem; display: flex; align-items: center; gap: .5rem;
+  padding: 0 .4rem 0 1.25rem; background: var(--surface-2); border-bottom: 1px solid var(--line);
+  border-radius: var(--radius) var(--radius) 0 0;
+}
+.window-title { flex: 1 1 auto; min-width: 0; margin: 0; font-size: .85rem; font-weight: 600; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.window-close {
+  flex: none; margin-left: auto; width: 1.5rem; height: 1.5rem; padding: 0; display: grid; place-items: center;
+  font: inherit; color: var(--ink-2); background: transparent; border: 0; border-radius: calc(var(--radius) * .5); cursor: pointer;
+}
+.window-close::before { content: "×"; font-size: 1.1rem; line-height: 1; }
+.window-close:hover { background: var(--line); color: var(--ink); }
+.window-close:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
 .grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1rem; margin-bottom: 1rem; }
 .grid-2 .card { margin-bottom: 0; }
 .split { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 1rem; align-items: start; margin-bottom: 1rem; }

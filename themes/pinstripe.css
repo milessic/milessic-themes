@@ -51,10 +51,18 @@
   content: ""; position: absolute; left: 3px; right: 3px; top: 3px; height: 15px;
   background: var(--pinstripe); border-bottom: 1px solid #888;
 }
-[data-theme="pinstripe"] .card::after {
-  content: ""; position: absolute; left: 10px; top: 4px; width: 11px; height: 11px;
+[data-theme="pinstripe"] .window-bar { top: 3px; left: 3px; right: 3px; height: 15px; padding: 0 0 0 6px; background: transparent; border: 0; border-radius: 0; }
+[data-theme="pinstripe"] .window-title {
+  flex: 0 1 auto; margin: 0 auto; padding: 0 .5rem; background: #dddddd; color: #000;
+  font-size: 12px; font-weight: 700; line-height: 15px;
+}
+[data-theme="pinstripe"] .window-close {
+  order: -1; margin: 0; width: 13px; height: 13px; border-radius: 0; color: #000;
   background: #dddddd; border: 1px solid #000; box-shadow: inset 1px 1px 0 #fff, inset -1px -1px 0 #888;
 }
+[data-theme="pinstripe"] .window-close::before { content: ""; }
+[data-theme="pinstripe"] .window-close:hover { background: #dddddd; }
+[data-theme="pinstripe"] .window-close:active { background: #999; box-shadow: inset 1px 1px 0 #666; }
 
 [data-theme="pinstripe"] .card.empty { color: #000; }
 [data-theme="pinstripe"] .tile { border-radius: 0; background: #eeeeee; box-shadow: var(--bevel-in); }

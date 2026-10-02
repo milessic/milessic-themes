@@ -60,6 +60,12 @@
 }
 [data-theme="rainbox"] .card::after { content: "♥"; position: absolute; top: .55rem; right: .9rem; color: #e63946; font-size: 1.1rem; }
 [data-theme="rainbox"] .card.empty::after { content: "♥"; position: static; display: block; margin-top: .5rem; }
+[data-theme="rainbox"] .card-window { padding-top: 3.5rem; }
+[data-theme="rainbox"] .card-window::after { content: none; }
+[data-theme="rainbox"] .window-bar { top: 6px; border-bottom: 2px solid #111; border-radius: 0; }
+[data-theme="rainbox"] .window-close { color: #e63946; }
+[data-theme="rainbox"] .window-close::before { content: "♥"; }
+[data-theme="rainbox"] .window-close:hover::before { content: "×"; }
 [data-theme="rainbox"] .danger-card { border-color: var(--danger); box-shadow: 4px 4px 0 var(--danger); }
 
 [data-theme="rainbox"] .tile { border-radius: 14px; border-left: 6px solid #2a9d4b; background: var(--surface-2); }
