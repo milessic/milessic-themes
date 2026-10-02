@@ -131,6 +131,9 @@ A settings form can reuse the picker markup from base.css (radio inputs, so it w
 | `document` event `milessic:themechange`        | Fired on every switch (`e.detail.key`), e.g. to redraw canvas charts |
 | `<script data-persist="false">`                | Don't use `localStorage`                                          |
 | `<script data-restore="false">`                | Don't re-apply the stored theme on load (server decides)          |
+| `<script data-themes="system,dark,bevel">`     | Offer only these themes (picker, `list()`, `apply()`)             |
+| `<script data-exclude="console,glass">`        | Hide these themes; wins over `data-themes`                        |
+| `MilessicThemes.enabled(key)`                  | `false` if the script tag disabled that theme                     |
 
 Level 2 + helper: render the user's theme on the server, load the helper with
 `data-restore="false"`, and call `mountPicker(el, {onChange: key => fetch("/settings/theme", …)})`

@@ -1,0 +1,187 @@
+/* ------------------------------------------------------------------------
+   Write.js: the look of the Write.js document editor. Cousine monospace
+   everywhere, a charcoal top bar, orange buttons, grey toolbar chips and
+   soft drop shadows. Follows the OS light/dark mode like Write.js' own toggle.
+   ------------------------------------------------------------------------ */
+:root[data-theme="writejs"] {
+  color-scheme: light;
+  --page: #f4f4f4;
+  --surface: #ffffff;
+  --surface-2: #f0f0f0;
+  --ink: #333333;
+  --ink-2: #555555;
+  --muted: #757575;
+  --line: #dddddd;
+  --line-strong: #c5c5c5;
+  --accent: #ff5722;
+  --accent-ink: #ffffff;
+  --danger: #d32f2f;
+  --success-text: #1b7a1b;
+  --ring: rgba(0, 0, 0, .1);
+  --tone-ok: #2e9e2e;
+  --tone-fail: #e53935;
+  --tone-warn: #f36d33;
+  --tone-caution: #f2c400;
+  --tone-neutral: #bbbbbb;
+  --radius: 4px;
+  --wj-bar: #333333;
+  --wj-bar-ink: #ffffff;
+  --wj-chip: #dddddd;
+  --wj-chip-hover: #cccccc;
+  --wj-chip-on: #bbbbbb;
+  --wj-chip-ink: #0b0b0b;
+  --wj-rule: #f36d33;
+  --wj-link: #2a78d6;
+  --wj-shadow: 0 2px 10px rgba(0, 0, 0, .1);
+  --wj-thumb: #888888;
+  --wj-thumb-hover: #555555;
+  --wj-track: #f1f1f1;
+  --font: "Cousine", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  --font-mono: var(--font);
+  font-family: var(--font);
+}
+@media (prefers-color-scheme: dark) {
+  :root[data-theme="writejs"] {
+    color-scheme: dark;
+    --page: #2c2c2c;
+    --surface: #404040;
+    --surface-2: #363636;
+    --ink: #ffffff;
+    --ink-2: #dddddd;
+    --muted: #aaaaaa;
+    --line: #4a4a4a;
+    --line-strong: #5c5c5c;
+    --danger: #ff6b6b;
+    --success-text: #5fd35f;
+    --ring: rgba(0, 0, 0, .35);
+    --tone-neutral: #777777;
+    --wj-bar: #1f1f1f;
+    --wj-chip: #555555;
+    --wj-chip-hover: #626262;
+    --wj-chip-on: #707070;
+    --wj-chip-ink: #ffffff;
+    --wj-link: #2bb8d2;
+    --wj-shadow: 0 2px 10px rgba(0, 0, 0, .4);
+    --wj-thumb: #666666;
+    --wj-thumb-hover: #888888;
+    --wj-track: #2c2c2c;
+  }
+}
+[data-theme="writejs"] body { font-family: var(--font); }
+[data-theme="writejs"] :is(button, input, select, textarea) { font-family: var(--font); }
+[data-theme="writejs"] a { color: var(--wj-link); }
+[data-theme="writejs"] h1,
+[data-theme="writejs"] h2 { font-weight: 700; }
+[data-theme="writejs"] h3 { color: var(--ink); }
+[data-theme="writejs"] code { background: var(--surface-2); border-radius: 3px; padding: 0 .25em; }
+[data-theme="writejs"] ::selection { background: var(--accent); color: var(--accent-ink); }
+
+/* scrollbars: the flat grey thumb from the editor */
+[data-theme="writejs"] ::-webkit-scrollbar { width: 10px; height: 10px; }
+[data-theme="writejs"] ::-webkit-scrollbar-track { background: var(--wj-track); }
+[data-theme="writejs"] ::-webkit-scrollbar-thumb { background: var(--wj-thumb); }
+[data-theme="writejs"] ::-webkit-scrollbar-thumb:hover { background: var(--wj-thumb-hover); }
+
+/* the top bar: charcoal, white type, orange buttons */
+[data-theme="writejs"] .topbar { background: var(--wj-bar); color: var(--wj-bar-ink); border-bottom: 0; box-shadow: var(--wj-shadow); }
+[data-theme="writejs"] .brand { color: var(--wj-bar-ink); }
+[data-theme="writejs"] .nav a { color: #e0e0e0; border-radius: 4px; }
+[data-theme="writejs"] .nav a:hover { background: rgba(255, 255, 255, .1); color: #fff; }
+[data-theme="writejs"] .nav a.active { background: var(--accent); color: var(--accent-ink); font-weight: 700; }
+[data-theme="writejs"] .topbar-end .muted { color: #bdbdbd; }
+[data-theme="writejs"] .topbar .btn { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); }
+[data-theme="writejs"] .topbar .btn:hover { background: #f0f0f0; border-color: #f0f0f0; color: #000; }
+[data-theme="writejs"] .topbar .btn.ghost { background: transparent; border-color: transparent; color: var(--wj-bar-ink); }
+[data-theme="writejs"] .topbar .btn.ghost:hover { background: rgba(255, 255, 255, .1); color: #fff; }
+[data-theme="writejs"] .topbar input,
+[data-theme="writejs"] .topbar select { border: 0; background: #fff; color: #333; }
+
+/* panels: borderless white sheets with the soft editor shadow */
+[data-theme="writejs"] .card { border: 0; box-shadow: var(--wj-shadow); }
+[data-theme="writejs"] .card.empty { border: 1px dashed var(--line-strong); box-shadow: none; background: transparent; }
+[data-theme="writejs"] .danger-card { box-shadow: var(--wj-shadow), inset 4px 0 0 var(--danger); }
+[data-theme="writejs"] .tile { background: var(--surface-2); border-radius: 4px; }
+[data-theme="writejs"] .tile-value { font-weight: 700; }
+
+/* controls: orange primary, grey toolbar chips everywhere else */
+[data-theme="writejs"] .btn { border: 0; background: var(--wj-chip); color: var(--wj-chip-ink); border-radius: 4px; padding: .45rem .9rem; transition: background-color .3s; }
+[data-theme="writejs"] .btn:hover { background: var(--wj-chip-hover); }
+[data-theme="writejs"] .btn.primary { background: var(--accent); color: var(--accent-ink); }
+[data-theme="writejs"] .btn.primary:hover { filter: none; background: #f0f0f0; color: #000; }
+[data-theme="writejs"] .btn.danger { background: transparent; color: var(--danger); box-shadow: inset 0 0 0 1px var(--danger); }
+[data-theme="writejs"] .btn.danger:hover { background: var(--danger); color: #fff; }
+[data-theme="writejs"] .btn.ghost { background: transparent; color: var(--muted); }
+[data-theme="writejs"] .btn.ghost:hover { background: var(--surface-2); color: var(--ink); }
+[data-theme="writejs"] .btn.small { padding: .25rem .6rem; }
+[data-theme="writejs"] input,
+[data-theme="writejs"] select,
+[data-theme="writejs"] textarea { border: 1px solid #d9d9d9; border-radius: 4px; padding: .5rem .6rem; }
+@media (prefers-color-scheme: dark) {
+  [data-theme="writejs"] input,
+  [data-theme="writejs"] select,
+  [data-theme="writejs"] textarea { border-color: var(--line-strong); background: var(--surface-2); }
+}
+[data-theme="writejs"] input:focus-visible,
+[data-theme="writejs"] select:focus-visible,
+[data-theme="writejs"] textarea:focus-visible,
+[data-theme="writejs"] .btn:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
+[data-theme="writejs"] .segmented { border: 0; border-radius: 4px; gap: 4px; overflow: visible; }
+[data-theme="writejs"] .segmented span { background: var(--wj-chip); color: var(--wj-chip-ink); border-radius: 4px; display: inline-block; }
+[data-theme="writejs"] .segmented span:hover { background: var(--wj-chip-hover); }
+[data-theme="writejs"] .segmented input:checked + span { background: var(--wj-chip-on); color: var(--wj-chip-ink); font-weight: 700; }
+[data-theme="writejs"] .chip { border: 0; border-radius: 4px; background: var(--wj-chip); color: var(--wj-chip-ink); }
+[data-theme="writejs"] .chip:hover { background: var(--wj-chip-hover); }
+[data-theme="writejs"] .chip.on { background: var(--accent); color: var(--accent-ink); }
+[data-theme="writejs"] .tag { border-radius: 3px; background: var(--wj-chip); color: var(--wj-chip-ink); }
+[data-theme="writejs"] kbd { border: 1px solid var(--line-strong); border-radius: 3px; background: var(--surface-2); }
+
+/* tables: plain rows, grey header strip, orange-ruled selection */
+[data-theme="writejs"] .data th { background: var(--surface-2); color: var(--muted); }
+[data-theme="writejs"] table.selectable tbody tr:hover { background: var(--surface-2); }
+[data-theme="writejs"] table.selectable tbody tr.selected { background: color-mix(in srgb, var(--accent) 14%, transparent); box-shadow: inset 3px 0 0 var(--accent); }
+[data-theme="writejs"] .meter { border-radius: 0; }
+[data-theme="writejs"] .meter-fill { border-radius: 0; }
+
+/* messages: Write.js notifications, a coloured left edge on a grey slip */
+[data-theme="writejs"] .flash { background: var(--surface-2); border: 0; border-left: 4px solid var(--surface); border-radius: 4px; box-shadow: var(--wj-shadow); }
+[data-theme="writejs"] .flash.success { border-left: 4px solid green; }
+[data-theme="writejs"] .flash.error { border-left: 4px solid red; }
+[data-theme="writejs"] .flash.info { border-left: 4px solid var(--accent); }
+[data-theme="writejs"] .tooltip { background: var(--wj-bar); color: #fff; border-radius: 4px; box-shadow: var(--wj-shadow); }
+/* the editor's code block: grey slab with an orange rule */
+[data-theme="writejs"] .secret {
+  background: var(--page); color: var(--ink-2); border: 1px solid var(--line); border-left: 3px solid var(--wj-rule);
+  border-radius: 0; line-height: 1.6;
+}
+[data-theme="writejs"] pre { background: var(--page); color: var(--ink-2); border: 1px solid var(--line); border-left: 3px solid var(--wj-rule); padding: 1em 1.5em; line-height: 1.6; overflow: auto; }
+
+/* menus: the hamburger menu, centred grey items on white */
+[data-theme="writejs"] .menu { background: var(--surface); border: 0; border-radius: 4px; padding: 3px 0; box-shadow: var(--wj-shadow); }
+[data-theme="writejs"] .menu > :is(a, button) { text-align: center; color: var(--muted); border-radius: 0; padding: 10px; }
+[data-theme="writejs"] .menu > :is(a, button):is(:hover, :focus-visible) { background: var(--surface-2); color: var(--ink); }
+[data-theme="writejs"] .menu > .danger { color: var(--danger); }
+[data-theme="writejs"] .menu > [disabled] { text-decoration: line-through; }
+[data-theme="writejs"] .menu > [disabled]:hover { background: none; color: var(--muted); }
+[data-theme="writejs"] .menu hr { border-top-color: var(--line); margin: 10px 0; }
+/* small buttons: the editor's formatting toolbar */
+[data-theme="writejs"] .small-btn { border: 0; border-radius: 4px; background: var(--wj-chip); color: var(--wj-chip-ink); padding: 0 .5rem; transition: background-color .3s; }
+[data-theme="writejs"] .small-btn:hover { background: var(--wj-chip-hover); }
+[data-theme="writejs"] .small-btn:is(.on, [aria-pressed="true"]) { background: var(--wj-chip-on); color: var(--wj-chip-ink); }
+
+/* modals: grey sheet over a half-black overlay */
+[data-theme="writejs"] .modal-container { background: var(--surface-2); border: 0; border-radius: 4px; box-shadow: var(--wj-shadow); padding: 35px; }
+[data-theme="writejs"] .modal-container::backdrop { background: rgba(0, 0, 0, .5); }
+
+/* notifications: Write.js toasts, green / yellow / red left edge */
+[data-theme="writejs"] :is(.notification-info, .notification-warn, .notification-error) {
+  background: var(--surface-2); border: 0; border-left: 4px solid var(--note-color); border-radius: 4px; padding: 0 0 0 10px;
+  box-shadow: var(--wj-shadow); font-size: inherit; align-items: stretch;
+}
+[data-theme="writejs"] :is(.notification-info, .notification-warn, .notification-error) > :not(.small-btn) { padding: 10px 0; }
+[data-theme="writejs"] .notification-info { --note-color: green; }
+[data-theme="writejs"] .notification-warn { --note-color: var(--tone-caution); }
+[data-theme="writejs"] .notification-error { --note-color: red; }
+[data-theme="writejs"] :is(.notification-info, .notification-warn, .notification-error) .small-btn {
+  height: auto; min-width: 40px; border-radius: 0 4px 4px 0; background: var(--surface); color: var(--muted);
+}
+[data-theme="writejs"] :is(.notification-info, .notification-warn, .notification-error) .small-btn:hover { background: var(--surface-2); color: var(--ink); }
