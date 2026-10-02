@@ -258,6 +258,7 @@ table.selectable tbody tr.selected :is(.status, .btn.ghost) { color: inherit; }
 .tp-glass { --tp-bg: radial-gradient(circle at 20% 30%, #ff4ecd, transparent 55%), radial-gradient(circle at 85% 70%, #22d3ee, transparent 55%), #1e1b4b; --tp-win: rgba(255, 255, 255, .18); --tp-bar: transparent; --tp-accent: linear-gradient(135deg, #67e8f9, #a78bfa); --tp-r: 8px; --tp-win-border: 1px solid rgba(255, 255, 255, .5); --tp-shadow: 0 4px 10px rgba(0, 0, 0, .3); }
 .tp-glass .tp-window { -webkit-backdrop-filter: blur(4px); backdrop-filter: blur(4px); }
 .tp-console { --tp-bg: #030603; --tp-win: #000; --tp-bar: #33ff66; --tp-accent: #33ff66; --tp-r: 0; --tp-win-border: 1px solid #33ff66; --tp-shadow: 0 0 6px rgba(51, 255, 102, .5); }
+.tp-writejs { --tp-bg: #f4f4f4; --tp-win: #fff; --tp-bar: #333; --tp-accent: #ff5722; --tp-r: 4px; --tp-win-border: 0; --tp-shadow: 0 2px 6px rgba(0, 0, 0, .15); }
 
 @media (max-width: 640px) {
   .topbar { gap: .5rem; }

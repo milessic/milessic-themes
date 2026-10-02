@@ -1,6 +1,6 @@
 # The milessic-themes manifesto
 
-How to build an application so that it wears every milessic theme, today's thirteen and the ones
+How to build an application so that it wears every milessic theme, today's fourteen and the ones
 added later, without changing a line of its own code.
 
 ---
@@ -254,7 +254,7 @@ The contract won't cover everything. For an app widget:
    outline them with `var(--ink)` if they must stay visible on white, and redraw on
    `milessic:themechange` if you paint on canvas (read tokens with
    `getComputedStyle(document.documentElement).getPropertyValue("--accent")`).
-5. **Dark mode:** `scheme: "auto"` themes (System, Aurora, Slate) follow
+5. **Dark mode:** `scheme: "auto"` themes (System, Aurora, Slate, Write.js) follow
    `prefers-color-scheme` by themselves. Don't add your own dark-mode media queries; tokens already
    flip.
 6. If a widget is useful to several apps, propose it for the contract (add it to `base.css`, every
