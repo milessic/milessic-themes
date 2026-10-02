@@ -250,8 +250,9 @@ table.selectable tbody tr.selected :is(.status, .btn.ghost) { color: inherit; }
 .tp-bevel { --tp-bg: #008080; --tp-win: #c0c0c0; --tp-bar: linear-gradient(90deg, #000080, #1084d0); --tp-accent: #c0c0c0; --tp-r: 0; --tp-win-border: 1px solid #000; --tp-shadow: inset 1px 1px 0 #fff, inset -1px -1px 0 #808080; }
 .tp-bevel .tp-bar { left: 2px; right: 2px; top: 2px; }
 .tp-bevel .tp-btn { box-shadow: inset 1px 1px 0 #fff, inset -1px -1px 0 #000; }
-.tp-parrots { --tp-bg: linear-gradient(160deg, #e6f4ff, #ffe3ea); --tp-win: #fff; --tp-bar: linear-gradient(90deg, #e63946, #ffd60a, #2a9d4b, #1d6fd8); --tp-accent: #111; --tp-r: 8px; --tp-win-border: 1px solid #111; --tp-shadow: 2px 2px 0 #111; }
-.tp-parrots .tp-btn { border-radius: 999px; }
+.tp-rainbox { --tp-bg: linear-gradient(160deg, #e6f4ff, #ffe3ea); --tp-win: #fff; --tp-bar: linear-gradient(90deg, #e63946, #ffd60a, #2a9d4b, #1d6fd8); --tp-accent: #111; --tp-r: 8px; --tp-win-border: 1px solid #111; --tp-shadow: 2px 2px 0 #111; }
+.tp-rainbox .tp-btn { border-radius: 999px; }
+.tp-robin { --tp-bg: #81d8d0; --tp-win: #fff; --tp-bar: linear-gradient(90deg, transparent 45%, #fff 45% 55%, transparent 55%), #81d8d0; --tp-accent: #111; --tp-r: 2px; --tp-win-border: 1px solid #5fbfb6; --tp-shadow: 0 3px 8px rgba(0, 80, 75, .2); }
 .tp-bubbles { --tp-bg: radial-gradient(circle at 18% 30%, rgba(255, 255, 255, .95) 0 3px, transparent 4px), radial-gradient(circle at 88% 72%, rgba(255, 255, 255, .25) 0 6px, rgba(255, 255, 255, .9) 7px, transparent 8px), linear-gradient(#5ab9f5, #c9ecff 70%, #8fd14f); --tp-win: #fff; --tp-bar: linear-gradient(#fdfeff, #c9e2f6); --tp-accent: linear-gradient(#8fd2ff, #0a6fd0); --tp-r: 8px; --tp-win-border: 1px solid #8db8dc; }
 .tp-bubbles .tp-btn { border-radius: 999px; }
 .tp-glass { --tp-bg: radial-gradient(circle at 20% 30%, #ff4ecd, transparent 55%), radial-gradient(circle at 85% 70%, #22d3ee, transparent 55%), #1e1b4b; --tp-win: rgba(255, 255, 255, .18); --tp-bar: transparent; --tp-accent: linear-gradient(135deg, #67e8f9, #a78bfa); --tp-r: 8px; --tp-win-border: 1px solid rgba(255, 255, 255, .5); --tp-shadow: 0 4px 10px rgba(0, 0, 0, .3); }
