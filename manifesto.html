@@ -15,13 +15,14 @@
       backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
     }
     .overlay > .card {
-      width: 100%; max-width: 860px; max-height: calc(100vh - 32px); margin: 0;
+      width: 100%; max-width: 860px; max-height: calc(100vh - 32px); max-height: calc(100dvh - 32px); margin: 0;
       display: flex; flex-direction: column; padding-bottom: 0;
     }
     /* Padding-top and box-shadow stay with the theme: overlays draw title bars and bevels with them. */
     .overlay .section-head { margin: 0; padding-bottom: .75rem; border-bottom: 1px solid var(--line); align-items: center; }
     .overlay .section-head h2 { margin: 0; }
-    .prose { overflow-y: auto; padding: 1.25rem .25rem 2rem; line-height: 1.6; }
+    .prose { overflow-y: auto; overscroll-behavior: contain; padding: 1.25rem .25rem 2rem; line-height: 1.6; overflow-wrap: anywhere; }
+    .prose img { max-width: 100%; height: auto; }
     .prose > :first-child { margin-top: 0; }
     .prose h1 { font-size: 1.6rem; }
     .prose h2 { font-size: 1.2rem; margin: 2rem 0 .75rem; }
@@ -39,6 +40,23 @@
     .prose .scroll-x { margin: 0 0 1rem; }
     .prose .toc ul { list-style: none; padding-left: 1rem; }
     .prose .toc > ul { padding-left: 0; }
+    /* Phones: the dialog fills the screen instead of floating in a padded frame. */
+    @media (max-width: 640px) {
+      .overlay { padding: 0; place-items: stretch; }
+      .overlay > .card {
+        max-width: none; height: 100vh; height: 100dvh; max-height: none;
+        border-radius: 0; padding-left: 1rem; padding-right: 1rem;
+      }
+      .overlay .section-head { flex-wrap: nowrap; }
+      .prose { padding: 1rem 0 calc(1.5rem + env(safe-area-inset-bottom)); line-height: 1.55; }
+      .prose h1 { font-size: 1.35rem; }
+      .prose h2 { font-size: 1.1rem; margin-top: 1.5rem; }
+      .prose ul, .prose ol { padding-left: 1.25rem; }
+      .prose .toc ul { padding-left: .75rem; }
+      .prose pre { padding: .6rem .75rem; }
+      .prose pre code { font-size: .8em; }
+      .prose pre, .prose pre code { overflow-wrap: normal; }
+    }
   </style>
 </head>
 <body>

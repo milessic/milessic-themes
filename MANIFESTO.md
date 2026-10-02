@@ -1,6 +1,6 @@
 # The milessic-themes manifesto
 
-How to build an application so that it wears every milessic theme, today's eight and the ones
+How to build an application so that it wears every milessic theme, today's twelve and the ones
 added later, without changing a line of its own code.
 
 ---

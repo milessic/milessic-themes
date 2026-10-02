@@ -1,5 +1,5 @@
 {
-  "version": "1.0.0",
+  "version": "1.1.0",
   "default": "system",
   "themes": [
     {"key": "system",  "label": "System",          "scheme": "auto",  "overlay": false, "description": "Neutral light/dark palette that follows the OS setting."},
@@ -9,6 +9,10 @@
     {"key": "pinstripe", "label": "Pinstripe",     "scheme": "light", "overlay": true,  "description": "Late-90s desktop: pinstriped title bars, bevelled controls."},
     {"key": "onebit",  "label": "1-bit",           "scheme": "light", "overlay": true,  "description": "Early-80s desktop: 1-bit black and white, tones become fill patterns."},
     {"key": "slate",   "label": "Slate",           "scheme": "auto",  "overlay": true,  "description": "Frosted tinted background, accent underline navigation."},
-    {"key": "bevel",   "label": "Bevel",           "scheme": "light", "overlay": true,  "description": "Mid-90s desktop: teal background, 3D bevels, navy title bars, bottom taskbar."}
+    {"key": "bevel",   "label": "Bevel",           "scheme": "light", "overlay": true,  "description": "Mid-90s desktop: teal background, 3D bevels, navy title bars, bottom taskbar."},
+    {"key": "parrots", "label": "Parrots and Penguins in love", "scheme": "light", "overlay": true, "description": "Tuxedo black and white meets macaw plumage: rainbow-striped cards, pill buttons, hearts."},
+    {"key": "bubbles", "label": "2000s bubbles",   "scheme": "light", "overlay": true,  "description": "Glossy 2000s desktop: sky wallpaper with floating bubbles, glossy gel pills and orbs."},
+    {"key": "glass",   "label": "super glass",     "scheme": "dark",  "overlay": true,  "description": "Heavy glassmorphism: frosted panes with bright rims over a vivid neon wallpaper."},
+    {"key": "console", "label": "CONSOLE",         "scheme": "dark",  "overlay": true,  "description": "Green phosphor terminal: scanlines, monospace, [bracketed] buttons, inverse-video selection."}
   ]
 }
