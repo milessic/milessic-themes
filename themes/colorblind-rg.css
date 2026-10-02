@@ -1,0 +1,100 @@
+/* ------------------------------------------------------------------------
+   Colorblind: red-green. For protanopia and deuteranopia (the common kinds).
+   Okabe-Ito palette: blue / vermillion / orange / yellow instead of
+   green-vs-red. Tones also get shapes and fill patterns. Follows OS light/dark.
+   ------------------------------------------------------------------------ */
+:root[data-theme="colorblind-rg"] {
+  color-scheme: light;
+  --page: #f7f8fa;
+  --surface: #ffffff;
+  --surface-2: #eef0f3;
+  --ink: #0b0b0b;
+  --ink-2: #45474c;
+  --muted: #6b6e75;
+  --line: #dfe2e7;
+  --line-strong: #b9bec7;
+  --accent: #0063a0;
+  --accent-ink: #ffffff;
+  --danger: #b34700;
+  --success-text: #00558c;
+  --ring: rgba(11, 11, 11, .12);
+  --tone-ok: #0072b2;
+  --tone-fail: #d55e00;
+  --tone-warn: #e69f00;
+  --tone-caution: #f0e442;
+  --tone-neutral: #b5b8be;
+  --cb-hatch: rgba(0, 0, 0, .35);
+}
+@media (prefers-color-scheme: dark) {
+  :root[data-theme="colorblind-rg"] {
+    color-scheme: dark;
+    --page: #0f1012;
+    --surface: #1a1b1e;
+    --surface-2: #26282c;
+    --ink: #ffffff;
+    --ink-2: #c8cbd1;
+    --muted: #9195a0;
+    --line: #2e3035;
+    --line-strong: #474a52;
+    --accent: #56b4e9;
+    --accent-ink: #000000;
+    --danger: #ff8a3d;
+    --success-text: #56b4e9;
+    --ring: rgba(255, 255, 255, .12);
+    --tone-ok: #56b4e9;
+    --tone-fail: #e8702a;
+    --tone-warn: #e69f00;
+    --tone-caution: #f0e442;
+    --tone-neutral: #6b6e75;
+  }
+}
+/* links are underlined: never told apart by colour alone */
+[data-theme="colorblind-rg"] a { text-decoration: underline; text-underline-offset: .15em; }
+[data-theme="colorblind-rg"] :is(.brand, .nav a, .btn, .chip, .tag, .small-btn, .menu > a) { text-decoration: none; }
+[data-theme="colorblind-rg"] .nav a.active { box-shadow: inset 0 -3px 0 var(--accent); }
+
+/* every tone has its own shape: ● ok, ✕ fail, ▲ warn, ◆ caution, ■ neutral */
+[data-theme="colorblind-rg"] .badge::before,
+[data-theme="colorblind-rg"] .swatch { width: .8rem; height: .8rem; border-radius: 0; }
+[data-theme="colorblind-rg"] .badge.tone-ok::before,
+[data-theme="colorblind-rg"] .swatch.tone-ok { border-radius: 50%; }
+[data-theme="colorblind-rg"] .badge.tone-fail::before,
+[data-theme="colorblind-rg"] .swatch.tone-fail { clip-path: polygon(20% 0, 50% 30%, 80% 0, 100% 20%, 70% 50%, 100% 80%, 80% 100%, 50% 70%, 20% 100%, 0 80%, 30% 50%, 0 20%); }
+[data-theme="colorblind-rg"] .badge.tone-warn::before,
+[data-theme="colorblind-rg"] .swatch.tone-warn { clip-path: polygon(50% 0, 100% 100%, 0 100%); }
+[data-theme="colorblind-rg"] .badge.tone-caution::before,
+[data-theme="colorblind-rg"] .swatch.tone-caution { clip-path: polygon(50% 0, 100% 50%, 50% 100%, 0 50%); }
+[data-theme="colorblind-rg"] .badge.tone-neutral::before,
+[data-theme="colorblind-rg"] .swatch.tone-neutral { box-shadow: inset 0 0 0 1px var(--ink-2); }
+
+/* bars: each tone also gets a fill pattern */
+[data-theme="colorblind-rg"] .distribution { gap: 2px; }
+[data-theme="colorblind-rg"] :is(.distribution .seg, .meter-fill).tone-fail { background: repeating-linear-gradient(45deg, var(--cb-hatch) 0 2px, transparent 2px 6px), var(--tone); }
+[data-theme="colorblind-rg"] :is(.distribution .seg, .meter-fill).tone-warn { background: radial-gradient(circle, var(--cb-hatch) 1.2px, transparent 1.6px) 0 0 / 5px 5px, var(--tone); }
+[data-theme="colorblind-rg"] :is(.distribution .seg, .meter-fill).tone-caution { background: repeating-linear-gradient(0deg, var(--cb-hatch) 0 2px, transparent 2px 5px), var(--tone); }
+[data-theme="colorblind-rg"] :is(.distribution .seg, .meter-fill).tone-neutral { background: repeating-linear-gradient(90deg, var(--cb-hatch) 0 2px, transparent 2px 5px), var(--tone); }
+
+/* states carry a mark, not just a colour */
+[data-theme="colorblind-rg"] .status.on::before { content: "● "; content: "● " / ""; }
+[data-theme="colorblind-rg"] .status.off::before { content: "○ "; content: "○ " / ""; }
+[data-theme="colorblind-rg"] .chip.on::before { content: "✓ "; content: "✓ " / ""; }
+[data-theme="colorblind-rg"] .segmented input:checked + span { font-weight: 700; text-decoration: underline; text-underline-offset: .2em; }
+[data-theme="colorblind-rg"] table.selectable tbody tr.selected td:first-child { box-shadow: inset 4px 0 0 var(--ink); }
+[data-theme="colorblind-rg"] .btn.danger { border-width: 2px; font-weight: 600; }
+
+/* messages: an icon for each kind */
+[data-theme="colorblind-rg"] .flash::before { font-weight: 700; margin-right: .5rem; }
+[data-theme="colorblind-rg"] .flash.success::before { content: "✓"; content: "✓" / ""; color: var(--tone-ok); }
+[data-theme="colorblind-rg"] .flash.error::before { content: "✕"; content: "✕" / ""; color: var(--danger); }
+[data-theme="colorblind-rg"] .flash.info::before { content: "i"; content: "i" / ""; color: var(--accent); }
+
+/* popups */
+[data-theme="colorblind-rg"] .menu { border-color: var(--line-strong); }
+[data-theme="colorblind-rg"] .menu > .danger::before { content: "⚠ "; content: "⚠ " / ""; }
+[data-theme="colorblind-rg"] .small-btn:is(.on, [aria-pressed="true"]) { box-shadow: inset 0 -3px 0 var(--accent-ink); font-weight: 700; }
+[data-theme="colorblind-rg"] .modal-container { border-color: var(--line-strong); }
+[data-theme="colorblind-rg"] :is(.notification-info, .notification-warn, .notification-error) { border-left-width: 6px; }
+[data-theme="colorblind-rg"] :is(.notification-info, .notification-warn, .notification-error)::before { font-weight: 700; margin-right: -.25rem; color: var(--note-color); }
+[data-theme="colorblind-rg"] .notification-info::before { content: "i"; content: "i" / ""; }
+[data-theme="colorblind-rg"] .notification-warn::before { content: "▲"; content: "▲" / ""; }
+[data-theme="colorblind-rg"] .notification-error::before { content: "✕"; content: "✕" / ""; }

@@ -7,9 +7,13 @@
  *   MilessicThemes.current()               active key
  *   MilessicThemes.list()                  Promise<registry>  (GET /api/themes)
  *   MilessicThemes.mountPicker(el, opts)   render a radio-group picker into el
+ *   MilessicThemes.enabled(key)            false if the script tag disabled that theme
  *
  * Script attributes: data-persist="false" disables localStorage,
- * data-restore="false" skips re-applying the stored theme on load.
+ * data-restore="false" skips re-applying the stored theme on load,
+ * data-themes="system,dark,bevel" offers only those themes,
+ * data-exclude="console,glass" hides those themes (wins over data-themes).
+ * Disabled themes are left out of list() and the picker, and apply() ignores them.
  * Every switch dispatches a "milessic:themechange" event on document ({detail: {key}}).
  */
 (function () {
@@ -20,6 +24,17 @@
   var STORAGE_KEY = "milessic-theme";
   var persist = !script || script.dataset.persist !== "false";
   var registryPromise = null;
+
+  function keys(attr) {
+    var raw = script && script.getAttribute(attr);
+    if (!raw) return null;
+    return raw.split(/[\s,]+/).filter(Boolean);
+  }
+  var only = keys("data-themes"), except = keys("data-exclude") || [];
+
+  function enabled(key) {
+    return (!only || only.indexOf(key) !== -1) && except.indexOf(key) === -1;
+  }
 
   function store(key) {
     if (!persist) return;
@@ -49,6 +64,10 @@
   }
 
   function apply(key) {
+    if (!enabled(key)) {
+      console.warn("milessic-themes: theme '" + key + "' is disabled on this page");
+      return;
+    }
     var el = link(), next = bundleUrl(key);
     if (el.href !== next) {
       // Load the new sheet before dropping the old one so the page never renders unstyled.
@@ -73,6 +92,9 @@
       registryPromise = fetch(ORIGIN + "/api/themes").then(function (r) {
         if (!r.ok) throw new Error("milessic-themes: registry HTTP " + r.status);
         return r.json();
+      }).then(function (reg) {
+        reg.themes = reg.themes.filter(function (t) { return enabled(t.key); });
+        return reg;
       });
     }
     return registryPromise;
@@ -109,8 +131,8 @@
     });
   }
 
-  window.MilessicThemes = { apply: apply, current: current, list: list, mountPicker: mountPicker, origin: ORIGIN };
+  window.MilessicThemes = { apply: apply, current: current, list: list, mountPicker: mountPicker, enabled: enabled, origin: ORIGIN };
 
   var saved = stored();
-  if (saved && saved !== current() && (!script || script.dataset.restore !== "false")) apply(saved);
+  if (saved && saved !== current() && enabled(saved) && (!script || script.dataset.restore !== "false")) apply(saved);
 })();

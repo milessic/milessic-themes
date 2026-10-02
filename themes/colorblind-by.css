@@ -1,0 +1,101 @@
+/* ------------------------------------------------------------------------
+   Colorblind: blue-yellow. For tritanopia: avoids blue-vs-green and
+   yellow-vs-pink pairs, works on the red-teal axis and on lightness instead.
+   Tones also get shapes and fill patterns. Follows OS light/dark.
+   ------------------------------------------------------------------------ */
+:root[data-theme="colorblind-by"] {
+  color-scheme: light;
+  --page: #f8f7f7;
+  --surface: #ffffff;
+  --surface-2: #f0eeee;
+  --ink: #0b0b0b;
+  --ink-2: #474545;
+  --muted: #6e6a6a;
+  --line: #e2dfdf;
+  --line-strong: #c0bbbb;
+  --accent: #00695c;
+  --accent-ink: #ffffff;
+  --danger: #b71c1c;
+  --success-text: #00695c;
+  --ring: rgba(11, 11, 11, .12);
+  --tone-ok: #009e8f;
+  --tone-fail: #c62828;
+  --tone-warn: #f06292;
+  --tone-caution: #4e342e;
+  --tone-neutral: #bdbdbd;
+  --cb-hatch: rgba(255, 255, 255, .5);
+}
+@media (prefers-color-scheme: dark) {
+  :root[data-theme="colorblind-by"] {
+    color-scheme: dark;
+    --page: #111010;
+    --surface: #1c1b1b;
+    --surface-2: #282626;
+    --ink: #ffffff;
+    --ink-2: #cfcaca;
+    --muted: #9a9494;
+    --line: #322f2f;
+    --line-strong: #4d4949;
+    --accent: #4dd0c0;
+    --accent-ink: #000000;
+    --danger: #ff6e6e;
+    --success-text: #4dd0c0;
+    --ring: rgba(255, 255, 255, .12);
+    --tone-ok: #26b5a5;
+    --tone-fail: #ef5350;
+    --tone-warn: #f48fb1;
+    --tone-caution: #d7ccc8;
+    --tone-neutral: #6e6a6a;
+    --cb-hatch: rgba(0, 0, 0, .4);
+  }
+}
+/* links are underlined: never told apart by colour alone */
+[data-theme="colorblind-by"] a { text-decoration: underline; text-underline-offset: .15em; }
+[data-theme="colorblind-by"] :is(.brand, .nav a, .btn, .chip, .tag, .small-btn, .menu > a) { text-decoration: none; }
+[data-theme="colorblind-by"] .nav a.active { box-shadow: inset 0 -3px 0 var(--accent); }
+
+/* every tone has its own shape: ● ok, ✕ fail, ▲ warn, ◆ caution, ■ neutral */
+[data-theme="colorblind-by"] .badge::before,
+[data-theme="colorblind-by"] .swatch { width: .8rem; height: .8rem; border-radius: 0; }
+[data-theme="colorblind-by"] .badge.tone-ok::before,
+[data-theme="colorblind-by"] .swatch.tone-ok { border-radius: 50%; }
+[data-theme="colorblind-by"] .badge.tone-fail::before,
+[data-theme="colorblind-by"] .swatch.tone-fail { clip-path: polygon(20% 0, 50% 30%, 80% 0, 100% 20%, 70% 50%, 100% 80%, 80% 100%, 50% 70%, 20% 100%, 0 80%, 30% 50%, 0 20%); }
+[data-theme="colorblind-by"] .badge.tone-warn::before,
+[data-theme="colorblind-by"] .swatch.tone-warn { clip-path: polygon(50% 0, 100% 100%, 0 100%); }
+[data-theme="colorblind-by"] .badge.tone-caution::before,
+[data-theme="colorblind-by"] .swatch.tone-caution { clip-path: polygon(50% 0, 100% 50%, 50% 100%, 0 50%); }
+[data-theme="colorblind-by"] .badge.tone-neutral::before,
+[data-theme="colorblind-by"] .swatch.tone-neutral { box-shadow: inset 0 0 0 1px var(--ink-2); }
+
+/* bars: each tone also gets a fill pattern */
+[data-theme="colorblind-by"] .distribution { gap: 2px; }
+[data-theme="colorblind-by"] :is(.distribution .seg, .meter-fill).tone-fail { background: repeating-linear-gradient(45deg, var(--cb-hatch) 0 2px, transparent 2px 6px), var(--tone); }
+[data-theme="colorblind-by"] :is(.distribution .seg, .meter-fill).tone-warn { background: radial-gradient(circle, var(--cb-hatch) 1.2px, transparent 1.6px) 0 0 / 5px 5px, var(--tone); }
+[data-theme="colorblind-by"] :is(.distribution .seg, .meter-fill).tone-caution { background: repeating-linear-gradient(0deg, var(--cb-hatch) 0 2px, transparent 2px 5px), var(--tone); }
+[data-theme="colorblind-by"] :is(.distribution .seg, .meter-fill).tone-neutral { background: repeating-linear-gradient(90deg, var(--cb-hatch) 0 2px, transparent 2px 5px), var(--tone); }
+
+/* states carry a mark, not just a colour */
+[data-theme="colorblind-by"] .status.on::before { content: "● "; content: "● " / ""; }
+[data-theme="colorblind-by"] .status.off::before { content: "○ "; content: "○ " / ""; }
+[data-theme="colorblind-by"] .chip.on::before { content: "✓ "; content: "✓ " / ""; }
+[data-theme="colorblind-by"] .segmented input:checked + span { font-weight: 700; text-decoration: underline; text-underline-offset: .2em; }
+[data-theme="colorblind-by"] table.selectable tbody tr.selected td:first-child { box-shadow: inset 4px 0 0 var(--ink); }
+[data-theme="colorblind-by"] .btn.danger { border-width: 2px; font-weight: 600; }
+
+/* messages: an icon for each kind */
+[data-theme="colorblind-by"] .flash::before { font-weight: 700; margin-right: .5rem; }
+[data-theme="colorblind-by"] .flash.success::before { content: "✓"; content: "✓" / ""; color: var(--tone-ok); }
+[data-theme="colorblind-by"] .flash.error::before { content: "✕"; content: "✕" / ""; color: var(--danger); }
+[data-theme="colorblind-by"] .flash.info::before { content: "i"; content: "i" / ""; color: var(--accent); }
+
+/* popups */
+[data-theme="colorblind-by"] .menu { border-color: var(--line-strong); }
+[data-theme="colorblind-by"] .menu > .danger::before { content: "⚠ "; content: "⚠ " / ""; }
+[data-theme="colorblind-by"] .small-btn:is(.on, [aria-pressed="true"]) { box-shadow: inset 0 -3px 0 var(--accent-ink); font-weight: 700; }
+[data-theme="colorblind-by"] .modal-container { border-color: var(--line-strong); }
+[data-theme="colorblind-by"] :is(.notification-info, .notification-warn, .notification-error) { border-left-width: 6px; }
+[data-theme="colorblind-by"] :is(.notification-info, .notification-warn, .notification-error)::before { font-weight: 700; margin-right: -.25rem; color: var(--note-color); }
+[data-theme="colorblind-by"] .notification-info::before { content: "i"; content: "i" / ""; }
+[data-theme="colorblind-by"] .notification-warn::before { content: "▲"; content: "▲" / ""; }
+[data-theme="colorblind-by"] .notification-error::before { content: "✕"; content: "✕" / ""; }
