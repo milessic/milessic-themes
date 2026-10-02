@@ -125,3 +125,36 @@
 [data-theme="pinstripe"] .meter { border-radius: 0; border: 1px solid #000; height: 8px; background: #fff; }
 [data-theme="pinstripe"] .meter-fill { border-radius: 0; }
 [data-theme="pinstripe"] .muted { color: #444; }
+
+/* menus: pull-down menus with blue highlight */
+[data-theme="pinstripe"] .menu { background: #fff; border: 1px solid #000; border-radius: 0; padding: 2px 0; box-shadow: 2px 2px 0 rgba(0, 0, 0, .45); }
+[data-theme="pinstripe"] .menu > :is(a, button) { color: #000; border-radius: 0; padding: .2rem 1.2rem; font-size: inherit; }
+[data-theme="pinstripe"] .menu > :is(a, button):is(:hover, :focus-visible) { background: var(--accent); color: #fff; }
+[data-theme="pinstripe"] .menu > .danger { color: #aa0000; }
+[data-theme="pinstripe"] .menu > [disabled] { color: #888; opacity: 1; }
+[data-theme="pinstripe"] .menu > [disabled]:hover { background: none; color: #888; }
+[data-theme="pinstripe"] .menu hr { border-top: 1px dotted #888; margin: 2px 0; }
+[data-theme="pinstripe"] .small-btn { border: 1px solid #000; border-radius: 4px; color: #000; background: linear-gradient(#ffffff, #cfcfcf); box-shadow: inset -1px -1px 0 #999; }
+[data-theme="pinstripe"] .small-btn:hover { background: linear-gradient(#f4f4f4, #c4c4c4); }
+[data-theme="pinstripe"] .small-btn:active,
+[data-theme="pinstripe"] .small-btn:is(.on, [aria-pressed="true"]) { background: #777; color: #fff; border-color: #000; box-shadow: none; }
+
+/* modals: a window with a pinstriped title bar */
+[data-theme="pinstripe"] .modal-container {
+  background: #dddddd; border: 1px solid #000; border-radius: 0; padding-top: 2.1rem;
+  box-shadow: var(--bevel-out), 3px 3px 0 rgba(0, 0, 0, .45);
+}
+[data-theme="pinstripe"] .modal-container::before {
+  content: ""; position: absolute; left: 3px; right: 3px; top: 3px; height: 15px;
+  background: var(--pinstripe); border-bottom: 1px solid #888;
+}
+[data-theme="pinstripe"] .modal-container::backdrop { background: rgba(0, 0, 0, .2); }
+
+/* notifications: alert boxes with an icon */
+[data-theme="pinstripe"] :is(.notification-info, .notification-warn, .notification-error) {
+  background: #dddddd; border: 1px solid #000; border-radius: 0; box-shadow: var(--bevel-out), 2px 2px 0 rgba(0, 0, 0, .45);
+}
+[data-theme="pinstripe"] :is(.notification-info, .notification-warn, .notification-error)::before { font-weight: 700; margin-right: -.25rem; }
+[data-theme="pinstripe"] .notification-info::before { content: "ⓘ"; }
+[data-theme="pinstripe"] .notification-warn::before { content: "⚠"; }
+[data-theme="pinstripe"] .notification-error::before { content: "✕"; color: #aa0000; }

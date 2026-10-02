@@ -142,3 +142,19 @@ def test_every_theme_has_a_picker_preview():
     base = (ROOT / "themes" / "base.css").read_text()
     for t in REGISTRY["themes"]:
         assert f".tp-{t['key']} " in base, f"missing .tp-{t['key']} preview"
+
+
+POPUP_CLASSES = [".menu", ".small-btn", ".modal-container", ".notification-info", ".notification-warn", ".notification-error"]
+
+
+@pytest.mark.parametrize("key", OVERLAYS)
+def test_overlay_styles_every_popup_component(key):
+    css = (ROOT / "themes" / f"{key}.css").read_text()
+    for cls in POPUP_CLASSES:
+        assert cls in css, f"{key}.css does not style {cls}"
+
+
+def test_base_defines_every_popup_component():
+    base = (ROOT / "themes" / "base.css").read_text()
+    for cls in POPUP_CLASSES:
+        assert cls in base, f"base.css does not define {cls}"

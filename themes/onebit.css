@@ -129,3 +129,35 @@
 [data-theme="onebit"] .meter { border-radius: 0; border: 1px solid #000; height: 8px; background: #fff; }
 [data-theme="onebit"] .meter-fill { border-radius: 0; background: #000; }
 [data-theme="onebit"] .theme-preview { border-color: #000; border-radius: 0; }
+
+/* menus: pull-down menus, inverted highlight, dotted separators */
+[data-theme="onebit"] .menu { background: #fff; border: 1px solid #000; border-radius: 0; padding: 1px 0; box-shadow: 1px 1px 0 #000; }
+[data-theme="onebit"] .menu > :is(a, button) { color: #000; border-radius: 0; padding: .15rem 1.2rem; font-size: inherit; text-decoration: none; }
+[data-theme="onebit"] .menu > :is(a, button):is(:hover, :focus-visible) { background: #000; color: #fff; }
+[data-theme="onebit"] .menu > .danger { color: #000; font-weight: 700; }
+[data-theme="onebit"] .menu > [disabled] { opacity: 1; color: #000; text-decoration: line-through; }
+[data-theme="onebit"] .menu > [disabled]:is(:hover, :focus-visible) { background: none; color: #000; }
+[data-theme="onebit"] .menu hr { border-top: 1px dotted #000; margin: 1px 0; }
+[data-theme="onebit"] .small-btn { background: #fff; color: #000; border: 1px solid #000; border-radius: 6px; }
+[data-theme="onebit"] .small-btn:hover { background: #fff; }
+[data-theme="onebit"] .small-btn:active,
+[data-theme="onebit"] .small-btn:is(.on, [aria-pressed="true"]) { background: #000; color: #fff; border-color: #000; }
+[data-theme="onebit"] .small-btn:focus-visible { outline: 1px dotted #000; outline-offset: 2px; }
+
+/* modals: the classic double-bordered alert dialog over a dithered desktop */
+[data-theme="onebit"] .modal-container {
+  background: #fff; border: 1px solid #000; border-radius: 0;
+  box-shadow: 0 0 0 3px #fff, 0 0 0 4px #000, 0 0 0 6px #fff, 0 0 0 7px #000, 8px 8px 0 #000;
+}
+[data-theme="onebit"] .modal-container.static { margin: 8px 15px 15px 8px; }
+[data-theme="onebit"] .modal-container::backdrop { background: repeating-conic-gradient(#000 0 25%, transparent 0 50%) 0 0 / 2px 2px; }
+
+/* notifications: framed alerts, the icon tells them apart */
+[data-theme="onebit"] :is(.notification-info, .notification-warn, .notification-error) {
+  background: #fff; color: #000; border: 1px solid #000; border-radius: 0; box-shadow: 2px 2px 0 #000;
+}
+[data-theme="onebit"] .notification-error { border-width: 1px 1px 1px 4px; }
+[data-theme="onebit"] :is(.notification-info, .notification-warn, .notification-error)::before { font-weight: 700; margin-right: -.25rem; }
+[data-theme="onebit"] .notification-info::before { content: "ⓘ"; }
+[data-theme="onebit"] .notification-warn::before { content: "⚠"; }
+[data-theme="onebit"] .notification-error::before { content: "✕"; }
