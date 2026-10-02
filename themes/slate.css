@@ -84,6 +84,21 @@
 /* cards */
 [data-theme="slate"] .card { background: var(--surface); border: 1px solid var(--ring); box-shadow: var(--card-shadow); }
 
+/* windows: Windows 11 caption close button (46px wide, full bar height, red on hover) */
+[data-theme="slate"] .window-bar { height: 2rem; padding: 0 0 0 .9rem; background: transparent; border-bottom: 0; }
+[data-theme="slate"] .window-title { font-size: .75rem; font-weight: 400; }
+[data-theme="slate"] .window-close {
+  width: 46px; height: 100%; border-radius: 0 var(--radius) 0 0; color: var(--ink);
+}
+[data-theme="slate"] .window-close::before {
+  content: ""; width: 10px; height: 10px; background: currentColor;
+  -webkit-mask: var(--win11-close) no-repeat center / 100%; mask: var(--win11-close) no-repeat center / 100%;
+  --win11-close: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 10'%3E%3Cpath d='M.5.5l9 9M9.5.5l-9 9' stroke='%23000' stroke-width='1'/%3E%3C/svg%3E");
+}
+[data-theme="slate"] .window-close:hover { background: #c42b1c; color: #fff; }
+[data-theme="slate"] .window-close:active { background: rgba(196, 43, 28, .9); color: rgba(255, 255, 255, .7); }
+[data-theme="slate"] .window-close:focus-visible { outline: 2px solid var(--ink); outline-offset: -2px; }
+
 [data-theme="slate"] .tile { border-radius: 6px; background: var(--surface-2); border: 1px solid var(--ring); }
 
 /* controls */

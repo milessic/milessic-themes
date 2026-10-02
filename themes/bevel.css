@@ -72,10 +72,16 @@
 [data-theme="bevel"] .window-title { color: #fff; font: 700 12px/18px Tahoma, sans-serif; }
 [data-theme="bevel"] .window-close {
   width: 16px; height: 14px; border-radius: 0; background: #c0c0c0; box-shadow: var(--raised); color: #000;
+  place-items: start; padding: 3px 0 0 4px;
 }
-[data-theme="bevel"] .window-close::before { font: 700 12px/13px Tahoma, sans-serif; }
+[data-theme="bevel"] .window-close::before {
+  content: ""; width: 8px; height: 7px; background: currentColor;
+  -webkit-mask: var(--win98-close) no-repeat; mask: var(--win98-close) no-repeat;
+  --win98-close: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='7' shape-rendering='crispEdges'%3E%3Cpath d='M0 0h2v1H0zM6 0h2v1H6zM1 1h2v1H1zM5 1h2v1H5zM2 2h4v1H2zM3 3h2v1H3zM2 4h4v1H2zM1 5h2v1H1zM5 5h2v1H5zM0 6h2v1H0zM6 6h2v1H6z'/%3E%3C/svg%3E");
+}
 [data-theme="bevel"] .window-close:hover { background: #c0c0c0; color: #000; }
-[data-theme="bevel"] .window-close:active { box-shadow: var(--sunken); }
+[data-theme="bevel"] .window-close:active { box-shadow: var(--sunken); padding: 4px 0 0 5px; }
+[data-theme="bevel"] .window-close:focus-visible { outline: 1px dotted #000; outline-offset: -4px; }
 
 [data-theme="bevel"] .tile { background: #fff; border-radius: 0; box-shadow: var(--sunken); }
 
