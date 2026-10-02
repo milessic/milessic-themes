@@ -1,0 +1,176 @@
+/* ------------------------------------------------------------------------
+   Holistic developer: the look of milessic's portfolio. Monospace everywhere,
+   plain white (or charcoal) page, black-outlined cards with 5px corners, grey
+   keycap buttons on a hard black shadow that turn red on hover and press
+   down on click, tags that grow under the pointer. Follows the OS light/dark
+   mode like the portfolio's own toggle.
+   ------------------------------------------------------------------------ */
+:root[data-theme="holistic-developer"] {
+  color-scheme: light;
+  --page: #ffffff;
+  --surface: #ffffff;
+  --surface-2: #eeeeee;
+  --ink: #000000;
+  --ink-2: #222222;
+  --muted: #666666;
+  --line: #010101;
+  --line-strong: #010101;
+  --accent: #ce0606;
+  --accent-ink: #ffffff;
+  --danger: #ce0606;
+  --success-text: #0f7a00;
+  --ring: #010101;
+  /* tones borrowed from the portfolio's technology tags */
+  --tone-ok: #15a200;
+  --tone-fail: #ce0606;
+  --tone-warn: #ee7509;
+  --tone-caution: #fedc45;
+  --tone-neutral: #9e9e9e;
+  --radius: 5px;
+  --hd-key: #9e9e9e;
+  --hd-key-ink: #000000;
+  --hd-key-shadow: #020202;
+  --hd-key-hot: #ce0606;
+  --hd-key-hot-ink: #ffffff;
+  --hd-dark: #414a4c;
+  --hd-dark-ink: #ffffff;
+  --hd-tag-border: #000000;
+  --font: monospace, ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  --font-mono: var(--font);
+  font-family: var(--font);
+}
+@media (prefers-color-scheme: dark) {
+  :root[data-theme="holistic-developer"] {
+    color-scheme: dark;
+    --page: #222222;
+    --surface: #222224;
+    --surface-2: #2f2f2f;
+    --ink: #ffffff;
+    --ink-2: #e6e6e6;
+    --muted: #a8a8a8;
+    --line: #575757;
+    --line-strong: #575757;
+    --danger: #ff4d4d;
+    --success-text: #4fd13a;
+    --ring: #575757;
+    --tone-neutral: #6f6f6f;
+    --hd-tag-border: #f4f4f4;
+  }
+}
+[data-theme="holistic-developer"] body { font-family: var(--font); }
+[data-theme="holistic-developer"] :is(button, input, select, textarea) { font-family: var(--font); }
+/* links wear the text colour, as on the portfolio */
+[data-theme="holistic-developer"] a { color: var(--ink); }
+[data-theme="holistic-developer"] a:hover { color: var(--hd-key-hot); }
+[data-theme="holistic-developer"] h3 { color: var(--ink); }
+[data-theme="holistic-developer"] code { background: var(--surface-2); border-radius: 3px; padding: 0 .25em; }
+[data-theme="holistic-developer"] ::selection { background: var(--hd-key-hot); color: var(--hd-key-hot-ink); }
+[data-theme="holistic-developer"] hr { border: 0; border-top: 1px solid var(--line); }
+
+/* the top bar: plain page, a heavy rule like the filter panel's frame */
+[data-theme="holistic-developer"] .topbar { background: var(--page); border-bottom: 2px solid var(--line); }
+[data-theme="holistic-developer"] .nav a { color: var(--ink); border-radius: var(--radius); border: 2px solid transparent; transition: scale .2s ease-in-out; }
+[data-theme="holistic-developer"] .nav a:hover { background: var(--surface-2); color: var(--ink); scale: 1.1; }
+[data-theme="holistic-developer"] .nav a.active { background: var(--surface-2); border-color: var(--hd-tag-border); font-weight: 700; }
+
+/* panels: the app cards, 1px black outline and 5px corners */
+[data-theme="holistic-developer"] .card { border: 1px solid var(--line); border-radius: var(--radius); box-shadow: none; }
+[data-theme="holistic-developer"] .card.empty { border-style: dashed; background: transparent; }
+[data-theme="holistic-developer"] .danger-card { border-color: var(--danger); box-shadow: inset 4px 0 0 var(--danger); }
+[data-theme="holistic-developer"] .tile { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); }
+[data-theme="holistic-developer"] .tile-value { font-weight: 700; }
+
+/* controls: grey keycaps on a hard black shadow, red on hover, pressed on click */
+[data-theme="holistic-developer"] .btn {
+  border: 0; border-radius: 0; background: var(--hd-key); color: var(--hd-key-ink);
+  padding: .5rem .95rem; margin-bottom: 5px; box-shadow: 0 5px 0 var(--hd-key-shadow);
+}
+[data-theme="holistic-developer"] .btn:hover { background: var(--hd-key-hot); color: var(--hd-key-hot-ink); }
+[data-theme="holistic-developer"] .btn:active:not([disabled]) { box-shadow: none; transform: translateY(5px); }
+[data-theme="holistic-developer"] .btn.primary { background: var(--hd-dark); color: var(--hd-dark-ink); }
+[data-theme="holistic-developer"] .btn.primary:hover { filter: none; background: var(--hd-key-hot); color: var(--hd-key-hot-ink); }
+[data-theme="holistic-developer"] .btn.danger { background: var(--hd-key); color: var(--hd-key-hot); font-weight: 700; }
+[data-theme="holistic-developer"] .btn.danger:hover { background: var(--hd-key-hot); color: var(--hd-key-hot-ink); }
+[data-theme="holistic-developer"] .btn.ghost { background: transparent; color: var(--ink); box-shadow: none; margin-bottom: 0; }
+[data-theme="holistic-developer"] .btn.ghost:hover { background: var(--surface-2); color: var(--hd-key-hot); }
+[data-theme="holistic-developer"] .btn.ghost:active { transform: none; }
+[data-theme="holistic-developer"] .btn.small { padding: .25rem .6rem; margin-bottom: 3px; box-shadow: 0 3px 0 var(--hd-key-shadow); }
+[data-theme="holistic-developer"] .btn.small:active:not([disabled]) { transform: translateY(3px); }
+[data-theme="holistic-developer"] .btn.ghost.small { box-shadow: none; margin-bottom: 0; }
+[data-theme="holistic-developer"] input,
+[data-theme="holistic-developer"] select,
+[data-theme="holistic-developer"] textarea { border: 1px solid var(--line); border-radius: var(--radius); background: var(--surface); }
+[data-theme="holistic-developer"] input:focus-visible,
+[data-theme="holistic-developer"] select:focus-visible,
+[data-theme="holistic-developer"] textarea:focus-visible,
+[data-theme="holistic-developer"] .btn:focus-visible { outline: 2px solid var(--hd-tag-border); outline-offset: 2px; }
+[data-theme="holistic-developer"] input[type="checkbox"],
+[data-theme="holistic-developer"] input[type="radio"] { accent-color: var(--hd-dark); }
+
+/* filter chips: the portfolio's tags, growing under the pointer, framed when active */
+[data-theme="holistic-developer"] .segmented { border: 0; border-radius: 0; gap: 10px; overflow: visible; }
+[data-theme="holistic-developer"] .segmented span {
+  display: inline-block; background: var(--surface-2); color: var(--ink); border: 2px solid transparent;
+  border-radius: var(--radius); padding: 2px 6px; transition: scale .2s ease-in-out;
+}
+[data-theme="holistic-developer"] .segmented span:hover { scale: 1.1; }
+[data-theme="holistic-developer"] .segmented input:checked + span { background: var(--surface-2); color: var(--ink); border-color: var(--hd-tag-border); font-weight: 700; scale: 1.1; }
+[data-theme="holistic-developer"] .chip {
+  border: 2px solid transparent; border-radius: var(--radius); background: var(--surface-2); color: var(--ink);
+  padding: 2px 6px; transition: scale .2s ease-in-out;
+}
+[data-theme="holistic-developer"] .chip:hover { scale: 1.1; }
+[data-theme="holistic-developer"] .chip.on { background: var(--surface-2); color: var(--ink); border-color: var(--hd-tag-border); scale: 1.1; }
+[data-theme="holistic-developer"] .chip.on:hover { scale: 1.2; }
+[data-theme="holistic-developer"] .tag { border-radius: var(--radius); background: var(--surface-2); color: var(--ink); padding: 2px 4px; transition: scale .2s ease-in-out; }
+[data-theme="holistic-developer"] .tag:hover { scale: 1.1; }
+[data-theme="holistic-developer"] kbd { border: 1px solid var(--line); border-radius: 3px; background: var(--surface-2); box-shadow: 0 2px 0 var(--hd-key-shadow); }
+
+/* tables: plain rows, grey header strip, black-framed selection */
+[data-theme="holistic-developer"] .data th { background: var(--surface-2); color: var(--ink); }
+[data-theme="holistic-developer"] .data :is(th, td) { border-bottom-color: color-mix(in srgb, var(--line) 30%, transparent); }
+[data-theme="holistic-developer"] table.selectable tbody tr:hover { background: var(--surface-2); }
+[data-theme="holistic-developer"] table.selectable tbody tr.selected { background: var(--surface-2); box-shadow: inset 0 0 0 2px var(--hd-tag-border); }
+[data-theme="holistic-developer"] .meter { border-radius: 0; border: 1px solid var(--line); }
+[data-theme="holistic-developer"] .meter-fill { border-radius: 0; }
+
+/* messages */
+[data-theme="holistic-developer"] .flash { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); }
+[data-theme="holistic-developer"] .flash.success { border-left: 5px solid var(--tone-ok); }
+[data-theme="holistic-developer"] .flash.error { border-left: 5px solid var(--danger); }
+[data-theme="holistic-developer"] .flash.info { border-left: 5px solid var(--hd-dark); }
+[data-theme="holistic-developer"] .tooltip { background: var(--hd-dark); color: var(--hd-dark-ink); border-radius: var(--radius); box-shadow: 0 3px 0 var(--hd-key-shadow); }
+[data-theme="holistic-developer"] .secret { background: var(--surface-2); border: 1px solid var(--line); border-radius: var(--radius); }
+[data-theme="holistic-developer"] pre { background: var(--surface-2); border: 1px solid var(--line); border-radius: var(--radius); padding: .8em 1em; overflow: auto; }
+
+/* menus: the filter panel, a 2px black frame on the page colour */
+[data-theme="holistic-developer"] .menu { background: var(--page); border: 2px solid var(--line); border-radius: var(--radius); box-shadow: none; }
+[data-theme="holistic-developer"] .menu > :is(a, button) { color: var(--ink); border-radius: var(--radius); }
+[data-theme="holistic-developer"] .menu > :is(a, button):not([disabled]):is(:hover, :focus-visible) { background: var(--hd-key-hot); color: var(--hd-key-hot-ink); }
+[data-theme="holistic-developer"] .menu > .danger { color: var(--danger); font-weight: 700; }
+[data-theme="holistic-developer"] .menu hr { border-top-color: var(--line); }
+
+/* small buttons: miniature keycaps */
+[data-theme="holistic-developer"] .small-btn {
+  border: 0; border-radius: 0; background: var(--hd-key); color: var(--hd-key-ink);
+  margin-bottom: 3px; box-shadow: 0 3px 0 var(--hd-key-shadow);
+}
+[data-theme="holistic-developer"] .small-btn:hover { background: var(--hd-key-hot); color: var(--hd-key-hot-ink); }
+[data-theme="holistic-developer"] .small-btn:active:not([disabled]) { box-shadow: none; transform: translateY(3px); }
+[data-theme="holistic-developer"] .small-btn:is(.on, [aria-pressed="true"]) { background: var(--hd-dark); color: var(--hd-dark-ink); box-shadow: none; transform: translateY(3px); }
+[data-theme="holistic-developer"] .small-btn:focus-visible { outline: 2px solid var(--hd-tag-border); outline-offset: 2px; }
+
+/* modals: the filter panel frame over a dim page */
+[data-theme="holistic-developer"] .modal-container { background: var(--page); border: 2px solid var(--line); border-radius: var(--radius); box-shadow: none; }
+[data-theme="holistic-developer"] .modal-container::backdrop { background: rgba(0, 0, 0, .5); }
+
+/* notifications: outlined slips with a coloured left edge and a keycap close */
+[data-theme="holistic-developer"] :is(.notification-info, .notification-warn, .notification-error) {
+  background: var(--page); border: 2px solid var(--line); border-left: 6px solid var(--note-color);
+  border-radius: var(--radius); box-shadow: none;
+}
+[data-theme="holistic-developer"] .notification-info { --note-color: var(--hd-dark); }
+[data-theme="holistic-developer"] .notification-warn { --note-color: var(--tone-caution); }
+[data-theme="holistic-developer"] .notification-error { --note-color: var(--danger); }
+[data-theme="holistic-developer"] :is(.notification-info, .notification-warn, .notification-error) .small-btn { background: var(--hd-key); }
+[data-theme="holistic-developer"] :is(.notification-info, .notification-warn, .notification-error) .small-btn:hover { background: var(--hd-key-hot); }
