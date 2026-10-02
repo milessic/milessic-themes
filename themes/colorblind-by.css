@@ -92,6 +92,7 @@
 /* popups */
 [data-theme="colorblind-by"] .menu { border-color: var(--line-strong); }
 [data-theme="colorblind-by"] .menu > .danger::before { content: "⚠ "; content: "⚠ " / ""; }
+[data-theme="colorblind-by"] .toolbar-bar { border-color: var(--line-strong); }
 [data-theme="colorblind-by"] .small-btn:is(.on, [aria-pressed="true"]) { box-shadow: inset 0 -3px 0 var(--accent-ink); font-weight: 700; }
 [data-theme="colorblind-by"] .modal-container { border-color: var(--line-strong); }
 [data-theme="colorblind-by"] :is(.notification-info, .notification-warn, .notification-error) { border-left-width: 6px; }

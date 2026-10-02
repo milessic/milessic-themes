@@ -163,6 +163,8 @@
 [data-theme="writejs"] .menu > [disabled] { text-decoration: line-through; }
 [data-theme="writejs"] .menu > [disabled]:hover { background: none; color: var(--muted); }
 [data-theme="writejs"] .menu hr { border-top-color: var(--line); margin: 10px 0; }
+[data-theme="writejs"] .toolbar-bar { background: var(--surface); border: 0; border-radius: 4px; padding: 5px; box-shadow: var(--wj-shadow); }
+[data-theme="writejs"] .toolbar-sep { background: var(--line); }
 /* small buttons: the editor's formatting toolbar */
 [data-theme="writejs"] .small-btn { border: 0; border-radius: 4px; background: var(--wj-chip); color: var(--wj-chip-ink); padding: 0 .5rem; transition: background-color .3s; }
 [data-theme="writejs"] .small-btn:hover { background: var(--wj-chip-hover); }

@@ -156,6 +156,8 @@
 [data-theme="bubbles"] .menu > .danger { color: var(--danger); }
 [data-theme="bubbles"] .menu > [disabled]:hover { background: none; color: #12395e; text-shadow: none; }
 [data-theme="bubbles"] .menu hr { border-top-color: #cfe3f2; margin: 4px 10px; }
+[data-theme="bubbles"] .toolbar-bar { border: 1px solid #b4d4ec; border-radius: 14px; padding: 4px 6px; background: linear-gradient(#ffffff, #eef7ff); box-shadow: inset 0 1px 0 #fff, 0 2px 8px rgba(20, 90, 160, .15); }
+[data-theme="bubbles"] .toolbar-sep { background: #cfe3f2; }
 /* small buttons are round glossy orbs */
 [data-theme="bubbles"] .small-btn {
   border: 1px solid #8db0cf; border-radius: 999px; background: var(--pill); box-shadow: var(--pill-shadow);

@@ -146,6 +146,8 @@
 [data-theme="console"] .menu > [disabled]:hover { background: none; color: var(--ink); }
 [data-theme="console"] .menu > [disabled]:hover::before { content: "  "; }
 [data-theme="console"] .menu hr { border-top: 1px dashed var(--line-strong); margin: .2rem 0; }
+[data-theme="console"] .toolbar-bar { background: #000; border: 1px solid var(--line-strong); border-radius: 0; padding: .15rem .3rem; gap: .5rem; }
+[data-theme="console"] .toolbar-sep { width: 0; background: none; border-left: 1px dashed var(--line-strong); margin: 0 .1rem; }
 [data-theme="console"] .small-btn { border: none; border-radius: 0; background: transparent; color: var(--ink); min-width: 0; padding: 0 .2rem; height: auto; line-height: 1.4; }
 [data-theme="console"] .small-btn::before { content: "["; }
 [data-theme="console"] .small-btn::after { content: "]"; }

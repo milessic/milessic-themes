@@ -129,6 +129,8 @@
 [data-theme="contrast-light"] .menu > [disabled],
 [data-theme="contrast-light"] .menu > [disabled]:hover { opacity: 1; background: none; color: var(--muted); text-decoration: line-through; }
 [data-theme="contrast-light"] .menu hr { border-top: 2px solid var(--ink); }
+[data-theme="contrast-light"] .toolbar-bar { background: var(--surface); border: 2px solid var(--ink); }
+[data-theme="contrast-light"] .toolbar-sep { width: 2px; background: var(--ink); }
 [data-theme="contrast-light"] .small-btn { border: 2px solid var(--ink); background: var(--surface); color: var(--ink); font-weight: 700; }
 [data-theme="contrast-light"] .small-btn:hover { background: var(--hc-hover-bg); border-color: var(--hc-hover-bg); color: var(--hc-hover-ink); }
 [data-theme="contrast-light"] .small-btn:is(.on, [aria-pressed="true"]) { background: var(--ink); border-color: var(--ink); color: var(--page); }

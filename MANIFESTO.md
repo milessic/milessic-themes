@@ -182,7 +182,7 @@ from them before inventing new ones. The gallery (`/`) shows each one in each th
 | Layout    | `.topbar` `.brand` `.nav` (`a.active`) `.topbar-end` · `.container` · `.page-head` `.section-head` · `.card` (`.narrow` `.empty` `.danger-card`) · `.grid-2` `.split` · `.stack` `.row` · `.scroll-x` · `.auth` + `.auth-card` |
 | Text      | `h1`–`h3` · `.muted` `.small` · `code` `.mono` `kbd` · `.warn-text` |
 | Forms     | `label` (wraps its control) · `label.check` · `input` `select` `textarea` · `.inline-form` `.filters` `.toolbar` (+ `.grow`) · `details`/`summary` |
-| Buttons   | `.btn` + `.primary` `.ghost` `.danger` `.small`, `[disabled]` · `.small-btn` (icon/toolbar; `.on` or `aria-pressed="true"`) · `.segmented` (label › radio + span) · `.chip` (`.on`) |
+| Buttons   | `.btn` + `.primary` `.ghost` `.danger` `.small`, `[disabled]` · `.small-btn` (icon/toolbar; `.on` or `aria-pressed="true"`) · `.toolbar-bar` (framed strip of `.small-btn`/`.btn`; `.toolbar-sep` between groups, `.grow` spacer) · `.segmented` (label › radio + span) · `.chip` (`.on`) |
 | Messages  | `.flash` + `.success` `.info` `.error` · `.tooltip` (`.static` for inline use) · `.secret` · `.danger-zone` |
 | Popups    | `.menu` › `button`/`a` items (`.danger`, `[disabled]`) + `hr` · `.modal-container` (`<dialog>` + `showModal()`; `.static` for inline use) · `.notification-info` `.notification-warn` `.notification-error` › text + optional close `.small-btn` |
 | Tables    | `table.data` · `th`/`td.num` `.actions` · `tr.dim` · `.sort-btn` + `th[aria-sort]` · `table.selectable` + `tr.selected` |
@@ -199,6 +199,10 @@ Markup rules:
   stacks and dismisses them. A modal's title and close button go in a `.section-head`
   (`h2` + `.small-btn aria-label="Close"`); its actions in a `.row`. Notifications get `role="status"`
   (`role="alert"` for errors), the menu `role="menu"` with `role="menuitem"` items.
+* `.toolbar` is only a layout row (no frame), e.g. actions in a `.section-head`. For a framed
+  control strip (editor formatting, bulk actions above a table) use
+  `<div class="toolbar-bar" role="toolbar" aria-label="…">`; separators are
+  `<span class="toolbar-sep" aria-hidden="true"></span>`.
 * User-chosen colors (a client's color) go through a custom property (`--dot-color`), never
   `style="background:…"`, so 1-bit themes can override them.
 

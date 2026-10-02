@@ -101,6 +101,8 @@
 [data-theme="robin"] .menu > :is(a, button):is(:hover, :focus-visible) { background: var(--surface-2); box-shadow: inset 2px 0 0 #111; }
 [data-theme="robin"] .menu > [disabled]:hover { background: none; box-shadow: none; }
 [data-theme="robin"] .menu hr { border-top-color: var(--line); margin: .3rem 1rem; }
+[data-theme="robin"] .toolbar-bar { background: var(--surface); border: 1px solid var(--line); border-top: 3px solid var(--robin); border-radius: 2px; }
+[data-theme="robin"] .toolbar-sep { background: var(--line); }
 [data-theme="robin"] .small-btn { border: 1px solid #111; border-radius: 2px; color: #111; background: var(--surface); }
 [data-theme="robin"] .small-btn:hover { background: var(--surface-2); }
 [data-theme="robin"] .small-btn:is(.on, [aria-pressed="true"]) { background: var(--robin); border-color: #111; color: #111; }

@@ -204,6 +204,16 @@ details .stack { margin-top: .75rem; }
 .small-btn[disabled] { opacity: .5; cursor: not-allowed; }
 .small-btn:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
 
+/* toolbar bar: a framed strip of controls (formatting, bulk actions); .toolbar stays the bare layout.
+   .toolbar-sep divides groups, .grow fills the gap (a spacer or a search field) */
+.toolbar-bar {
+  display: flex; flex-wrap: wrap; align-items: center; gap: .25rem; padding: .3rem;
+  background: var(--surface-2); color: var(--ink); border: 1px solid var(--ring); border-radius: calc(var(--radius) * .6);
+}
+.toolbar-bar > .grow { flex: 1 1 auto; }
+.toolbar-bar > .grow input { width: 100%; }
+.toolbar-sep { flex: none; align-self: stretch; width: 1px; margin: .2rem .25rem; background: var(--line-strong); }
+
 /* modals: a centred dialog panel (<dialog class="modal-container"> + showModal() gets the backdrop);
    .static renders it inline, e.g. in a gallery */
 .modal-container {

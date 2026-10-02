@@ -91,6 +91,7 @@
 /* popups */
 [data-theme="colorblind-rg"] .menu { border-color: var(--line-strong); }
 [data-theme="colorblind-rg"] .menu > .danger::before { content: "⚠ "; content: "⚠ " / ""; }
+[data-theme="colorblind-rg"] .toolbar-bar { border-color: var(--line-strong); }
 [data-theme="colorblind-rg"] .small-btn:is(.on, [aria-pressed="true"]) { box-shadow: inset 0 -3px 0 var(--accent-ink); font-weight: 700; }
 [data-theme="colorblind-rg"] .modal-container { border-color: var(--line-strong); }
 [data-theme="colorblind-rg"] :is(.notification-info, .notification-warn, .notification-error) { border-left-width: 6px; }

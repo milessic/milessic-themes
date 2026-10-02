@@ -134,6 +134,8 @@
 [data-theme="pinstripe"] .menu > [disabled] { color: #888; opacity: 1; }
 [data-theme="pinstripe"] .menu > [disabled]:hover { background: none; color: #888; }
 [data-theme="pinstripe"] .menu hr { border-top: 1px dotted #888; margin: 2px 0; }
+[data-theme="pinstripe"] .toolbar-bar { background: linear-gradient(#f4f4f4, #d6d6d6); border: 1px solid #000; border-radius: 0; padding: 3px; box-shadow: inset 1px 1px 0 #fff; }
+[data-theme="pinstripe"] .toolbar-sep { background: #888; }
 [data-theme="pinstripe"] .small-btn { border: 1px solid #000; border-radius: 4px; color: #000; background: linear-gradient(#ffffff, #cfcfcf); box-shadow: inset -1px -1px 0 #999; }
 [data-theme="pinstripe"] .small-btn:hover { background: linear-gradient(#f4f4f4, #c4c4c4); }
 [data-theme="pinstripe"] .small-btn:active,
