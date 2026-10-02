@@ -75,9 +75,14 @@
   order: 0; margin: 0; width: 12px; height: 12px; border-radius: 50%; background: #ff5f57;
   box-shadow: inset 0 0 0 .5px rgba(0, 0, 0, .18); color: rgba(77, 0, 0, .8);
 }
-[data-theme="aurora"] .window-close::before { font-size: 11px; font-weight: 700; line-height: 12px; opacity: 0; }
+[data-theme="aurora"] .window-close::before {
+  content: ""; width: 6px; height: 6px; background: currentColor; opacity: 0;
+  -webkit-mask: var(--mac-close) no-repeat center / 100%; mask: var(--mac-close) no-repeat center / 100%;
+  --mac-close: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 6 6'%3E%3Cpath d='M.6.6l4.8 4.8M5.4.6L.6 5.4' stroke='%23000' stroke-width='1.1' stroke-linecap='round'/%3E%3C/svg%3E");
+}
 [data-theme="aurora"] .window-close:is(:hover, :focus-visible)::before { opacity: 1; }
-[data-theme="aurora"] .window-close:hover { background: #ff5f57; }
+[data-theme="aurora"] .window-close:hover { background: #ff5f57; color: rgba(77, 0, 0, .8); }
+[data-theme="aurora"] .window-close:active { background: #bf4942; color: rgba(40, 0, 0, .9); }
 
 [data-theme="aurora"] .tile { border-radius: 10px; }
 

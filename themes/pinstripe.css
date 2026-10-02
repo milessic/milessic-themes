@@ -57,12 +57,19 @@
   font-size: 12px; font-weight: 700; line-height: 15px;
 }
 [data-theme="pinstripe"] .window-close {
-  order: -1; margin: 0; width: 13px; height: 13px; border-radius: 0; color: #000;
-  background: #dddddd; border: 1px solid #000; box-shadow: inset 1px 1px 0 #fff, inset -1px -1px 0 #888;
+  order: -1; margin: 0 0 0 1px; width: 11px; height: 11px; border-radius: 0; color: #000;
+  background: linear-gradient(135deg, #f4f4f4, #c8c8c8); border: 1px solid #262626;
+  box-shadow: inset 1px 1px 0 #fff, inset -1px -1px 0 #9a9a9a,
+    -1px -1px 0 #7b7b7b, 1px 1px 0 #fff, -4px 0 0 1px #dddddd, 4px 0 0 1px #dddddd;
 }
 [data-theme="pinstripe"] .window-close::before { content: ""; }
-[data-theme="pinstripe"] .window-close:hover { background: #dddddd; }
-[data-theme="pinstripe"] .window-close:active { background: #999; box-shadow: inset 1px 1px 0 #666; }
+[data-theme="pinstripe"] .window-close:hover { background: linear-gradient(135deg, #f4f4f4, #c8c8c8); }
+[data-theme="pinstripe"] .window-close:active {
+  background: linear-gradient(135deg, #6b6b6b, #9c9c9c);
+  box-shadow: inset 1px 1px 0 #4a4a4a, inset -1px -1px 0 #b0b0b0,
+    -1px -1px 0 #7b7b7b, 1px 1px 0 #fff, -4px 0 0 1px #dddddd, 4px 0 0 1px #dddddd;
+}
+[data-theme="pinstripe"] .window-close:focus-visible { outline: 1px solid #000; outline-offset: 2px; }
 
 [data-theme="pinstripe"] .card.empty { color: #000; }
 [data-theme="pinstripe"] .tile { border-radius: 0; background: #eeeeee; box-shadow: var(--bevel-in); }

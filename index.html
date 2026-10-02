@@ -215,6 +215,14 @@ two lines</span></p>
 </main>
 
 <script>
+  // Highlight the nav link for the current #section (on click, back/forward and load).
+  var navLinks = document.querySelectorAll('.nav a[href^="#"]');
+  function syncNav() {
+    var hash = location.hash || navLinks[0].getAttribute("href");
+    navLinks.forEach(function (a) { a.classList.toggle("active", a.getAttribute("href") === hash); });
+  }
+  window.addEventListener("hashchange", syncNav);
+  syncNav();
   document.querySelector("#window-demo .window-close").addEventListener("click", function () {
     document.getElementById("window-demo").hidden = true;
   });
