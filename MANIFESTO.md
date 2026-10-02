@@ -316,3 +316,19 @@ The contract won't cover everything. For an app widget:
 - [ ] Status colors use `tone-*` classes plus a text label
 - [ ] Version pinned with `?v=`; outage fallback decided
 - [ ] Every screen checked in System (light + dark), 1-bit and Bevel
+- [ ] Attribution link to milessic-themes is visible (see §10)
+
+---
+
+## 10. License and attribution
+
+milessic-themes is free of charge for anyone, in any project, personal or commercial. The one
+condition: every app that uses it must state that its styling is taken from milessic-themes, with a
+hyperlink to the milessic-themes server. Put it where users can see it, e.g. the footer or an
+About page:
+
+```html
+<footer>Themes from <a href="https://THEMES-SERVER-URL">milessic-themes</a></footer>
+```
+
+Full terms: [LICENSE](LICENSE).
