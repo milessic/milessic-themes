@@ -66,15 +66,18 @@
 [data-theme="aurora"] .nav a:hover { background: transparent; color: var(--ink); }
 [data-theme="aurora"] .nav a.active { background: var(--control-bg); color: var(--ink); font-weight: 500; box-shadow: var(--control-shadow); }
 
-/* windows with traffic lights */
-[data-theme="aurora"] .card { position: relative; border: none; box-shadow: var(--window-shadow); padding-top: 2rem; }
-[data-theme="aurora"] .card::before {
-  content: ""; position: absolute; left: 14px; top: 12px; width: 52px; height: 12px;
-  background:
-    radial-gradient(circle at 6px 6px, #ff5f57 5.5px, transparent 6px),
-    radial-gradient(circle at 26px 6px, #febc2e 5.5px, transparent 6px),
-    radial-gradient(circle at 46px 6px, #28c840 5.5px, transparent 6px);
+/* windows: card-window gets a real close light (the only button, so the only light) */
+[data-theme="aurora"] .card { border: none; box-shadow: var(--window-shadow); }
+[data-theme="aurora"] .card-window { padding-top: 2.6rem; }
+[data-theme="aurora"] .window-bar { height: 2.1rem; padding: 0 14px; gap: 10px; background: transparent; border: 0; }
+[data-theme="aurora"] .window-title { order: 1; text-align: center; font-weight: 500; color: var(--ink-2); padding-right: 22px; }
+[data-theme="aurora"] .window-close {
+  order: 0; margin: 0; width: 12px; height: 12px; border-radius: 50%; background: #ff5f57;
+  box-shadow: inset 0 0 0 .5px rgba(0, 0, 0, .18); color: rgba(77, 0, 0, .8);
 }
+[data-theme="aurora"] .window-close::before { font-size: 11px; font-weight: 700; line-height: 12px; opacity: 0; }
+[data-theme="aurora"] .window-close:is(:hover, :focus-visible)::before { opacity: 1; }
+[data-theme="aurora"] .window-close:hover { background: #ff5f57; }
 
 [data-theme="aurora"] .tile { border-radius: 10px; }
 

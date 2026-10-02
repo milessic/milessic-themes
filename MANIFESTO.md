@@ -179,7 +179,7 @@ from them before inventing new ones. The gallery (`/`) shows each one in each th
 
 | Area      | Classes / markup |
 |-----------|------------------|
-| Layout    | `.topbar` `.brand` `.nav` (`a.active`) `.topbar-end` · `.container` · `.page-head` `.section-head` · `.card` (`.narrow` `.empty` `.danger-card`) · `.grid-2` `.split` · `.stack` `.row` · `.scroll-x` · `.auth` + `.auth-card` |
+| Layout    | `.topbar` `.brand` `.nav` (`a.active`) `.topbar-end` · `.container` · `.page-head` `.section-head` · `.card` (`.narrow` `.empty` `.danger-card`) · `.card-window` › `.window-bar` › `.window-title` + `.window-close` · `.grid-2` `.split` · `.stack` `.row` · `.scroll-x` · `.auth` + `.auth-card` |
 | Text      | `h1`–`h3` · `.muted` `.small` · `code` `.mono` `kbd` · `.warn-text` |
 | Forms     | `label` (wraps its control) · `label.check` · `input` `select` `textarea` · `.inline-form` `.filters` `.toolbar` (+ `.grow`) · `details`/`summary` |
 | Buttons   | `.btn` + `.primary` `.ghost` `.danger` `.small`, `[disabled]` · `.small-btn` (icon/toolbar; `.on` or `aria-pressed="true"`) · `.toolbar-bar` (framed strip of `.small-btn`/`.btn`; `.toolbar-sep` between groups, `.grow` spacer) · `.segmented` (label › radio + span) · `.chip` (`.on`) |
@@ -203,6 +203,10 @@ Markup rules:
   control strip (editor formatting, bulk actions above a table) use
   `<div class="toolbar-bar" role="toolbar" aria-label="…">`; separators are
   `<span class="toolbar-sep" aria-hidden="true"></span>`.
+* A plain `.card` never draws fake window buttons. For a closable panel use a window card; the
+  close box is a real button that your app wires up (themes only style it):
+  `<section class="card card-window"><div class="window-bar"><h2 class="window-title">…</h2><button class="window-close" type="button" aria-label="Close"></button></div>…</section>`.
+  Keep `.window-close` empty (the theme draws its glyph); `.window-title` is optional.
 * User-chosen colors (a client's color) go through a custom property (`--dot-color`), never
   `style="background:…"`, so 1-bit themes can override them.
 
@@ -211,7 +215,8 @@ Markup rules:
 Window themes draw their chrome with pseudo-elements and extra padding. Apps must **not** use or
 restyle:
 
-* `.card::before`, `.card::after`, `.card` `padding-top` (title bars, close boxes, traffic lights)
+* `.card::before`, `.card::after`, `.card` `padding-top` (title bars, stripes)
+* the position and size of `.window-bar`, `.window-close::before`/`::after` (close boxes, traffic lights)
 * `.flash::before` and `.notification-*::before` (alert icons) · `.brand::before` · `.nav a::after`
 * `.modal-container::before`/`::after` and its `padding-top` (window title bars) · `.small-btn::before`/`::after` · `.menu > *::before`
 * the position of `.topbar` (it may be sticky at the top or fixed at the bottom)

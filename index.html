@@ -196,6 +196,14 @@ two lines</span></p>
     </dialog>
   </section>
 
+  <section class="card card-window" id="window-demo">
+    <div class="window-bar">
+      <h2 class="window-title">Window card</h2>
+      <button class="window-close" type="button" aria-label="Close"></button>
+    </div>
+    <p>A <code>.card-window</code> has a real close button. Click it to hide this card.</p>
+  </section>
+
   <div class="split">
     <section class="card empty">Nothing here yet.</section>
     <section class="card danger-card">
@@ -207,6 +215,9 @@ two lines</span></p>
 </main>
 
 <script>
+  document.querySelector("#window-demo .window-close").addEventListener("click", function () {
+    document.getElementById("window-demo").hidden = true;
+  });
   // /?theme=bevel opens the gallery in a given theme (handy for sharing and screenshots).
   var requested = new URLSearchParams(location.search).get("theme");
   if (requested) MilessicThemes.apply(requested);
