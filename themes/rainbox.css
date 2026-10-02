@@ -124,6 +124,8 @@
 [data-theme="rainbox"] .menu > .danger:hover { background: var(--love); }
 [data-theme="rainbox"] .menu > [disabled]:hover { background: none; }
 [data-theme="rainbox"] .menu hr { border-top: 2px dashed var(--line-strong); }
+[data-theme="rainbox"] .toolbar-bar { background: var(--surface); border: 2px solid #111; border-radius: 14px; padding: .35rem; box-shadow: 3px 3px 0 #111; }
+[data-theme="rainbox"] .toolbar-sep { width: 2px; background: #111; }
 [data-theme="rainbox"] .small-btn { border: 2px solid #111; border-radius: 999px; font-weight: 800; color: #111; background: var(--surface); }
 [data-theme="rainbox"] .small-btn:hover { background: #fff7d6; }
 [data-theme="rainbox"] .small-btn:is(.on, [aria-pressed="true"]) { background: #111; border-color: #111; color: #fff; }

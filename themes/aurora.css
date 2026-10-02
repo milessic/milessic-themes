@@ -139,6 +139,8 @@
 [data-theme="aurora"] .menu > :is(a, button):is(:hover, :focus-visible) { background: var(--accent); color: #fff; }
 [data-theme="aurora"] .menu > [disabled]:hover { background: none; color: var(--ink); }
 [data-theme="aurora"] .menu hr { border-top: .5px solid var(--line-strong); margin: 5px 8px; }
+[data-theme="aurora"] .toolbar-bar { border: none; border-radius: 8px; background: var(--bar-bg); box-shadow: inset 0 0 0 .5px var(--line-strong); }
+[data-theme="aurora"] .toolbar-sep { width: .5px; margin: .3rem .3rem; }
 [data-theme="aurora"] .small-btn { border: none; border-radius: 6px; background: var(--control-bg); box-shadow: var(--control-shadow); }
 [data-theme="aurora"] .small-btn:hover { background: var(--control-bg); filter: brightness(.97); }
 [data-theme="aurora"] .small-btn:is(.on, [aria-pressed="true"]) {

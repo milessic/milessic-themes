@@ -149,6 +149,8 @@
 [data-theme="holistic-developer"] .menu > :is(a, button):not([disabled]):is(:hover, :focus-visible) { background: var(--hd-key-hot); color: var(--hd-key-hot-ink); }
 [data-theme="holistic-developer"] .menu > .danger { color: var(--danger); font-weight: 700; }
 [data-theme="holistic-developer"] .menu hr { border-top-color: var(--line); }
+[data-theme="holistic-developer"] .toolbar-bar { background: var(--page); border: 2px solid var(--line); border-radius: var(--radius); padding: .35rem .35rem .55rem; }
+[data-theme="holistic-developer"] .toolbar-sep { width: 2px; background: var(--line); }
 
 /* small buttons: miniature keycaps */
 [data-theme="holistic-developer"] .small-btn {

@@ -156,6 +156,8 @@
 [data-theme="bevel"] .menu > [disabled] { opacity: 1; color: #808080; text-shadow: 1px 1px 0 #fff; }
 [data-theme="bevel"] .menu > [disabled]:hover { background: none; color: #808080; }
 [data-theme="bevel"] .menu hr { border-top: 1px solid #808080; border-bottom: 1px solid #fff; margin: 3px 2px; }
+[data-theme="bevel"] .toolbar-bar { background: #c0c0c0; border: none; border-radius: 0; padding: 3px; box-shadow: var(--raised); }
+[data-theme="bevel"] .toolbar-sep { width: 0; background: none; border-left: 1px solid #808080; border-right: 1px solid #fff; margin: 2px 3px; }
 [data-theme="bevel"] .small-btn { background: #c0c0c0; color: #000; border: none; border-radius: 0; box-shadow: var(--raised); min-width: 1.7rem; height: 1.6rem; }
 [data-theme="bevel"] .small-btn:hover { background: #c0c0c0; }
 [data-theme="bevel"] .small-btn:active { box-shadow: var(--pressed); }

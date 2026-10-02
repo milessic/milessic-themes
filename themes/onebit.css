@@ -27,7 +27,7 @@
   --tone-caution: repeating-linear-gradient(0deg, #000 0 1px, #fff 1px 3px);
   font-family: ChicagoFLF, Chicago, Geneva, Monaco, system-ui, sans-serif;
 }
-[data-theme="onebit"] body { font-size: 13px; background: var(--dither); -webkit-font-smoothing: none; }
+[data-theme="onebit"] body { font-size: 15px; background: var(--dither); -webkit-font-smoothing: none; }
 [data-theme="onebit"] a { color: #000; text-decoration: underline; }
 [data-theme="onebit"] :is(.brand, .chip, .btn, .tag) { text-decoration: none; }
 [data-theme="onebit"] .muted { color: #000; opacity: .75; }
@@ -138,6 +138,8 @@
 [data-theme="onebit"] .menu > [disabled] { opacity: 1; color: #000; text-decoration: line-through; }
 [data-theme="onebit"] .menu > [disabled]:is(:hover, :focus-visible) { background: none; color: #000; }
 [data-theme="onebit"] .menu hr { border-top: 1px dotted #000; margin: 1px 0; }
+[data-theme="onebit"] .toolbar-bar { background: #fff; border: 1px solid #000; border-radius: 0; padding: 2px; }
+[data-theme="onebit"] .toolbar-sep { background: #000; }
 [data-theme="onebit"] .small-btn { background: #fff; color: #000; border: 1px solid #000; border-radius: 6px; }
 [data-theme="onebit"] .small-btn:hover { background: #fff; }
 [data-theme="onebit"] .small-btn:active,

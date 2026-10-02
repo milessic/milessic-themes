@@ -144,6 +144,8 @@
 [data-theme="slate"] .menu > :is(a, button):is(:hover, :focus-visible) { background: var(--ring); }
 [data-theme="slate"] .menu > [disabled]:hover { background: none; }
 [data-theme="slate"] .menu hr { border-top-color: var(--line); margin: 4px -4px; }
+[data-theme="slate"] .toolbar-bar { background: var(--flyout); border: 1px solid var(--line); border-radius: 8px; padding: 4px; }
+[data-theme="slate"] .toolbar-sep { background: var(--line); }
 [data-theme="slate"] .small-btn {
   border-radius: 4px; background: var(--control-bg); color: var(--ink);
   border: 1px solid var(--control-border); border-bottom-color: var(--control-bottom);
