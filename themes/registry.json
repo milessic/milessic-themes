@@ -1,5 +1,5 @@
 {
-  "version": "1.2.0",
+  "version": "1.3.0",
   "default": "system",
   "themes": [
     {"key": "system",  "label": "System",          "scheme": "auto",  "overlay": false, "description": "Neutral light/dark palette that follows the OS setting."},
@@ -14,6 +14,7 @@
     {"key": "robin",   "label": "Robin's egg",     "scheme": "light", "overlay": true,  "description": "Robin's-egg blue box with a white satin ribbon: serif headings, black type, quiet luxury."},
     {"key": "bubbles", "label": "2000s bubbles",   "scheme": "light", "overlay": true,  "description": "Glossy 2000s desktop: sky wallpaper with floating bubbles, glossy gel pills and orbs."},
     {"key": "glass",   "label": "super glass",     "scheme": "dark",  "overlay": true,  "description": "Heavy glassmorphism: frosted panes with bright rims over a vivid neon wallpaper."},
-    {"key": "console", "label": "CONSOLE",         "scheme": "dark",  "overlay": true,  "description": "Green phosphor terminal: scanlines, monospace, [bracketed] buttons, inverse-video selection."}
+    {"key": "console", "label": "CONSOLE",         "scheme": "dark",  "overlay": true,  "description": "Green phosphor terminal: scanlines, monospace, [bracketed] buttons, inverse-video selection."},
+    {"key": "writejs", "label": "Write.js",        "scheme": "auto",  "overlay": true,  "description": "The Write.js editor: Cousine monospace, charcoal top bar, orange buttons, grey toolbar chips."}
   ]
 }
