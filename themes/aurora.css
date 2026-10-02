@@ -129,3 +129,40 @@
 [data-theme="aurora"] .flash.error::before { background: var(--danger); }
 [data-theme="aurora"] .flash.info::before { background: var(--accent); }
 [data-theme="aurora"] .tooltip { background: var(--surface); color: var(--ink); border-radius: 8px; box-shadow: var(--window-shadow); }
+
+/* menus: translucent macOS menus with accent-filled highlight */
+[data-theme="aurora"] .menu {
+  border: none; border-radius: 10px; padding: 5px; background: var(--bar-bg); box-shadow: var(--window-shadow);
+  -webkit-backdrop-filter: saturate(180%) blur(20px); backdrop-filter: saturate(180%) blur(20px);
+}
+[data-theme="aurora"] .menu > :is(a, button) { border-radius: 5px; padding: .25rem .7rem; font-size: .88rem; }
+[data-theme="aurora"] .menu > :is(a, button):is(:hover, :focus-visible) { background: var(--accent); color: #fff; }
+[data-theme="aurora"] .menu > [disabled]:hover { background: none; color: var(--ink); }
+[data-theme="aurora"] .menu hr { border-top: .5px solid var(--line-strong); margin: 5px 8px; }
+[data-theme="aurora"] .small-btn { border: none; border-radius: 6px; background: var(--control-bg); box-shadow: var(--control-shadow); }
+[data-theme="aurora"] .small-btn:hover { background: var(--control-bg); filter: brightness(.97); }
+[data-theme="aurora"] .small-btn:is(.on, [aria-pressed="true"]) {
+  background: linear-gradient(to bottom, color-mix(in srgb, var(--accent) 85%, #fff), var(--accent)); color: #fff;
+}
+[data-theme="aurora"] .small-btn:focus-visible { outline: none; box-shadow: 0 0 0 3.5px color-mix(in srgb, var(--accent) 45%, transparent); }
+
+/* modals: a window with traffic lights, like the cards */
+[data-theme="aurora"] .modal-container { border: none; border-radius: 12px; box-shadow: var(--window-shadow), 0 24px 70px rgba(0, 0, 0, .3); padding-top: 2rem; }
+[data-theme="aurora"] .modal-container::before {
+  content: ""; position: absolute; left: 14px; top: 12px; width: 52px; height: 12px;
+  background:
+    radial-gradient(circle at 6px 6px, #ff5f57 5.5px, transparent 6px),
+    radial-gradient(circle at 26px 6px, #febc2e 5.5px, transparent 6px),
+    radial-gradient(circle at 46px 6px, #28c840 5.5px, transparent 6px);
+}
+[data-theme="aurora"] .modal-container::backdrop { background: rgba(0, 0, 0, .25); }
+
+/* notifications: Notification Center banners */
+[data-theme="aurora"] :is(.notification-info, .notification-warn, .notification-error) {
+  position: relative; border: none; border-radius: 14px; padding-left: 2.4rem; background: var(--bar-bg); box-shadow: var(--window-shadow);
+  -webkit-backdrop-filter: blur(20px); backdrop-filter: blur(20px);
+}
+[data-theme="aurora"] :is(.notification-info, .notification-warn, .notification-error)::before {
+  content: ""; position: absolute; left: .9rem; top: 50%; width: .8rem; height: .8rem; margin-top: -.4rem; border-radius: 50%; background: var(--note-color);
+}
+[data-theme="aurora"] :is(.notification-info, .notification-warn, .notification-error) .small-btn { background: transparent; box-shadow: none; border-radius: 50%; }

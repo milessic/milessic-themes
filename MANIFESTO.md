@@ -1,6 +1,6 @@
 # The milessic-themes manifesto
 
-How to build an application so that it wears every milessic theme, today's fourteen and the ones
+How to build an application so that it wears every milessic theme, today's eighteen and the ones
 added later, without changing a line of its own code.
 
 ---
@@ -179,8 +179,9 @@ from them before inventing new ones. The gallery (`/`) shows each one in each th
 | Layout    | `.topbar` `.brand` `.nav` (`a.active`) `.topbar-end` · `.container` · `.page-head` `.section-head` · `.card` (`.narrow` `.empty` `.danger-card`) · `.grid-2` `.split` · `.stack` `.row` · `.scroll-x` · `.auth` + `.auth-card` |
 | Text      | `h1`–`h3` · `.muted` `.small` · `code` `.mono` `kbd` · `.warn-text` |
 | Forms     | `label` (wraps its control) · `label.check` · `input` `select` `textarea` · `.inline-form` `.filters` `.toolbar` (+ `.grow`) · `details`/`summary` |
-| Buttons   | `.btn` + `.primary` `.ghost` `.danger` `.small`, `[disabled]` · `.segmented` (label › radio + span) · `.chip` (`.on`) |
+| Buttons   | `.btn` + `.primary` `.ghost` `.danger` `.small`, `[disabled]` · `.small-btn` (icon/toolbar; `.on` or `aria-pressed="true"`) · `.segmented` (label › radio + span) · `.chip` (`.on`) |
 | Messages  | `.flash` + `.success` `.info` `.error` · `.tooltip` (`.static` for inline use) · `.secret` · `.danger-zone` |
+| Popups    | `.menu` › `button`/`a` items (`.danger`, `[disabled]`) + `hr` · `.modal-container` (`<dialog>` + `showModal()`; `.static` for inline use) · `.notification-info` `.notification-warn` `.notification-error` › text + optional close `.small-btn` |
 | Tables    | `table.data` · `th`/`td.num` `.actions` · `tr.dim` · `.sort-btn` + `th[aria-sort]` · `table.selectable` + `tr.selected` |
 | Labels    | `.tag` · `.status.on` / `.status.off` · `.dot` (`style="--dot-color:#hex"`) |
 | Data      | tone classes `.tone-ok` `.tone-fail` `.tone-warn` `.tone-caution` `.tone-neutral` on `.badge` `.swatch` `.distribution .seg` `.meter-fill` · `.legend` · `.tiles` › `.tile` › `.tile-label` + `.tile-value` · `.meter` › `.meter-fill` |
@@ -191,6 +192,10 @@ Markup rules:
 * Buttons are `<button class="btn">` or `<a class="btn">`. Never a styled `div`.
 * Status text must be a label (`<span class="badge tone-fail">Fail</span>`), never a bare swatch.
 * `.distribution` segments get `style="flex: N"` and the container an `aria-label` with the numbers.
+* `.menu`, `.modal-container` and the notifications are only *styled*: your app positions, opens,
+  stacks and dismisses them. A modal's title and close button go in a `.section-head`
+  (`h2` + `.small-btn aria-label="Close"`); its actions in a `.row`. Notifications get `role="status"`
+  (`role="alert"` for errors), the menu `role="menu"` with `role="menuitem"` items.
 * User-chosen colors (a client's color) go through a custom property (`--dot-color`), never
   `style="background:…"`, so 1-bit themes can override them.
 
@@ -200,7 +205,8 @@ Window themes draw their chrome with pseudo-elements and extra padding. Apps mus
 restyle:
 
 * `.card::before`, `.card::after`, `.card` `padding-top` (title bars, close boxes, traffic lights)
-* `.flash::before` (alert icons) · `.brand::before` · `.nav a::after`
+* `.flash::before` and `.notification-*::before` (alert icons) · `.brand::before` · `.nav a::after`
+* `.modal-container::before`/`::after` and its `padding-top` (window title bars) · `.small-btn::before`/`::after` · `.menu > *::before`
 * the position of `.topbar` (it may be sticky at the top or fixed at the bottom)
 
 If a widget needs a decoration, put it on an inner element.
@@ -254,7 +260,7 @@ The contract won't cover everything. For an app widget:
    outline them with `var(--ink)` if they must stay visible on white, and redraw on
    `milessic:themechange` if you paint on canvas (read tokens with
    `getComputedStyle(document.documentElement).getPropertyValue("--accent")`).
-5. **Dark mode:** `scheme: "auto"` themes (System, Aurora, Slate, Write.js) follow
+5. **Dark mode:** `scheme: "auto"` themes (System, Aurora, Slate, Write.js, both Colorblind themes) follow
    `prefers-color-scheme` by themselves. Don't add your own dark-mode media queries; tokens already
    flip.
 6. If a widget is useful to several apps, propose it for the contract (add it to `base.css`, every
@@ -286,8 +292,14 @@ The contract won't cover everything. For an app widget:
   screen readers work in every theme.
 * Don't remove outlines: every theme defines its own `:focus-visible` style.
 * Tones always with text; charts carry an `aria-label` with the numbers.
-* Check new screens in **1-bit** (no color) and **Dark** (contrast). If they read well in both,
-  they will in the rest.
+* Accessibility themes: **High contrast L / D** (AAA contrast, 2px outlines, thick focus ring,
+  disabled shown dashed rather than faded) and **Colorblind: red-green / blue-yellow** (safe palettes;
+  tones also get shapes, bar patterns and message icons). They only work if your markup uses the
+  contract: a hand-picked hex or a custom `opacity` on text undoes them.
+* Don't fade text to show state (`opacity` on disabled things or secondary text); use `[disabled]`
+  and `.muted`, which every theme maps to a colour that keeps its contrast.
+* Check new screens in **1-bit** (no color), **High contrast D** (contrast, focus) and
+  **Colorblind: red-green** (tones). If they read well in those, they will in the rest.
 
 ---
 

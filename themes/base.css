@@ -166,6 +166,55 @@ details .stack { margin-top: .75rem; }
 }
 .tooltip.static { position: static; display: inline-block; }
 
+/* notifications: floating toasts; the app stacks, positions and dismisses them */
+:is(.notification-info, .notification-warn, .notification-error) {
+  display: flex; align-items: center; gap: .75rem; margin: .4rem 0;
+  padding: .5rem .5rem .5rem .9rem; font-size: .9rem; color: var(--ink); background: var(--surface);
+  border: 1px solid var(--ring); border-left: 4px solid var(--note-color); border-radius: calc(var(--radius) * .6);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, .16);
+}
+.notification-info { --note-color: var(--accent); }
+.notification-warn { --note-color: var(--tone-warn); }
+.notification-error { --note-color: var(--danger); }
+:is(.notification-info, .notification-warn, .notification-error) .small-btn { margin-left: auto; flex: none; border-color: transparent; background: transparent; }
+
+/* menus: a dropdown / popover list of actions; the app positions and shows it */
+.menu {
+  display: flex; flex-direction: column; align-self: flex-start; min-width: 180px; padding: .3rem;
+  background: var(--surface); color: var(--ink); border: 1px solid var(--ring); border-radius: calc(var(--radius) * .6);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, .14);
+}
+.menu > :is(a, button) {
+  font: inherit; font-size: .9rem; text-align: left; color: var(--ink); text-decoration: none; white-space: nowrap;
+  background: none; border: 0; border-radius: 4px; padding: .4rem .7rem; cursor: pointer;
+}
+.menu > :is(a, button):not([disabled]):is(:hover, :focus-visible) { background: var(--surface-2); outline: none; }
+.menu > .danger { color: var(--danger); }
+.menu > [disabled] { opacity: .5; cursor: not-allowed; background: none; }
+.menu hr { border: 0; border-top: 1px solid var(--line); margin: .3rem 0; }
+
+/* small buttons: compact icon / toolbar buttons (×, B, I…); .on or aria-pressed="true" when toggled */
+.small-btn {
+  font: inherit; font-size: .85rem; line-height: 1; display: inline-flex; align-items: center; justify-content: center;
+  min-width: 1.9rem; height: 1.9rem; padding: 0 .45rem; cursor: pointer; text-decoration: none;
+  border: 1px solid var(--line-strong); background: var(--surface); color: var(--ink); border-radius: 6px;
+}
+.small-btn:hover { background: var(--surface-2); }
+.small-btn:is(.on, [aria-pressed="true"]) { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); }
+.small-btn[disabled] { opacity: .5; cursor: not-allowed; }
+.small-btn:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
+
+/* modals: a centred dialog panel (<dialog class="modal-container"> + showModal() gets the backdrop);
+   .static renders it inline, e.g. in a gallery */
+.modal-container {
+  position: fixed; inset: 50% auto auto 50%; transform: translate(-50%, -50%); z-index: 30; margin: 0;
+  width: min(560px, calc(100vw - 32px)); max-height: calc(100vh - 32px); overflow: auto;
+  background: var(--surface); color: var(--ink); border: 1px solid var(--ring); border-radius: var(--radius);
+  padding: 1.1rem 1.25rem; box-shadow: 0 20px 60px rgba(0, 0, 0, .3);
+}
+.modal-container::backdrop { background: rgba(0, 0, 0, .45); }
+.modal-container.static { position: relative; inset: auto; transform: none; z-index: auto; width: auto; max-width: 560px; max-height: none; }
+
 /* tables */
 table.data { width: 100%; border-collapse: collapse; font-size: .9rem; }
 .data th, .data td { text-align: left; padding: .45rem .6rem; border-bottom: 1px solid var(--line); vertical-align: middle; }
@@ -259,6 +308,10 @@ table.selectable tbody tr.selected :is(.status, .btn.ghost) { color: inherit; }
 .tp-glass .tp-window { -webkit-backdrop-filter: blur(4px); backdrop-filter: blur(4px); }
 .tp-console { --tp-bg: #030603; --tp-win: #000; --tp-bar: #33ff66; --tp-accent: #33ff66; --tp-r: 0; --tp-win-border: 1px solid #33ff66; --tp-shadow: 0 0 6px rgba(51, 255, 102, .5); }
 .tp-writejs { --tp-bg: #f4f4f4; --tp-win: #fff; --tp-bar: #333; --tp-accent: #ff5722; --tp-r: 4px; --tp-win-border: 0; --tp-shadow: 0 2px 6px rgba(0, 0, 0, .15); }
+.tp-contrast-light { --tp-bg: #fff; --tp-win: #fff; --tp-bar: #000; --tp-accent: #0038b8; --tp-r: 2px; --tp-win-border: 2px solid #000; }
+.tp-contrast-dark { --tp-bg: #000; --tp-win: #000; --tp-bar: #fff; --tp-accent: #ffe600; --tp-r: 2px; --tp-win-border: 2px solid #fff; }
+.tp-colorblind-rg { --tp-bg: #f7f8fa; --tp-win: #fff; --tp-bar: linear-gradient(90deg, #0072b2 0 25%, #e69f00 25% 50%, #f0e442 50% 75%, #d55e00 75%); --tp-accent: #0063a0; }
+.tp-colorblind-by { --tp-bg: #f8f7f7; --tp-win: #fff; --tp-bar: linear-gradient(90deg, #009e8f 0 25%, #f06292 25% 50%, #4e342e 50% 75%, #c62828 75%); --tp-accent: #00695c; }
 
 @media (max-width: 640px) {
   .topbar { gap: .5rem; }

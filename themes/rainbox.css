@@ -113,3 +113,38 @@
 [data-theme="rainbox"] .flash.info::before { content: "★ "; color: #1d6fd8; }
 [data-theme="rainbox"] .tooltip { background: #111; color: #fff; border-radius: 12px; border-bottom: 3px solid #ffd60a; }
 [data-theme="rainbox"] .secret { background: #fff9e0; border: 2px dashed #111; }
+
+/* menus: outlined panel with a rainbow hem and pill rows */
+[data-theme="rainbox"] .menu {
+  border: 2px solid #111; border-radius: 14px; padding: .5rem .35rem .35rem; box-shadow: 4px 4px 0 #111;
+  background: var(--rainbow) top / 100% 5px no-repeat, var(--surface);
+}
+[data-theme="rainbox"] .menu > :is(a, button) { border-radius: 999px; font-weight: 700; }
+[data-theme="rainbox"] .menu > :is(a, button):is(:hover, :focus-visible) { background: #fff7d6; }
+[data-theme="rainbox"] .menu > .danger:hover { background: var(--love); }
+[data-theme="rainbox"] .menu > [disabled]:hover { background: none; }
+[data-theme="rainbox"] .menu hr { border-top: 2px dashed var(--line-strong); }
+[data-theme="rainbox"] .small-btn { border: 2px solid #111; border-radius: 999px; font-weight: 800; color: #111; background: var(--surface); }
+[data-theme="rainbox"] .small-btn:hover { background: #fff7d6; }
+[data-theme="rainbox"] .small-btn:is(.on, [aria-pressed="true"]) { background: #111; border-color: #111; color: #fff; }
+[data-theme="rainbox"] .small-btn:focus-visible { outline: 3px solid #ffd60a; outline-offset: 1px; }
+
+/* modals: a big card, rainbow stripe and all */
+[data-theme="rainbox"] .modal-container {
+  border: 2px solid #111; padding-top: 1.5rem; box-shadow: 6px 6px 0 #111;
+  background: var(--rainbow) top / 100% 8px no-repeat, var(--surface);
+}
+[data-theme="rainbox"] .modal-container::backdrop { background: rgba(255, 227, 234, .7); }
+
+/* notifications: chunky stickers */
+[data-theme="rainbox"] :is(.notification-info, .notification-warn, .notification-error) {
+  border: 2px solid #111; border-radius: 14px; font-weight: 600; box-shadow: 3px 3px 0 #111;
+}
+[data-theme="rainbox"] :is(.notification-info, .notification-warn, .notification-error)::before { font-weight: 800; margin-right: -.4rem; }
+[data-theme="rainbox"] .notification-info { background: #eef4ff; }
+[data-theme="rainbox"] .notification-info::before { content: "★"; color: #1d6fd8; }
+[data-theme="rainbox"] .notification-warn { background: #fff9e0; }
+[data-theme="rainbox"] .notification-warn::before { content: "!"; color: #f4842a; }
+[data-theme="rainbox"] .notification-error { background: var(--love); }
+[data-theme="rainbox"] .notification-error::before { content: "✕"; color: var(--danger); }
+[data-theme="rainbox"] :is(.notification-info, .notification-warn, .notification-error) .small-btn { border-width: 2px; background: #fff; }

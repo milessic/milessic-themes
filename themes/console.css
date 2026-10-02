@@ -134,3 +134,37 @@
 [data-theme="console"] .tooltip { background: #000; color: var(--ink); border: 1px solid var(--ink); border-radius: 0; box-shadow: none; }
 [data-theme="console"] .secret { background: #000; border: 1px dashed var(--line-strong); border-radius: 0; }
 [data-theme="console"] .danger-zone { border-top: 1px dashed var(--danger); }
+
+/* menus: a boxed list, "> " marks the highlighted row in inverse video */
+[data-theme="console"] .menu { background: #000; border: 3px double var(--line-strong); border-radius: 0; padding: .2rem 0; box-shadow: 0 0 12px rgba(51, 255, 102, .15); }
+[data-theme="console"] .menu > :is(a, button) { color: var(--ink); border-radius: 0; padding: .15rem .6rem; text-transform: uppercase; text-shadow: var(--glow); }
+[data-theme="console"] .menu > :is(a, button)::before { content: "  "; white-space: pre; }
+[data-theme="console"] .menu > :is(a, button):is(:hover, :focus-visible) { background: var(--ink); color: #000; text-shadow: none; }
+[data-theme="console"] .menu > :is(a, button):is(:hover, :focus-visible)::before { content: "> "; }
+[data-theme="console"] .menu > .danger { color: var(--danger); }
+[data-theme="console"] .menu > .danger:is(:hover, :focus-visible) { background: var(--danger); color: #000; }
+[data-theme="console"] .menu > [disabled]:hover { background: none; color: var(--ink); }
+[data-theme="console"] .menu > [disabled]:hover::before { content: "  "; }
+[data-theme="console"] .menu hr { border-top: 1px dashed var(--line-strong); margin: .2rem 0; }
+[data-theme="console"] .small-btn { border: none; border-radius: 0; background: transparent; color: var(--ink); min-width: 0; padding: 0 .2rem; height: auto; line-height: 1.4; }
+[data-theme="console"] .small-btn::before { content: "["; }
+[data-theme="console"] .small-btn::after { content: "]"; }
+[data-theme="console"] .small-btn:hover,
+[data-theme="console"] .small-btn:is(.on, [aria-pressed="true"]) { background: var(--ink); color: #000; text-shadow: none; }
+[data-theme="console"] .small-btn[disabled]:hover { background: transparent; color: var(--ink); }
+[data-theme="console"] .small-btn:focus-visible { outline: 1px solid var(--ink); outline-offset: 1px; }
+
+/* modals: a double-ruled box on a darkened screen */
+[data-theme="console"] .modal-container { background: #000; color: var(--ink); border: 3px double var(--ink); border-radius: 0; box-shadow: 0 0 24px rgba(51, 255, 102, .25); }
+[data-theme="console"] .modal-container::backdrop { background: rgba(0, 0, 0, .75); }
+
+/* notifications: log lines with a status prefix */
+[data-theme="console"] :is(.notification-info, .notification-warn, .notification-error) {
+  background: #000; color: var(--ink); border: 1px solid var(--note-color); border-radius: 0; box-shadow: none; text-shadow: var(--glow);
+}
+[data-theme="console"] :is(.notification-info, .notification-warn, .notification-error)::before { font-weight: 700; white-space: pre; margin-right: -.4rem; }
+[data-theme="console"] .notification-info { --note-color: var(--line-strong); }
+[data-theme="console"] .notification-info::before { content: "[ INFO ]"; color: var(--tone-caution); }
+[data-theme="console"] .notification-warn { --note-color: var(--tone-warn); }
+[data-theme="console"] .notification-warn::before { content: "[ WARN ]"; color: var(--tone-warn); }
+[data-theme="console"] .notification-error::before { content: "[ FAIL ]"; color: var(--danger); }

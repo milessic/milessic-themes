@@ -94,3 +94,31 @@
 [data-theme="robin"] .flash.info { border-left: 4px solid var(--robin); background: var(--surface-2); }
 [data-theme="robin"] .tooltip { background: #111; color: #fff; border-radius: 2px; border-bottom: 3px solid var(--robin); }
 [data-theme="robin"] .secret { background: var(--surface-2); border: 1px dashed var(--robin-deep); }
+
+/* menus: white with a robin's-egg lid */
+[data-theme="robin"] .menu { border: 1px solid var(--line); border-top: 3px solid var(--robin); border-radius: 2px; padding: .3rem 0; box-shadow: 0 10px 30px rgba(10, 80, 75, .14); }
+[data-theme="robin"] .menu > :is(a, button) { border-radius: 0; letter-spacing: .06em; padding: .45rem 1rem; }
+[data-theme="robin"] .menu > :is(a, button):is(:hover, :focus-visible) { background: var(--surface-2); box-shadow: inset 2px 0 0 #111; }
+[data-theme="robin"] .menu > [disabled]:hover { background: none; box-shadow: none; }
+[data-theme="robin"] .menu hr { border-top-color: var(--line); margin: .3rem 1rem; }
+[data-theme="robin"] .small-btn { border: 1px solid #111; border-radius: 2px; color: #111; background: var(--surface); }
+[data-theme="robin"] .small-btn:hover { background: var(--surface-2); }
+[data-theme="robin"] .small-btn:is(.on, [aria-pressed="true"]) { background: var(--robin); border-color: #111; color: #111; }
+[data-theme="robin"] .small-btn:focus-visible { outline: 3px solid var(--robin); outline-offset: 1px; }
+
+/* modals: the opened box, robin's-egg band with the ribbon across it */
+[data-theme="robin"] .modal-container {
+  border: 1px solid var(--line); border-top: 0; border-radius: 2px; padding-top: 2rem;
+  background: var(--ribbon) top / 100% 10px no-repeat, linear-gradient(var(--robin), var(--robin)) top / 100% 10px no-repeat, var(--surface);
+  box-shadow: 0 24px 60px rgba(10, 80, 75, .25);
+}
+[data-theme="robin"] .modal-container::backdrop { background: rgba(233, 247, 245, .75); }
+
+/* notifications: quiet white cards with a coloured edge */
+[data-theme="robin"] :is(.notification-info, .notification-warn, .notification-error) {
+  border: 1px solid var(--line-strong); border-left: 4px solid var(--note-color); border-radius: 2px; letter-spacing: .02em;
+  box-shadow: 0 10px 30px rgba(10, 80, 75, .12);
+}
+[data-theme="robin"] .notification-info { --note-color: var(--robin); }
+[data-theme="robin"] :is(.notification-info, .notification-warn, .notification-error) .small-btn { border-color: transparent; background: transparent; }
+[data-theme="robin"] :is(.notification-info, .notification-warn, .notification-error) .small-btn:hover { border-color: #111; }

@@ -146,3 +146,41 @@
 @media (max-width: 640px) {
   [data-theme="bevel"] .nav a { min-width: 0; }
 }
+
+/* menus: Start-menu style, navy highlight, etched separators */
+[data-theme="bevel"] .menu { background: #c0c0c0; border: none; border-radius: 0; padding: 3px; box-shadow: var(--raised); }
+[data-theme="bevel"] .menu > :is(a, button) { color: #000; border-radius: 0; padding: .3rem 1.4rem; font-size: inherit; }
+[data-theme="bevel"] .menu > :is(a, button):is(:hover, :focus-visible) { background: #000080; color: #fff; }
+[data-theme="bevel"] .menu > .danger { color: var(--danger); }
+[data-theme="bevel"] .menu > .danger:hover { color: #fff; }
+[data-theme="bevel"] .menu > [disabled] { opacity: 1; color: #808080; text-shadow: 1px 1px 0 #fff; }
+[data-theme="bevel"] .menu > [disabled]:hover { background: none; color: #808080; }
+[data-theme="bevel"] .menu hr { border-top: 1px solid #808080; border-bottom: 1px solid #fff; margin: 3px 2px; }
+[data-theme="bevel"] .small-btn { background: #c0c0c0; color: #000; border: none; border-radius: 0; box-shadow: var(--raised); min-width: 1.7rem; height: 1.6rem; }
+[data-theme="bevel"] .small-btn:hover { background: #c0c0c0; }
+[data-theme="bevel"] .small-btn:active { box-shadow: var(--pressed); }
+[data-theme="bevel"] .small-btn:is(.on, [aria-pressed="true"]) {
+  box-shadow: var(--pressed); color: #000; background: repeating-conic-gradient(#c0c0c0 0 25%, #ffffff 0 50%) 0 0 / 2px 2px;
+}
+[data-theme="bevel"] .small-btn:focus-visible { outline: 1px dotted #000; outline-offset: -4px; }
+
+/* modals: a window with a navy title bar; no dimming, like the real thing */
+[data-theme="bevel"] .modal-container { background: #c0c0c0; border: none; border-radius: 0; box-shadow: var(--raised), 2px 2px 0 rgba(0, 0, 0, .35); padding: 2.2rem 1rem 1rem; }
+[data-theme="bevel"] .modal-container::before {
+  content: ""; position: absolute; left: 3px; right: 3px; top: 3px; height: 18px;
+  background: linear-gradient(90deg, #000080, #1084d0);
+}
+[data-theme="bevel"] .modal-container::backdrop { background: transparent; }
+
+/* notifications: balloon-ish message boxes with round icons */
+[data-theme="bevel"] :is(.notification-info, .notification-warn, .notification-error) {
+  position: relative; background: #c0c0c0; border: none; border-radius: 0; box-shadow: var(--raised); padding-left: 2.6rem;
+}
+[data-theme="bevel"] :is(.notification-info, .notification-warn, .notification-error)::before {
+  position: absolute; left: .7rem; top: 50%; transform: translateY(-50%); width: 1.3rem; height: 1.3rem;
+  border-radius: 50%; color: #fff; font-weight: 700; text-align: center; line-height: 1.3rem; font-size: .8rem;
+}
+[data-theme="bevel"] .notification-info::before { content: "i"; background: #0000ff; font-family: Georgia, serif; }
+[data-theme="bevel"] .notification-warn::before { content: "!"; background: #ffcc00; color: #000; border-radius: 0; clip-path: polygon(50% 0, 100% 100%, 0 100%); line-height: 1.55rem; }
+[data-theme="bevel"] .notification-error::before { content: "✕"; background: #ff0000; }
+[data-theme="bevel"] :is(.notification-info, .notification-warn, .notification-error) .small-btn { box-shadow: var(--raised); background: #c0c0c0; }
