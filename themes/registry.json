@@ -1,5 +1,5 @@
 {
-  "version": "1.8.0",
+  "version": "1.9.0",
   "default": "system",
   "themes": [
     {"key": "system",  "label": "System",          "scheme": "auto",  "overlay": false, "description": "Neutral light/dark palette that follows the OS setting."},
@@ -20,6 +20,7 @@
     {"key": "contrast-light", "label": "High contrast L", "scheme": "light", "overlay": true, "description": "Black on white at AAA contrast: 2px outlines, thick focus ring, underlined links, hover inverts."},
     {"key": "contrast-dark",  "label": "High contrast D", "scheme": "dark",  "overlay": true, "description": "White on black at AAA contrast, yellow action and focus, underlined links, hover turns yellow."},
     {"key": "colorblind-rg",  "label": "Colorblind: red-green", "scheme": "auto", "overlay": true, "description": "For protanopia/deuteranopia: Okabe-Ito palette, plus shapes, patterns and icons so nothing depends on colour alone."},
-    {"key": "colorblind-by",  "label": "Colorblind: blue-yellow", "scheme": "auto", "overlay": true, "description": "For tritanopia: red-teal palette, plus shapes, patterns and icons so nothing depends on colour alone."}
+    {"key": "colorblind-by",  "label": "Colorblind: blue-yellow", "scheme": "auto", "overlay": true, "description": "For tritanopia: red-teal palette, plus shapes, patterns and icons so nothing depends on colour alone."},
+    {"key": "ultra-compact", "label": "Ultra Compact", "scheme": "auto", "overlay": true, "description": "Neutral light/dark palette with the tightest type, padding and gaps, for dense data screens."}
   ]
 }

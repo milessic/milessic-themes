@@ -1,8 +1,8 @@
 # milessic-themes
 
-A tiny read-only API that serves a shared look (tokens, components and nineteen
+A tiny read-only API that serves a shared look (tokens, components and twenty
 themes: System, Light, Dark, Aurora, Pinstripe, 1-bit, Slate, Bevel,
-Rainbox, Robin's egg, 2000s bubbles, super glass, CONSOLE, Write.js, Holistic developer, plus the accessibility themes
+Rainbox, Robin's egg, 2000s bubbles, super glass, CONSOLE, Write.js, Holistic developer, Ultra Compact, plus the accessibility themes
 High contrast L, High contrast D, Colorblind: red-green and Colorblind: blue-yellow)
 so every project can share it.
 

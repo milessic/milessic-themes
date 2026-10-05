@@ -340,6 +340,9 @@ table.selectable tbody tr.selected :is(.status, .btn.ghost) { color: inherit; }
 .tp-contrast-dark { --tp-bg: #000; --tp-win: #000; --tp-bar: #fff; --tp-accent: #ffe600; --tp-r: 2px; --tp-win-border: 2px solid #fff; }
 .tp-colorblind-rg { --tp-bg: #f7f8fa; --tp-win: #fff; --tp-bar: linear-gradient(90deg, #0072b2 0 25%, #e69f00 25% 50%, #f0e442 50% 75%, #d55e00 75%); --tp-accent: #0063a0; }
 .tp-colorblind-by { --tp-bg: #f8f7f7; --tp-win: #fff; --tp-bar: linear-gradient(90deg, #009e8f 0 25%, #f06292 25% 50%, #4e342e 50% 75%, #c62828 75%); --tp-accent: #00695c; }
+.tp-ultra-compact { --tp-bg: linear-gradient(135deg, #f9f9f7 50%, #0d0d0d 50%); --tp-win: repeating-linear-gradient(#fcfcfb 0 3px, #e1e0d9 3px 4px); --tp-bar: #e1e0d9; --tp-accent: #2a78d6; --tp-r: 2px; }
+.tp-ultra-compact .tp-bar { height: 5px; }
+.tp-ultra-compact .tp-btn { width: 14px; height: 5px; }
 
 @media (max-width: 640px) {
   .topbar { gap: .5rem; }
