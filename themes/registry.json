@@ -1,5 +1,5 @@
 {
-  "version": "1.9.0",
+  "version": "1.10.0",
   "default": "system",
   "themes": [
     {"key": "system",  "label": "System",          "scheme": "auto",  "overlay": false, "description": "Neutral light/dark palette that follows the OS setting."},
@@ -16,6 +16,7 @@
     {"key": "glass",   "label": "super glass",     "scheme": "dark",  "overlay": true,  "description": "Heavy glassmorphism: frosted panes with bright rims over a vivid neon wallpaper."},
     {"key": "console", "label": "CONSOLE",         "scheme": "dark",  "overlay": true,  "description": "Green phosphor terminal: scanlines, monospace, [bracketed] buttons, inverse-video selection."},
     {"key": "writejs", "label": "Write.js",        "scheme": "auto",  "overlay": true,  "description": "The Write.js editor: Cousine monospace, charcoal top bar, orange buttons, grey toolbar chips."},
+    {"key": "pocket-monster", "label": "Pocket monster", "scheme": "light", "overlay": true, "description": "2000s handheld monster-catching games: red encyclopedia top bar with a blue lens, double-framed dialog boxes, ▶ menu cursor, HP-bar meters, type-badge tags, capture-ball close buttons."},
     {"key": "holistic-developer", "label": "Holistic developer", "scheme": "auto", "overlay": true, "description": "milessic's portfolio: monospace, black-outlined cards, grey keycap buttons that turn red and press down, growing tags."},
     {"key": "contrast-light", "label": "High contrast L", "scheme": "light", "overlay": true, "description": "Black on white at AAA contrast: 2px outlines, thick focus ring, underlined links, hover inverts."},
     {"key": "contrast-dark",  "label": "High contrast D", "scheme": "dark",  "overlay": true, "description": "White on black at AAA contrast, yellow action and focus, underlined links, hover turns yellow."},

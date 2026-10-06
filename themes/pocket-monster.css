@@ -1,0 +1,222 @@
+/* ------------------------------------------------------------------------
+   Pocket monster: the 2000s handheld monster-catching games. A red pocket
+   encyclopedia top bar with its big blue lens and three status lights,
+   cream overworld grass tiles, white dialog boxes with a rounded double
+   frame, a black ▶ cursor in menus, HP bars that run green to yellow to
+   red, type-badge tags and capture-ball close buttons.
+   ------------------------------------------------------------------------ */
+:root[data-theme="pocket-monster"] {
+  color-scheme: light;
+  --page: #f8f0d8;
+  --surface: #ffffff;
+  --surface-2: #f0f4f8;
+  --ink: #283040;
+  --ink-2: #404858;
+  --muted: #687080;
+  --line: #a8b8c8;
+  --line-strong: #283040;
+  --accent: #c8102e;
+  --accent-ink: #ffffff;
+  --danger: #c8102e;
+  --success-text: #1e7a1e;
+  --ring: #283040;
+  /* tones: the HP bar (green, yellow, red) plus fire orange and normal grey */
+  --tone-ok: #38c048;
+  --tone-fail: #e03028;
+  --tone-warn: #f08030;
+  --tone-caution: #f8d030;
+  --tone-neutral: #a8a878;
+  --radius: 8px;
+  --pm-red: #dc0a2d;
+  --pm-red-dark: #8b0016;
+  --pm-lens: #3b9cf0;
+  --pm-frame: #6890b8;
+  --pm-cream: #f8f0d8;
+  --pm-grass: #e8e0b8;
+  --pm-box: inset 0 0 0 3px #fff, inset 0 0 0 6px var(--pm-frame);
+  --pm-drop: 3px 3px 0 rgba(40, 48, 64, .35);
+  --font: Verdana, Tahoma, "Segoe UI", system-ui, sans-serif;
+  font-family: var(--font);
+}
+/* the overworld: a cream route with a faint tile grid */
+[data-theme="pocket-monster"] body {
+  background:
+    linear-gradient(90deg, rgba(168, 160, 112, .18) 1px, transparent 1px) 0 0 / 16px 16px,
+    linear-gradient(rgba(168, 160, 112, .18) 1px, transparent 1px) 0 0 / 16px 16px,
+    var(--pm-cream);
+}
+[data-theme="pocket-monster"] :is(h1, h2) { font-weight: 700; letter-spacing: .02em; }
+[data-theme="pocket-monster"] h1 { color: var(--ink); text-shadow: 2px 2px 0 #d8d0b0; }
+[data-theme="pocket-monster"] h3 { color: var(--ink-2); text-transform: uppercase; letter-spacing: .06em; font-size: .8rem; }
+[data-theme="pocket-monster"] a { color: #2058b8; }
+[data-theme="pocket-monster"] a:hover { color: var(--pm-red); }
+[data-theme="pocket-monster"] code { background: var(--surface-2); border-radius: 4px; padding: 0 .25em; }
+[data-theme="pocket-monster"] ::selection { background: var(--pm-lens); color: #fff; }
+
+/* top bar: the red encyclopedia lid, a blue lens and three lights */
+[data-theme="pocket-monster"] .topbar {
+  background: linear-gradient(var(--pm-red), #c00826); border-bottom: 4px solid var(--pm-red-dark);
+  box-shadow: 0 2px 0 rgba(0, 0, 0, .25);
+}
+[data-theme="pocket-monster"] .brand { color: #fff; text-shadow: 1px 1px 0 var(--pm-red-dark); display: inline-flex; align-items: center; }
+[data-theme="pocket-monster"] .brand::before {
+  content: ""; width: 22px; height: 22px; margin-right: 8px; flex: none; border-radius: 50%; border: 3px solid #fff;
+  background: radial-gradient(circle at 35% 30%, #d8f0ff 0 3px, transparent 4px), radial-gradient(circle at 50% 55%, #7cc8ff, var(--pm-lens) 60%, #1f5fa8);
+  box-shadow: 0 0 0 2px #283040;
+}
+[data-theme="pocket-monster"] .brand::after {
+  content: ""; width: 34px; height: 8px; margin-left: 8px; flex: none;
+  background:
+    radial-gradient(circle, #ff5050 0 3px, #283040 3px 4px, transparent 4.5px) 0 0 / 12px 8px no-repeat,
+    radial-gradient(circle, #f8d030 0 3px, #283040 3px 4px, transparent 4.5px) 12px 0 / 12px 8px no-repeat,
+    radial-gradient(circle, #38c048 0 3px, #283040 3px 4px, transparent 4.5px) 24px 0 / 12px 8px no-repeat;
+}
+[data-theme="pocket-monster"] .nav a { color: #fff; font-weight: 700; border-radius: 999px; }
+[data-theme="pocket-monster"] .nav a:hover { background: rgba(255, 255, 255, .2); }
+[data-theme="pocket-monster"] .nav a.active { background: #fff; color: var(--pm-red); box-shadow: inset 0 -2px 0 #d0d8e0; }
+[data-theme="pocket-monster"] .topbar-end { color: #fff; }
+
+/* panels: the dialog box, white with a rounded double frame */
+[data-theme="pocket-monster"] .card {
+  border: 2px solid var(--line-strong); border-radius: 10px; padding: 1.25rem 1.4rem;
+  box-shadow: var(--pm-box), var(--pm-drop);
+}
+[data-theme="pocket-monster"] .card.empty { background: var(--surface-2); }
+[data-theme="pocket-monster"] .danger-card { border-color: var(--danger); box-shadow: inset 0 0 0 3px #fff, inset 0 0 0 6px #f08080, var(--pm-drop); }
+[data-theme="pocket-monster"] .card-window { padding-top: 3.4rem; }
+[data-theme="pocket-monster"] .window-bar {
+  top: 6px; left: 6px; right: 6px; height: 2.1rem; border-radius: 4px 4px 0 0; border-bottom: 3px solid var(--pm-red-dark);
+  background: linear-gradient(var(--pm-red), #c00826);
+}
+[data-theme="pocket-monster"] .window-title { color: #fff; font-weight: 700; text-shadow: 1px 1px 0 var(--pm-red-dark); }
+/* the close button is a capture ball; it pops open into × on hover */
+[data-theme="pocket-monster"] .window-close {
+  width: 1.4rem; height: 1.4rem; border-radius: 50%; border: 2px solid #283040;
+  background: linear-gradient(var(--pm-red) 0 44%, #283040 44% 56%, #fff 56%);
+}
+[data-theme="pocket-monster"] .window-close::before {
+  content: ""; width: .45rem; height: .45rem; border-radius: 50%; background: #fff; border: 2px solid #283040;
+}
+[data-theme="pocket-monster"] .window-close:hover { background: #fff; color: var(--pm-red); }
+[data-theme="pocket-monster"] .window-close:hover::before { content: "×"; width: auto; height: auto; border: 0; background: none; font-weight: 700; }
+[data-theme="pocket-monster"] .window-close:focus-visible { outline: 2px solid #fff; outline-offset: 1px; }
+[data-theme="pocket-monster"] .tile {
+  background: var(--surface); border: 2px solid var(--line-strong); border-radius: 8px; box-shadow: inset 0 0 0 2px #fff, inset 0 0 0 4px var(--pm-frame);
+  padding: .7rem .9rem;
+}
+[data-theme="pocket-monster"] .tile-label { text-transform: uppercase; letter-spacing: .05em; font-weight: 700; color: var(--muted); }
+[data-theme="pocket-monster"] .tile-value { font-weight: 700; color: var(--ink); }
+
+/* buttons: chunky menu buttons on a hard shadow; primary is the red half of the ball */
+[data-theme="pocket-monster"] .btn {
+  border: 2px solid var(--line-strong); border-radius: 8px; background: linear-gradient(#ffffff, #e0e8f0);
+  color: var(--ink); font-weight: 700; box-shadow: 0 3px 0 var(--line-strong); margin-bottom: 3px;
+}
+[data-theme="pocket-monster"] .btn:hover { background: linear-gradient(#ffffff, #d0e4f8); }
+[data-theme="pocket-monster"] .btn:active:not([disabled]) { box-shadow: none; transform: translateY(3px); }
+[data-theme="pocket-monster"] .btn.primary { background: linear-gradient(#f03a4a, var(--pm-red) 55%, #b80020); border-color: #283040; color: #fff; text-shadow: 1px 1px 0 var(--pm-red-dark); }
+[data-theme="pocket-monster"] .btn.primary:hover { filter: brightness(1.1); }
+[data-theme="pocket-monster"] .btn.danger { color: var(--danger); border-color: var(--danger); box-shadow: 0 3px 0 var(--danger); }
+[data-theme="pocket-monster"] .btn.ghost { background: transparent; border-color: transparent; box-shadow: none; margin-bottom: 0; }
+[data-theme="pocket-monster"] .btn.ghost:hover { background: var(--surface-2); border-color: var(--line-strong); }
+[data-theme="pocket-monster"] .btn.ghost:active { transform: none; }
+[data-theme="pocket-monster"] .btn.small { box-shadow: 0 2px 0 var(--line-strong); margin-bottom: 2px; }
+[data-theme="pocket-monster"] .btn.danger.small { box-shadow: 0 2px 0 var(--danger); }
+[data-theme="pocket-monster"] .btn.ghost.small { box-shadow: none; margin-bottom: 0; }
+[data-theme="pocket-monster"] .btn.small:active:not([disabled]) { transform: translateY(2px); }
+[data-theme="pocket-monster"] input,
+[data-theme="pocket-monster"] select,
+[data-theme="pocket-monster"] textarea { border: 2px solid var(--line-strong); border-radius: 6px; background: #fff; }
+[data-theme="pocket-monster"] input:focus-visible,
+[data-theme="pocket-monster"] select:focus-visible,
+[data-theme="pocket-monster"] textarea:focus-visible,
+[data-theme="pocket-monster"] .btn:focus-visible { outline: 3px solid var(--pm-lens); outline-offset: 1px; }
+[data-theme="pocket-monster"] input[type="checkbox"],
+[data-theme="pocket-monster"] input[type="radio"] { accent-color: var(--pm-red); }
+[data-theme="pocket-monster"] label { font-weight: 700; }
+[data-theme="pocket-monster"] label.check { font-weight: 400; }
+[data-theme="pocket-monster"] summary { color: var(--ink); }
+
+/* choices: the battle menu, a black ▶ cursor marks the pick */
+[data-theme="pocket-monster"] .segmented { border: 2px solid var(--line-strong); border-radius: 8px; background: #fff; box-shadow: inset 0 0 0 2px #fff, inset 0 0 0 4px var(--pm-frame); padding: 4px; gap: 2px; }
+[data-theme="pocket-monster"] .segmented span { color: var(--ink); font-weight: 700; padding: .3rem .8rem .3rem 1.3rem; border-radius: 4px; position: relative; }
+[data-theme="pocket-monster"] .segmented input:checked + span { background: transparent; color: var(--ink); }
+[data-theme="pocket-monster"] .segmented input:checked + span::before { content: "▶"; position: absolute; left: .35rem; font-size: .75em; top: 50%; transform: translateY(-50%); }
+[data-theme="pocket-monster"] .segmented span:hover { background: var(--surface-2); }
+[data-theme="pocket-monster"] .chip { border: 2px solid var(--line-strong); background: #fff; color: var(--ink); font-weight: 700; }
+[data-theme="pocket-monster"] .chip:hover { background: var(--surface-2); }
+[data-theme="pocket-monster"] .chip.on { background: var(--pm-red); border-color: #283040; color: #fff; text-shadow: 1px 1px 0 var(--pm-red-dark); }
+/* tags: type badges, a coloured slab with shadowed caps */
+[data-theme="pocket-monster"] .tag {
+  background: linear-gradient(#a8a878, #8a8a59); color: #fff; font-weight: 700; text-transform: uppercase; letter-spacing: .05em;
+  border: 1px solid #6d6d4e; border-radius: 6px; padding: 0 .5rem; text-shadow: 1px 1px 0 rgba(0, 0, 0, .35);
+}
+[data-theme="pocket-monster"] kbd { background: #fff; border: 2px solid var(--line-strong); border-radius: 4px; box-shadow: 0 2px 0 var(--line-strong); font-weight: 700; }
+
+/* tables: the party list */
+[data-theme="pocket-monster"] .scroll-x { border: 2px solid var(--line-strong); border-radius: 8px; background: #fff; }
+[data-theme="pocket-monster"] .data th { background: #4870a0; color: #fff; text-shadow: 1px 1px 0 rgba(0, 0, 0, .3); border-bottom: 2px solid var(--line-strong); }
+[data-theme="pocket-monster"] .data :is(th, td) { border-bottom-color: #d8e0e8; }
+[data-theme="pocket-monster"] .data tbody tr:nth-child(even) { background: #f6f9fc; }
+[data-theme="pocket-monster"] th[aria-sort="ascending"], [data-theme="pocket-monster"] th[aria-sort="descending"] { color: #fff; }
+[data-theme="pocket-monster"] table.selectable tbody tr:hover { background: #e4eef8; }
+[data-theme="pocket-monster"] table.selectable tbody tr.selected { background: #fff4c8; box-shadow: inset 4px 0 0 var(--pm-red); }
+[data-theme="pocket-monster"] table.selectable tbody tr.selected > :first-child::before { content: "▶ "; font-size: .75em; }
+
+/* status: ball-shaped dots, an HP bar meter */
+[data-theme="pocket-monster"] .badge::before,
+[data-theme="pocket-monster"] .swatch { border-radius: 50%; border: 1px solid #283040; }
+[data-theme="pocket-monster"] .dot { border: 1px solid #283040; }
+[data-theme="pocket-monster"] .distribution { height: 14px; gap: 0; padding: 2px; border: 2px solid var(--line-strong); border-radius: 999px; background: #485058; }
+[data-theme="pocket-monster"] .distribution .seg { border-radius: 0; box-shadow: inset 0 -3px 0 rgba(0, 0, 0, .18); }
+[data-theme="pocket-monster"] .distribution .seg:first-child { border-radius: 999px 0 0 999px; }
+[data-theme="pocket-monster"] .distribution .seg:last-child { border-radius: 0 999px 999px 0; }
+[data-theme="pocket-monster"] .distribution .seg:only-child { border-radius: 999px; }
+[data-theme="pocket-monster"] .meter { width: 72px; height: 10px; padding: 2px; border: 2px solid var(--line-strong); border-radius: 999px; background: #485058; }
+[data-theme="pocket-monster"] .meter-fill { border-radius: 999px; box-shadow: inset 0 -2px 0 rgba(0, 0, 0, .18); }
+
+/* messages: little dialog boxes */
+[data-theme="pocket-monster"] .flash {
+  background: #fff; border: 2px solid var(--line-strong); border-radius: 8px;
+  box-shadow: inset 0 0 0 2px #fff, inset 0 0 0 4px var(--note, var(--pm-frame)), var(--pm-drop); padding: .75rem 1rem;
+}
+[data-theme="pocket-monster"] .flash.success { border-left: 2px solid var(--line-strong); --note: var(--tone-ok); }
+[data-theme="pocket-monster"] .flash.error { border-left: 2px solid var(--line-strong); --note: var(--tone-fail); }
+[data-theme="pocket-monster"] .flash.info { border-left: 2px solid var(--line-strong); --note: var(--pm-frame); }
+[data-theme="pocket-monster"] .tooltip { background: #fff; color: var(--ink); border: 2px solid var(--line-strong); border-radius: 6px; box-shadow: inset 0 0 0 2px #fff, inset 0 0 0 3px var(--pm-frame), var(--pm-drop); }
+[data-theme="pocket-monster"] .secret { background: #fff; border: 2px solid var(--line-strong); border-radius: 8px; box-shadow: inset 0 0 0 2px #fff, inset 0 0 0 4px var(--pm-frame); }
+[data-theme="pocket-monster"] pre { background: #fff; border: 2px solid var(--line-strong); border-radius: 8px; padding: .8em 1em; overflow: auto; }
+
+/* menus: the start menu, white box on the right with a ▶ cursor */
+[data-theme="pocket-monster"] .menu { background: #fff; border: 2px solid var(--line-strong); border-radius: 10px; box-shadow: var(--pm-box), var(--pm-drop); padding: 9px; }
+[data-theme="pocket-monster"] .menu > :is(a, button) { font-weight: 700; color: var(--ink); padding-left: 1.5rem; position: relative; }
+[data-theme="pocket-monster"] .menu > :is(a, button):not([disabled]):is(:hover, :focus-visible) { background: transparent; }
+[data-theme="pocket-monster"] .menu > :is(a, button):not([disabled]):is(:hover, :focus-visible)::before { content: "▶"; position: absolute; left: .45rem; font-size: .75em; top: 50%; transform: translateY(-50%); }
+[data-theme="pocket-monster"] .menu > .danger { color: var(--danger); }
+[data-theme="pocket-monster"] .menu hr { border-top: 2px dotted var(--line); }
+[data-theme="pocket-monster"] .toolbar-bar { background: #fff; border: 2px solid var(--line-strong); border-radius: 8px; box-shadow: inset 0 0 0 2px #fff, inset 0 0 0 4px var(--pm-frame); padding: .45rem; }
+[data-theme="pocket-monster"] .toolbar-sep { width: 2px; background: var(--pm-frame); }
+
+/* small buttons: round ball-buttons; toggled ones turn red */
+[data-theme="pocket-monster"] .small-btn {
+  border: 2px solid var(--line-strong); border-radius: 999px; background: linear-gradient(#ffffff, #e0e8f0);
+  color: var(--ink); font-weight: 700; box-shadow: 0 2px 0 var(--line-strong); margin-bottom: 2px;
+}
+[data-theme="pocket-monster"] .small-btn:hover { background: linear-gradient(#ffffff, #d0e4f8); }
+[data-theme="pocket-monster"] .small-btn:active:not([disabled]) { box-shadow: none; transform: translateY(2px); }
+[data-theme="pocket-monster"] .small-btn:is(.on, [aria-pressed="true"]) { background: linear-gradient(#f03a4a, var(--pm-red) 55%, #b80020); border-color: #283040; color: #fff; }
+[data-theme="pocket-monster"] .small-btn:focus-visible { outline: 3px solid var(--pm-lens); outline-offset: 1px; }
+
+/* modals: a big dialog box over a dimmed route */
+[data-theme="pocket-monster"] .modal-container { background: #fff; border: 2px solid var(--line-strong); border-radius: 12px; box-shadow: var(--pm-box), 0 12px 0 rgba(40, 48, 64, .25); padding: 1.4rem 1.6rem; }
+[data-theme="pocket-monster"] .modal-container::backdrop { background: rgba(24, 32, 48, .55); }
+
+/* notifications: dialog boxes whose inner frame takes the message colour */
+[data-theme="pocket-monster"] :is(.notification-info, .notification-warn, .notification-error) {
+  background: #fff; border: 2px solid var(--line-strong); border-radius: 10px; padding: .7rem .6rem .7rem 1.1rem;
+  box-shadow: inset 0 0 0 2px #fff, inset 0 0 0 5px var(--note-color), var(--pm-drop);
+}
+[data-theme="pocket-monster"] .notification-info { --note-color: var(--pm-frame); }
+[data-theme="pocket-monster"] .notification-warn { --note-color: var(--tone-caution); }
+[data-theme="pocket-monster"] .notification-error { --note-color: var(--tone-fail); }
+[data-theme="pocket-monster"] :is(.notification-info, .notification-warn, .notification-error) .small-btn { border-color: var(--line-strong); background: #fff; }
