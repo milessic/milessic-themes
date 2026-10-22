@@ -139,9 +139,26 @@ def test_overlay_rules_are_scoped_to_their_theme(key):
 
 
 def test_every_theme_has_a_picker_preview():
-    base = (ROOT / "themes" / "base.css").read_text()
+    previews = (ROOT / "themes" / "previews.css").read_text()
     for t in REGISTRY["themes"]:
-        assert f".tp-{t['key']} " in base, f"missing .tp-{t['key']} preview"
+        assert f".tp-{t['key']} " in previews, f"missing .tp-{t['key']} preview"
+
+
+def test_previews_are_imported_unversioned_and_never_immutable():
+    # New themes ship without a version bump: base.css (cached immutable under ?v=) must not
+    # hold per-theme previews, and previews.css must stay revalidatable even when asked with ?v=.
+    base = (ROOT / "themes" / "base.css").read_text()
+    assert '@import url("/css/previews.css");' in base and ".tp-system" not in base
+    for path in ["/css/previews.css", "/css/previews.css?v=1.0.0"]:
+        r = client.get(path)
+        assert r.status_code == 200 and r.headers["content-type"].startswith("text/css")
+        assert r.headers["cache-control"] == "public, max-age=300"
+    assert client.get("/api/themes").json()["previews_url"].endswith("/css/previews.css")
+
+
+def test_new_theme_is_served_under_an_older_pinned_version():
+    r = client.get("/css/bundle/night-hawk.css?v=1.0.0")
+    assert r.status_code == 200 and ':root[data-theme="night-hawk"]' in r.text
 
 
 POPUP_CLASSES = [".menu", ".small-btn", ".modal-container", ".notification-info", ".notification-warn", ".notification-error"]

@@ -9,9 +9,13 @@ GET /api/themes/{key}          one theme
 GET /css/base.css              tokens + components + system/light/dark
 GET /css/themes/{key}.css      overlay only (404 for system/light/dark: they live in base.css)
 GET /css/bundle/{key}.css      base.css + overlay in one file (the recommended link)
+GET /css/previews.css          picker previews for every theme (@imported by base.css, never immutable)
 GET /js/themes.js              optional client helper (switching, picker, persistence)
 
 Add ?v=<registry version> to any CSS/JS URL to get a year-long immutable cache.
+The version tracks the contract (classes, tokens, structure, the helper): adding a theme does not
+bump it. New themes still reach pinned apps because the registry is unversioned, a new key is a new
+bundle URL, and the picker previews come from previews.css, which is never cached immutable.
 """
 import hashlib
 import json
@@ -64,9 +68,9 @@ def theme_or_404(key: str) -> dict:
     return theme
 
 
-def asset(request: Request, body: str, media_type: str) -> Response:
+def asset(request: Request, body: str, media_type: str, versioned: bool = True) -> Response:
     etag = '"' + hashlib.sha256(body.encode()).hexdigest()[:16] + '"'
-    if "v" in request.query_params:
+    if versioned and "v" in request.query_params:
         cache = "public, max-age=31536000, immutable"
     else:
         cache = f"public, max-age={MAX_AGE}"
@@ -117,6 +121,7 @@ def list_themes(request: Request):
         "default": reg["default"],
         "base_url": f"{base}/css/base.css?v={reg['version']}",
         "script_url": f"{base}/js/themes.js?v={reg['version']}",
+        "previews_url": f"{base}/css/previews.css",
         "themes": [describe(t, base) for t in reg["themes"]],
     })
 
@@ -146,6 +151,12 @@ def bundle_css(key: str, request: Request):
     if theme["overlay"]:
         body += "\n" + read(THEMES_DIR / f"{key}.css")
     return asset(request, body, "text/css")
+
+
+@app.get("/css/previews.css")
+def previews_css(request: Request):
+    # Grows with every new theme under the same version, so it is never cached immutable.
+    return asset(request, read(THEMES_DIR / "previews.css"), "text/css", versioned=False)
 
 
 @app.get("/js/themes.js")

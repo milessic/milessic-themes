@@ -1,8 +1,8 @@
 # milessic-themes
 
-A tiny read-only API that serves a shared look (tokens, components and twenty-one
+A tiny read-only API that serves a shared look (tokens, components and twenty-two
 themes: System, Light, Dark, Aurora, Pinstripe, 1-bit, Slate, Bevel,
-Rainbox, Robin's egg, 2000s bubbles, super glass, CONSOLE, Write.js, Holistic developer, Ultra Compact, Pocket monster, plus the accessibility themes
+Rainbox, Robin's egg, 2000s bubbles, super glass, CONSOLE, Write.js, Holistic developer, Ultra Compact, Pocket monster, Night hawk, plus the accessibility themes
 High contrast L, High contrast D, Colorblind: red-green and Colorblind: blue-yellow)
 so every project can share it.
 
@@ -32,11 +32,12 @@ given theme). Tests: `pytest`.
 | GET    | `/manifesto`             | MANIFESTO.md rendered in an overlay wearing the current theme (`?theme=` works too) |
 | GET    | `/manifesto.md`          | MANIFESTO.md as raw markdown                                         |
 | GET    | `/health`                | `{"status": "ok", "version": "1.0.0"}`                               |
-| GET    | `/api/themes`            | Registry: version, default, `base_url`, `script_url`, themes[]       |
+| GET    | `/api/themes`            | Registry: version, default, `base_url`, `script_url`, `previews_url`, themes[] |
 | GET    | `/api/themes/{key}`      | One theme: key, label, scheme (`auto`/`light`/`dark`), description, `bundle_url`, `overlay_url` |
 | GET    | `/css/bundle/{key}.css`  | **base + overlay in one file — the link apps should use**            |
 | GET    | `/css/base.css`          | Tokens, components, system/light/dark                                |
 | GET    | `/css/themes/{key}.css`  | Overlay only (404 for system/light/dark)                             |
+| GET    | `/css/previews.css`      | Picker previews for every theme; `@import`ed by base.css, never cached immutable |
 | GET    | `/js/themes.js`          | Optional client helper (switching, picker, persistence)              |
 
 All responses send `Access-Control-Allow-Origin: *`; CSS/JS send an `ETag` (304 on match).
@@ -45,8 +46,9 @@ Unknown keys are 404: the registry is the allow-list, keys never touch the files
 ## Layout
 
 ```
-themes/registry.json   theme list + version (bump version on every CSS change)
+themes/registry.json   theme list + contract version (see Versioning)
 themes/base.css        tokens + component contract + system/light/dark
+themes/previews.css    picker previews (.tp-<key>), one per theme
 themes/<key>.css       overlay, every selector scoped to [data-theme="<key>"]
 static/themes.js       client helper
 server/main.py         the API
@@ -59,9 +61,24 @@ tests/                 API + contract tests
 
 1. `themes/<key>.css`: redefine tokens under `:root[data-theme="<key>"]`, restyle components with
    `[data-theme="<key>"] .selector`. Nothing unscoped (a test enforces it).
-2. Add an entry to `themes/registry.json` and bump `version`.
-3. Add a `.tp-<key>` picker preview to `base.css` (a test enforces it).
+2. Add an entry to `themes/registry.json`. **Don't** bump `version` (see below).
+3. Add a `.tp-<key>` picker preview to `previews.css` (a test enforces it). Never to `base.css`.
 4. Check every component in the gallery: `/?theme=<key>`.
+
+## Versioning
+
+`version` in the registry is the **contract** version, the `?v=` apps pin. Bump it when the
+contract changes: classes, tokens, page structure, `base.css` rules, `themes.js`, or an existing
+overlay (a `?v=` URL is cached immutable for a year, so a fix to an existing theme only reaches
+browsers under a new version).
+
+Adding a theme is **not** a contract change and must not bump it. The new theme reaches pinned apps
+by itself:
+
+* `/api/themes` is unversioned, so `list()`, `mountPicker()` and server-side registries see the new key;
+* `/css/bundle/<new-key>.css?v=<old>` is a URL no browser has cached yet, so it gets current content;
+* its picker preview is in `previews.css`, which `base.css` `@import`s without `?v=` and which is
+  always served with the short `THEMES_MAX_AGE` cache plus an ETag, even when asked with `?v=`.
 
 ## License
 

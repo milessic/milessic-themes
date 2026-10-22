@@ -1,6 +1,6 @@
 # The milessic-themes manifesto
 
-How to build an application so that it wears every milessic theme, today's twenty-one and the ones
+How to build an application so that it wears every milessic theme, today's twenty-two and the ones
 added later, without changing a line of its own code.
 
 ---
@@ -30,6 +30,10 @@ added later, without changing a line of its own code.
 
 Replace `THEMES` with the server origin, e.g. `https://themes.example.com`.
 Pin the registry version with `?v=` so browsers cache the files forever and you upgrade deliberately.
+The version tracks the **contract** (component classes, tokens, page structure, the helper script).
+New themes are added *without* a version bump: they show up in `/api/themes`, their bundle is served
+under whatever `?v=` you pinned, and their picker preview comes from the unversioned
+`/css/previews.css` that `base.css` imports. Your app gets new themes without changing a line.
 
 ### Level 1: one fixed theme (static pages, internal tools)
 
@@ -51,19 +55,22 @@ registry, render it.
 
 ```python
 # themes.py
-import httpx, os
+import httpx, os, time
 THEMES_URL = os.environ.get("THEMES_URL", "http://localhost:8765")
 THEMES_VERSION = "1.0.0"
-_registry = None
+REGISTRY_TTL = 600          # seconds; new themes appear in the app within this time
+_registry, _fetched_at = None, 0.0
 
 def registry() -> dict:
-    """Fetched once at startup; on failure fall back to the built-ins so the app still boots."""
-    global _registry
-    if _registry is None:
+    """Refreshed every REGISTRY_TTL so new themes appear without a deploy; on failure keep the last
+    good copy, or fall back to the built-ins so the app still boots."""
+    global _registry, _fetched_at
+    if _registry is None or time.monotonic() - _fetched_at > REGISTRY_TTL:
         try:
             _registry = httpx.get(f"{THEMES_URL}/api/themes", timeout=3).json()
         except httpx.HTTPError:
-            _registry = {"default": "system", "themes": [{"key": k, "label": k.title()} for k in ("system", "light", "dark")]}
+            _registry = _registry or {"default": "system", "themes": [{"key": k, "label": k.title()} for k in ("system", "light", "dark")]}
+        _fetched_at = time.monotonic()
     return _registry
 
 def theme_keys() -> set[str]:
@@ -282,15 +289,18 @@ The contract won't cover everything. For an app widget:
 
 ## 7. Operations
 
-* **Pin the version.** `?v=1.0.0` → immutable cache. Upgrading is a one-line change you review in
+* **Pin the version.** `?v=1.0.0` → immutable cache. It only changes when the contract does (classes,
+  tokens, structure); new themes never need it. Upgrading is a one-line change you review in
   the gallery first.
-* **Cache the registry** in the app process (it changes only with the version).
+* **Cache the registry** in the app process, but refresh it every few minutes (or at least on restart):
+  new themes are added to it without a version bump. Never hard-code the theme list.
 * **Outage fallback.** The themes server is a single dependency for every app. Either
   (a) accept an unstyled but working page, or (b) vendor the files at build time and serve them
   yourself:
   ```bash
   for k in $(curl -s THEMES/api/themes | python -c "import sys,json;print(' '.join(t['key'] for t in json.load(sys.stdin)['themes']))"); do
     curl -s "THEMES/css/bundle/$k.css?v=1.0.0" -o "static/themes/$k.css"; done
+  curl -s "THEMES/css/previews.css" -o "static/css/previews.css"   # base.css imports /css/previews.css
   ```
 * **CSP:** allow the origin in `style-src` (and `script-src` if you use the helper); add
   `connect-src` for `mountPicker`/`list()`.
@@ -306,7 +316,8 @@ The contract won't cover everything. For an app widget:
 * Tones always with text; charts carry an `aria-label` with the numbers.
 * Accessibility themes: **High contrast L / D** (AAA contrast, 2px outlines, thick focus ring,
   disabled shown dashed rather than faded) and **Colorblind: red-green / blue-yellow** (safe palettes;
-  tones also get shapes, bar patterns and message icons). They only work if your markup uses the
+  tones also get shapes, bar patterns and message icons) and **Night hawk** (night work, OLED pure black: low glare
+  and low contrast, kept visible by larger type, 2px outlines and an amber focus ring). They only work if your markup uses the
   contract: a hand-picked hex or a custom `opacity` on text undoes them.
 * Don't fade text to show state (`opacity` on disabled things or secondary text); use `[disabled]`
   and `.muted`, which every theme maps to a colour that keeps its contrast.
