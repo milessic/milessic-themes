@@ -144,7 +144,7 @@ Combine them with `&`: `THEMES/js/themes.js?v=1.12.0&ts=1&so=1`.
 | `MilessicThemes.apply(key)`                    | Sets `data-theme`, swaps the link (new sheet loads before the old one is dropped), stores in `localStorage` |
 | `MilessicThemes.current()`                     | Active key                                                        |
 | `MilessicThemes.list()`                        | `Promise` of `/api/themes`                                        |
-| `MilessicThemes.mountPicker(el, {onChange, apply, name, label})` | Renders the picker chosen by `?ts`; `apply: false` + `onChange` to save server-side instead |
+| `MilessicThemes.mountPicker(el, {onChange, apply, name, label, type})` | Renders the picker chosen by `?ts` (`type: "dropdown"`/`"gallery"` overrides it; mounting again into `el` replaces it); `apply: false` + `onChange` to save server-side instead |
 | `MilessicThemes.recent()`                      | With `?so=1`: theme keys, most recently selected first (else `[]`) |
 | `MilessicThemes.forgetRecent()`                | Erases the recently-used list from this browser                   |
 | `document` event `milessic:themechange`        | Fired on every switch (`e.detail.key`), e.g. to redraw canvas charts |
@@ -241,7 +241,7 @@ from them before inventing new ones. The gallery (`/`) shows each one in each th
 | Tables    | `table.data` · `th`/`td.num` `.actions` · `tr.dim` · `.sort-btn` + `th[aria-sort]` · `table.selectable` + `tr.selected` |
 | Labels    | `.tag` · `.status.on` / `.status.off` · `.dot` (`style="--dot-color:#hex"`) |
 | Data      | tone classes `.tone-ok` `.tone-fail` `.tone-warn` `.tone-caution` `.tone-neutral` on `.badge` `.swatch` `.distribution .seg` `.meter-fill` · `.legend` · `.tiles` › `.tile` › `.tile-label` + `.tile-value` · `.meter` › `.meter-fill` |
-| Picker    | gallery: `.theme-grid` › `label.theme-option` › radio + `.theme-preview.tp-KEY` + `.theme-label` · dropdown: `.theme-dropdown` › `.theme-swatch` + `input[role=combobox]` + `button.theme-dropdown-toggle` (the "v") + `.menu[role=listbox]` › `button[role=option]` › `.theme-swatch` + `.theme-label` (`.theme-swatch` › `.theme-preview.tp-KEY` is the preview at 40%) |
+| Picker    | gallery: `.theme-grid` › `label.theme-option` › radio + `.theme-preview.tp-KEY` + `.theme-label` · dropdown: `.theme-dropdown` › `.theme-swatch` + `input[role=combobox]` + `button.theme-dropdown-toggle` (the "v") + `.menu[role=listbox]` (opened in the top layer via the popover API, so ancestors never cover or clip it) › `button[role=option]` › `.theme-swatch` + `.theme-label` (`.theme-swatch` › `.theme-preview.tp-KEY` is the preview at 40%) |
 
 Markup rules:
 

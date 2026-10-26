@@ -6,11 +6,11 @@
   <title>milessic-themes</title>
   <link rel="stylesheet" data-milessic-theme href="/css/bundle/system.css">
   <script>
-    // The picker type is a script option (?ts=0 dropdown, ?ts=1 gallery), so the page's own
-    // ?ts= and ?so= are passed on to the helper: /?ts=1 shows the gallery picker.
+    // ?so=1 (recently used first) is a script option, so the page's own ?so= is passed on to the helper.
+    // The picker type (?ts=) is switched in place below.
     (function () {
       var page = new URLSearchParams(location.search), query = new URLSearchParams();
-      ["ts", "so"].forEach(function (k) { if (/^[01]$/.test(page.get(k) || "")) query.set(k, page.get(k)); });
+      if (/^[01]$/.test(page.get("so") || "")) query.set("so", page.get("so"));
       document.write('<script src="/js/themes.js' + (query.toString() ? "?" + query : "") + '"><\/script>');
     })();
   </script>
@@ -247,17 +247,19 @@ two lines</span></p>
   function show() { label.textContent = "theme: " + MilessicThemes.current(); }
   document.addEventListener("milessic:themechange", show);
   show();
-  MilessicThemes.mountPicker(document.getElementById("picker"));
-  // Dropdown / Gallery switch: reload with ?ts= (it is read when the helper script loads).
+  // Dropdown / Gallery switch: remounts the picker in place (no reload); /?ts=1 opens on the gallery.
+  var picker = document.getElementById("picker");
   var params = new URLSearchParams(location.search);
+  function mount(ts) { MilessicThemes.mountPicker(picker, { type: ts === "1" ? "gallery" : "dropdown" }); }
   document.querySelectorAll('input[name="picker-type"]').forEach(function (input) {
     input.checked = input.value === (params.get("ts") === "1" ? "1" : "0");
     input.addEventListener("change", function () {
+      mount(input.value);
       params.set("ts", input.value);
-      params.set("theme", MilessicThemes.current());
-      location.search = params;
+      history.replaceState(null, "", "?" + params + location.hash);
     });
   });
+  mount(params.get("ts"));
   document.getElementById("open-modal").addEventListener("click", function () { document.getElementById("modal-demo").showModal(); });
   document.querySelectorAll('.small-btn[aria-pressed]').forEach(function (b) {
     b.addEventListener("click", function () { b.setAttribute("aria-pressed", b.getAttribute("aria-pressed") !== "true"); });

@@ -6,7 +6,8 @@
  *   MilessicThemes.apply("bevel")          switch theme (sets <html data-theme>, swaps the link)
  *   MilessicThemes.current()               active key
  *   MilessicThemes.list()                  Promise<registry>  (GET /api/themes)
- *   MilessicThemes.mountPicker(el, opts)   render the theme picker into el (dropdown or gallery, see ?ts)
+ *   MilessicThemes.mountPicker(el, opts)   render the theme picker into el (dropdown or gallery, see ?ts;
+ *                                          opts.type "dropdown"/"gallery" overrides it, remounting replaces it)
  *   MilessicThemes.enabled(key)            false if the script tag disabled that theme
  *   MilessicThemes.recent()                keys in "last selected" order, newest first (?so=1 only)
  *   MilessicThemes.forgetRecent()          erase that list from this browser
@@ -149,8 +150,15 @@
 
   function mountPicker(el, opts) {
     opts = opts || {};
+    var type = opts.type || PICKER;
     return list().then(function (reg) {
-      (PICKER === "gallery" ? mountGallery : mountDropdown)(el, opts, reg);
+      // Mounting again into the same element replaces the previous picker, of either type.
+      if (el.milessicUnmount) el.milessicUnmount();
+      el.milessicUnmount = null;
+      el.classList.remove("theme-grid", "theme-dropdown");
+      el.removeAttribute("role");
+      el.removeAttribute("aria-label");
+      (type === "gallery" ? mountGallery : mountDropdown)(el, opts, reg);
     });
   }
 
@@ -182,9 +190,15 @@
     var id = "milessic-theme-list-" + (++pickerCount);
     var selected = current();
     el.classList.add("theme-dropdown");
-    el.innerHTML = '<span class="theme-swatch">' + PREVIEW + '</span><input type="text" role="combobox" autocomplete="off" spellcheck="false" aria-autocomplete="list" aria-expanded="false"><button type="button" class="theme-dropdown-toggle" tabindex="-1" aria-label="Show themes"><span aria-hidden="true"></span></button><div class="menu" role="listbox" hidden></div>';
+    el.innerHTML = '<span class="theme-swatch">' + PREVIEW + '</span><input type="text" role="combobox" autocomplete="off" spellcheck="false" aria-autocomplete="list" aria-expanded="false"><button type="button" class="theme-dropdown-toggle" tabindex="-1" aria-label="Show themes">' +
+      '<svg viewBox="0 0 12 8" width="12" height="8" aria-hidden="true"><path d="M1 1.5l5 5 5-5" fill="none" stroke="currentColor" stroke-width="2"/></svg></button>' +
+      '<div class="menu" role="listbox" hidden></div>';
     var input = el.querySelector("input"), menu = el.querySelector(".menu"), swatch = el.querySelector(".theme-preview");
     var toggle = el.querySelector(".theme-dropdown-toggle");
+    // The list opens in the top layer where supported, so no ancestor's stacking context
+    // (backdrop-filter, transform, overflow) can draw over it or clip it.
+    var topLayer = typeof menu.showPopover === "function";
+    if (topLayer) menu.setAttribute("popover", "manual");
     input.setAttribute("aria-label", opts.label || "Theme");
     input.setAttribute("aria-controls", id);
     input.placeholder = "Search themes…";
@@ -236,14 +250,33 @@
         menu.appendChild(clear);
       }
     }
+    function place() {
+      var r = input.getBoundingClientRect();
+      menu.style.left = r.left + "px";
+      menu.style.top = r.bottom + 4 + "px";
+      menu.style.width = r.width + "px";
+      menu.style.maxHeight = Math.max(160, Math.min(360, window.innerHeight - r.bottom - 12)) + "px";
+    }
+    function show() {
+      if (!menu.hidden) return;
+      menu.hidden = false;
+      input.setAttribute("aria-expanded", "true");
+      if (!topLayer) return;
+      menu.showPopover();
+      place();
+      window.addEventListener("scroll", place, true);
+      window.addEventListener("resize", place);
+    }
     function open() {
       if (!menu.hidden) return;
       render("");
-      menu.hidden = false;
-      input.setAttribute("aria-expanded", "true");
+      show();
       input.select();
     }
     function close(restore) {
+      if (topLayer && menu.matches(":popover-open")) menu.hidePopover();
+      window.removeEventListener("scroll", place, true);
+      window.removeEventListener("resize", place);
       menu.hidden = true;
       input.setAttribute("aria-expanded", "false");
       if (restore) showSelected();
@@ -268,11 +301,12 @@
       if (menu.hidden) { input.focus(); open(); } else { close(true); input.focus(); }
     });
     input.addEventListener("input", function () {
-      if (menu.hidden) { menu.hidden = false; input.setAttribute("aria-expanded", "true"); }
       render(input.value);
+      show();
     });
     input.addEventListener("keydown", function (e) {
       if (e.key === "ArrowDown") { e.preventDefault(); open(); move(null, 1); }
+      else if (menu.hidden && e.key.length === 1 && !e.ctrlKey && !e.metaKey && !e.altKey) input.select();  // typing replaces the label
       else if (e.key === "Escape" && !menu.hidden) { e.preventDefault(); close(true); }
       else if (e.key === "Enter" && !menu.hidden) {
         e.preventDefault();
@@ -287,14 +321,21 @@
     });
     // Keep focus in the lookup while clicking an option (Safari never focuses clicked buttons).
     menu.addEventListener("mousedown", function (e) { e.preventDefault(); });
-    el.addEventListener("focusout", function (e) {
+    function onFocusOut(e) {
       if (!el.contains(e.relatedTarget)) close(true);
-    });
-    document.addEventListener("milessic:themechange", function (e) {
+    }
+    function onThemeChange(e) {
       if (opts.apply === false) return;  // the app decides; the picker shows what was picked
       selected = e.detail.key;
       if (menu.hidden) showSelected();
-    });
+    }
+    el.addEventListener("focusout", onFocusOut);
+    document.addEventListener("milessic:themechange", onThemeChange);
+    el.milessicUnmount = function () {
+      close(false);
+      el.removeEventListener("focusout", onFocusOut);
+      document.removeEventListener("milessic:themechange", onThemeChange);
+    };
     showSelected();
   }
 
