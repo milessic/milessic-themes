@@ -10,7 +10,7 @@
  *                                          opts.type "dropdown"/"gallery" overrides it, remounting replaces it)
  *   MilessicThemes.enabled(key)            false if the script tag disabled that theme
  *   MilessicThemes.recent()                keys in "last selected" order, newest first (?so=1 only)
- *   MilessicThemes.forgetRecent()          erase that list from this browser
+ *   MilessicThemes.forgetRecent([key])     erase that list from this browser (or only key from it)
  *
  * Script query: ?ts=0 (default) the picker is a dropdown with lookup, ?ts=1 the preview gallery;
  * ?so=1 remembers the order of the user's choices (localStorage "milessic-theme-recent", theme keys
@@ -69,8 +69,13 @@
     list.unshift(key);
     try { localStorage.setItem(RECENT_KEY, JSON.stringify(list.slice(0, 50))); } catch (e) { /* private mode */ }
   }
-  function forgetRecent() {
-    try { localStorage.removeItem(RECENT_KEY); } catch (e) { /* private mode */ }
+  function forgetRecent(key) {
+    try {
+      if (key === undefined) { localStorage.removeItem(RECENT_KEY); return; }
+      var list = recent().filter(function (k) { return k !== key; });
+      if (list.length) localStorage.setItem(RECENT_KEY, JSON.stringify(list));
+      else localStorage.removeItem(RECENT_KEY);
+    } catch (e) { /* private mode */ }
   }
   // Registry order, with the recently selected themes moved to the front (newest first).
   function ordered(themes) {
@@ -211,7 +216,9 @@
       input.value = t ? t.label : selected;
     }
     function options() { return Array.prototype.slice.call(menu.querySelectorAll("button:not([hidden])")); }
+    var lastQuery = "";
     function render(query) {
+      lastQuery = query || "";
       var q = (query || "").trim().toLowerCase(), recents = recent(), seenRecent = false, any = false;
       menu.innerHTML = "";
       ordered(reg.themes).forEach(function (t) {
@@ -228,7 +235,17 @@
         b.innerHTML = '<span class="theme-swatch">' + PREVIEW + '</span><span class="theme-label"></span>';
         b.querySelector(".theme-preview").classList.add("tp-" + t.key);
         b.querySelector(".theme-label").textContent = t.label;
-        b.addEventListener("click", function () { pick(t); });
+        b.dataset.key = t.key;
+        if (isRecent) {
+          // The "x" (shown on hover / focus; Delete on a focused option does the same) drops one recent theme.
+          b.setAttribute("aria-keyshortcuts", "Delete");
+          b.insertAdjacentHTML("beforeend", '<span class="theme-dropdown-remove" title="Remove from recently used" aria-hidden="true">' +
+            '<svg viewBox="0 0 10 10" width="10" height="10"><path d="M1.5 1.5l7 7m0-7l-7 7" stroke="currentColor" stroke-width="1.6"/></svg></span>');
+        }
+        b.addEventListener("click", function (e) {
+          if (e.target.closest(".theme-dropdown-remove")) unrecent(t.key, false);
+          else pick(t);
+        });
         menu.appendChild(b);
         any = true;
       });
@@ -287,6 +304,15 @@
       input.focus();
       choose(t, opts);
     }
+    function unrecent(key, keyboard) {
+      var index = options().map(function (b) { return b.dataset.key; }).indexOf(key);
+      forgetRecent(key);
+      input.focus();  // before render() drops the focused option, which would read as leaving the dropdown
+      render(lastQuery);
+      // Keyboard users stay on the same row (now the next theme); mouse users stay in the lookup.
+      var all = options();
+      if (keyboard && all.length) all[Math.min(index, all.length - 1)].focus();
+    }
     function move(from, step) {
       var all = options(), i = all.indexOf(from) + step;
       if (i < 0) input.focus();
@@ -317,6 +343,7 @@
     menu.addEventListener("keydown", function (e) {
       if (e.key === "ArrowDown" || e.key === "ArrowUp") { e.preventDefault(); move(e.target, e.key === "ArrowDown" ? 1 : -1); }
       else if (e.key === "Escape") { e.preventDefault(); close(true); input.focus(); }
+      else if (e.key === "Delete" && e.target.querySelector(".theme-dropdown-remove")) { e.preventDefault(); unrecent(e.target.dataset.key, true); }
       else if (e.key.length === 1 && !e.ctrlKey && !e.metaKey && !e.altKey) input.focus();  // keep typing into the lookup
     });
     // Keep focus in the lookup while clicking an option (Safari never focuses clicked buttons).

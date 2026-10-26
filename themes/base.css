@@ -340,6 +340,13 @@ table.selectable tbody tr.selected :is(.status, .btn.ghost) { color: inherit; }
 .theme-dropdown > .menu > [aria-selected="true"] .theme-label { font-weight: 700; }
 .theme-dropdown > .menu > p { margin: .4rem .7rem; }
 .theme-dropdown > .menu > .theme-dropdown-forget { font-size: .8rem; color: var(--ink-2); }
+.theme-dropdown-remove {
+  margin-left: auto; flex: none; display: flex; align-items: center; justify-content: center;
+  width: 1.4rem; height: 1.4rem; border-radius: 4px; color: var(--muted); visibility: hidden;
+}
+.theme-dropdown-remove:hover { color: var(--danger); }
+.theme-dropdown > .menu > [role="option"]:is(:hover, :focus-visible) .theme-dropdown-remove { visibility: visible; }
+@media (hover: none) { .theme-dropdown-remove { visibility: visible; } }
 
 @media (max-width: 640px) {
   .topbar { gap: .5rem; }

@@ -53,8 +53,8 @@ favourites.
 `?so=1` is off by default because it writes a second `localStorage` entry. It is built to fit the
 EU ePrivacy "strictly necessary / user-interface customisation" exemption (no consent banner needed):
 written only when the user picks a theme, holds theme keys only (newest first, max 50, no timestamps
-or ids), never leaves the browser, can be erased from the dropdown (*Forget recently used*) or with
-`MilessicThemes.forgetRecent()`, and is disabled by `data-persist="false"`. Apps that enable it must
+or ids), never leaves the browser, can be erased from the dropdown (an "x" on hover per theme, or *Forget recently used* for all)
+or with `MilessicThemes.forgetRecent([key])`, and is disabled by `data-persist="false"`. Apps that enable it must
 still list `milessic-theme` and `milessic-theme-recent` in their privacy notice. Details and the
 operator's duties: [MANIFESTO.md, Privacy](MANIFESTO.md#privacy-the-recently-used-order). Not legal
 advice.

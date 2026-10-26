@@ -146,7 +146,7 @@ Combine them with `&`: `THEMES/js/themes.js?v=1.12.0&ts=1&so=1`.
 | `MilessicThemes.list()`                        | `Promise` of `/api/themes`                                        |
 | `MilessicThemes.mountPicker(el, {onChange, apply, name, label, type})` | Renders the picker chosen by `?ts` (`type: "dropdown"`/`"gallery"` overrides it; mounting again into `el` replaces it); `apply: false` + `onChange` to save server-side instead |
 | `MilessicThemes.recent()`                      | With `?so=1`: theme keys, most recently selected first (else `[]`) |
-| `MilessicThemes.forgetRecent()`                | Erases the recently-used list from this browser                   |
+| `MilessicThemes.forgetRecent([key])`           | Erases the recently-used list from this browser, or only `key` from it |
 | `document` event `milessic:themechange`        | Fired on every switch (`e.detail.key`), e.g. to redraw canvas charts |
 | `<script data-persist="false">`                | Don't use `localStorage` (also turns `?so=1` off)                 |
 | `<script data-restore="false">`                | Don't re-apply the stored theme on load (server decides)          |
@@ -175,8 +175,10 @@ Opinion 04/2012, "user-interface customisation"). The helper keeps both of its e
 * **Only on an explicit choice.** Nothing is written on page load, on hover or while searching.
 * **Stays on the device.** Neither entry is ever sent to the themes server or to your app; there are
   no cookies, so nothing travels with requests.
-* **The user can erase it.** The dropdown ends with *Forget recently used* whenever the list is not
-  empty; apps can call `MilessicThemes.forgetRecent()`, e.g. from their own settings or privacy page.
+* **The user can erase it.** Each recent theme in the dropdown has an "x" (on hover, or Delete on the
+  focused option) that removes just that one, and the list ends with *Forget recently used* that erases
+  it all; apps can call `MilessicThemes.forgetRecent()` (or `forgetRecent(key)`), e.g. from their own
+  settings or privacy page.
 
 What stays with you as the app operator:
 
@@ -241,7 +243,7 @@ from them before inventing new ones. The gallery (`/`) shows each one in each th
 | Tables    | `table.data` · `th`/`td.num` `.actions` · `tr.dim` · `.sort-btn` + `th[aria-sort]` · `table.selectable` + `tr.selected` |
 | Labels    | `.tag` · `.status.on` / `.status.off` · `.dot` (`style="--dot-color:#hex"`) |
 | Data      | tone classes `.tone-ok` `.tone-fail` `.tone-warn` `.tone-caution` `.tone-neutral` on `.badge` `.swatch` `.distribution .seg` `.meter-fill` · `.legend` · `.tiles` › `.tile` › `.tile-label` + `.tile-value` · `.meter` › `.meter-fill` |
-| Picker    | gallery: `.theme-grid` › `label.theme-option` › radio + `.theme-preview.tp-KEY` + `.theme-label` · dropdown: `.theme-dropdown` › `.theme-swatch` + `input[role=combobox]` + `button.theme-dropdown-toggle` (the "v") + `.menu[role=listbox]` (opened in the top layer via the popover API, so ancestors never cover or clip it) › `button[role=option]` › `.theme-swatch` + `.theme-label` (`.theme-swatch` › `.theme-preview.tp-KEY` is the preview at 40%) |
+| Picker    | gallery: `.theme-grid` › `label.theme-option` › radio + `.theme-preview.tp-KEY` + `.theme-label` · dropdown: `.theme-dropdown` › `.theme-swatch` + `input[role=combobox]` + `button.theme-dropdown-toggle` (the "v") + `.menu[role=listbox]` (opened in the top layer via the popover API, so ancestors never cover or clip it) › `button[role=option]` › `.theme-swatch` + `.theme-label` (+ `.theme-dropdown-remove`, the "x", on recent themes) (`.theme-swatch` › `.theme-preview.tp-KEY` is the preview at 40%) |
 
 Markup rules:
 
