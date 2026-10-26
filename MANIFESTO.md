@@ -241,7 +241,7 @@ from them before inventing new ones. The gallery (`/`) shows each one in each th
 | Tables    | `table.data` · `th`/`td.num` `.actions` · `tr.dim` · `.sort-btn` + `th[aria-sort]` · `table.selectable` + `tr.selected` |
 | Labels    | `.tag` · `.status.on` / `.status.off` · `.dot` (`style="--dot-color:#hex"`) |
 | Data      | tone classes `.tone-ok` `.tone-fail` `.tone-warn` `.tone-caution` `.tone-neutral` on `.badge` `.swatch` `.distribution .seg` `.meter-fill` · `.legend` · `.tiles` › `.tile` › `.tile-label` + `.tile-value` · `.meter` › `.meter-fill` |
-| Picker    | gallery: `.theme-grid` › `label.theme-option` › radio + `.theme-preview.tp-KEY` + `.theme-label` · dropdown: `.theme-dropdown` › `.theme-swatch` + `input[role=combobox]` + `.menu[role=listbox]` › `button[role=option]` › `.theme-swatch` + `.theme-label` (`.theme-swatch` › `.theme-preview.tp-KEY` is the preview at 40%) |
+| Picker    | gallery: `.theme-grid` › `label.theme-option` › radio + `.theme-preview.tp-KEY` + `.theme-label` · dropdown: `.theme-dropdown` › `.theme-swatch` + `input[role=combobox]` + `button.theme-dropdown-toggle` (the "v") + `.menu[role=listbox]` › `button[role=option]` › `.theme-swatch` + `.theme-label` (`.theme-swatch` › `.theme-preview.tp-KEY` is the preview at 40%) |
 
 Markup rules:
 

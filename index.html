@@ -5,7 +5,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>milessic-themes</title>
   <link rel="stylesheet" data-milessic-theme href="/css/bundle/system.css">
-  <script src="/js/themes.js"></script>
+  <script>
+    // The picker type is a script option (?ts=0 dropdown, ?ts=1 gallery), so the page's own
+    // ?ts= and ?so= are passed on to the helper: /?ts=1 shows the gallery picker.
+    (function () {
+      var page = new URLSearchParams(location.search), query = new URLSearchParams();
+      ["ts", "so"].forEach(function (k) { if (/^[01]$/.test(page.get(k) || "")) query.set(k, page.get(k)); });
+      document.write('<script src="/js/themes.js' + (query.toString() ? "?" + query : "") + '"><\/script>');
+    })();
+  </script>
 </head>
 <body>
 <header class="topbar">
@@ -37,7 +45,13 @@
   <div class="flash error" role="status">Something went wrong.</div>
 
   <section class="card">
-    <h2>Theme</h2>
+    <div class="section-head">
+      <h2>Theme</h2>
+      <div class="segmented" role="radiogroup" aria-label="Picker">
+        <label><input type="radio" name="picker-type" value="0"><span>Dropdown</span></label>
+        <label><input type="radio" name="picker-type" value="1"><span>Gallery</span></label>
+      </div>
+    </div>
     <div id="picker"></div>
   </section>
 
@@ -234,6 +248,16 @@ two lines</span></p>
   document.addEventListener("milessic:themechange", show);
   show();
   MilessicThemes.mountPicker(document.getElementById("picker"));
+  // Dropdown / Gallery switch: reload with ?ts= (it is read when the helper script loads).
+  var params = new URLSearchParams(location.search);
+  document.querySelectorAll('input[name="picker-type"]').forEach(function (input) {
+    input.checked = input.value === (params.get("ts") === "1" ? "1" : "0");
+    input.addEventListener("change", function () {
+      params.set("ts", input.value);
+      params.set("theme", MilessicThemes.current());
+      location.search = params;
+    });
+  });
   document.getElementById("open-modal").addEventListener("click", function () { document.getElementById("modal-demo").showModal(); });
   document.querySelectorAll('.small-btn[aria-pressed]').forEach(function (b) {
     b.addEventListener("click", function () { b.setAttribute("aria-pressed", b.getAttribute("aria-pressed") !== "true"); });

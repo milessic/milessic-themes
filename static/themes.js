@@ -182,8 +182,9 @@
     var id = "milessic-theme-list-" + (++pickerCount);
     var selected = current();
     el.classList.add("theme-dropdown");
-    el.innerHTML = '<span class="theme-swatch">' + PREVIEW + '</span><input type="text" role="combobox" autocomplete="off" spellcheck="false" aria-autocomplete="list" aria-expanded="false"><div class="menu" role="listbox" hidden></div>';
+    el.innerHTML = '<span class="theme-swatch">' + PREVIEW + '</span><input type="text" role="combobox" autocomplete="off" spellcheck="false" aria-autocomplete="list" aria-expanded="false"><button type="button" class="theme-dropdown-toggle" tabindex="-1" aria-label="Show themes"><span aria-hidden="true"></span></button><div class="menu" role="listbox" hidden></div>';
     var input = el.querySelector("input"), menu = el.querySelector(".menu"), swatch = el.querySelector(".theme-preview");
+    var toggle = el.querySelector(".theme-dropdown-toggle");
     input.setAttribute("aria-label", opts.label || "Theme");
     input.setAttribute("aria-controls", id);
     input.placeholder = "Search themes…";
@@ -260,6 +261,12 @@
     }
 
     input.addEventListener("click", open);
+    // The "v" button: shows the input is a dropdown; opens or closes the list without leaving the lookup.
+    toggle.setAttribute("aria-controls", id);
+    toggle.addEventListener("mousedown", function (e) { e.preventDefault(); });
+    toggle.addEventListener("click", function () {
+      if (menu.hidden) { input.focus(); open(); } else { close(true); input.focus(); }
+    });
     input.addEventListener("input", function () {
       if (menu.hidden) { menu.hidden = false; input.setAttribute("aria-expanded", "true"); }
       render(input.value);
