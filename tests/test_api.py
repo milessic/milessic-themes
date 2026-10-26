@@ -175,3 +175,17 @@ def test_base_defines_every_popup_component():
     base = (ROOT / "themes" / "base.css").read_text()
     for cls in POPUP_CLASSES:
         assert cls in base, f"base.css does not define {cls}"
+
+
+def test_script_picker_options():
+    js = client.get("/js/themes.js").text
+    # ?ts picks the picker (dropdown by default), ?so=1 opts in to the recently-used order
+    assert 'QUERY.get("ts") === "1" ? "gallery" : "dropdown"' in js
+    assert 'persist && QUERY.get("so") === "1"' in js
+    assert "forgetRecent" in js and "milessic-theme-recent" in js
+
+
+def test_base_defines_dropdown_picker():
+    base = (ROOT / "themes" / "base.css").read_text()
+    for cls in [".theme-dropdown", ".theme-swatch", ".theme-grid", ".theme-option"]:
+        assert cls in base, f"base.css does not define {cls}"

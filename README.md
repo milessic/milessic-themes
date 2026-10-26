@@ -38,10 +38,26 @@ given theme). Tests: `pytest`.
 | GET    | `/css/base.css`          | Tokens, components, system/light/dark                                |
 | GET    | `/css/themes/{key}.css`  | Overlay only (404 for system/light/dark)                             |
 | GET    | `/css/previews.css`      | Picker previews for every theme; `@import`ed by base.css, never cached immutable |
-| GET    | `/js/themes.js`          | Optional client helper (switching, picker, persistence)              |
+| GET    | `/js/themes.js`          | Optional client helper (switching, picker, persistence); query `?ts=0` dropdown picker (default), `?ts=1` gallery picker, `?so=1` list recently selected themes first |
 
 All responses send `Access-Control-Allow-Origin: *`; CSS/JS send an `ETag` (304 on match).
 Unknown keys are 404: the registry is the allow-list, keys never touch the filesystem unchecked.
+
+## Theme picker and privacy
+
+`MilessicThemes.mountPicker(el)` renders the picker chosen on the script URL: `?ts=0` (default) a
+dropdown with lookup and a preview of each theme on the left, `?ts=1` the preview gallery.
+`?so=1` (save order) sorts the most recently selected themes first so users can flip between their
+favourites.
+
+`?so=1` is off by default because it writes a second `localStorage` entry. It is built to fit the
+EU ePrivacy "strictly necessary / user-interface customisation" exemption (no consent banner needed):
+written only when the user picks a theme, holds theme keys only (newest first, max 50, no timestamps
+or ids), never leaves the browser, can be erased from the dropdown (*Forget recently used*) or with
+`MilessicThemes.forgetRecent()`, and is disabled by `data-persist="false"`. Apps that enable it must
+still list `milessic-theme` and `milessic-theme-recent` in their privacy notice. Details and the
+operator's duties: [MANIFESTO.md, Privacy](MANIFESTO.md#privacy-the-recently-used-order). Not legal
+advice.
 
 ## Layout
 

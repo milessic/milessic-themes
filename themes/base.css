@@ -318,6 +318,19 @@ table.selectable tbody tr.selected :is(.status, .btn.ghost) { color: inherit; }
 }
 .tp-bar { position: absolute; left: 0; right: 0; top: 0; height: 9px; background: var(--tp-bar); border-radius: var(--tp-r, 4px) var(--tp-r, 4px) 0 0; }
 .tp-btn { position: absolute; right: 6px; bottom: 5px; width: 22px; height: 8px; background: var(--tp-accent); border-radius: calc(var(--tp-r, 4px) / 2); }
+/* theme dropdown (themes.js default): a lookup input with the active preview on its left, options in a .menu.
+   .theme-swatch shows a full-size preview scaled to 40%, so previews.css needs nothing extra. */
+.theme-swatch { display: inline-block; flex: none; width: 40px; height: 25px; overflow: hidden; border-radius: 3px; }
+.theme-swatch .theme-preview { width: 100px; height: 62px; border-width: 2.5px; border-radius: 7px; transform: scale(.4); transform-origin: 0 0; }
+.theme-dropdown { position: relative; max-width: 340px; }
+.theme-dropdown > input[role="combobox"] { width: 100%; padding-left: calc(40px + 1rem); text-overflow: ellipsis; }
+.theme-dropdown > .theme-swatch { position: absolute; left: .5rem; top: 50%; transform: translateY(-50%); pointer-events: none; }
+.theme-dropdown > .menu { position: absolute; z-index: 30; left: 0; right: 0; top: calc(100% + 4px); max-height: min(360px, 60vh); overflow-y: auto; }
+.theme-dropdown > .menu[hidden] { display: none; }
+.theme-dropdown > .menu > [role="option"] { display: flex; align-items: center; gap: .6rem; }
+.theme-dropdown > .menu > [aria-selected="true"] .theme-label { font-weight: 700; }
+.theme-dropdown > .menu > p { margin: .4rem .7rem; }
+.theme-dropdown > .menu > .theme-dropdown-forget { font-size: .8rem; color: var(--ink-2); }
 
 @media (max-width: 640px) {
   .topbar { gap: .5rem; }

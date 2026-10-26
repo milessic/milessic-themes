@@ -129,14 +129,26 @@ A settings form can reuse the picker markup from base.css (radio inputs, so it w
 </body>
 ```
 
+The picker type is chosen on the script URL, so one line switches it for the whole app:
+
+| Script URL query | Picker                                                                          |
+|------------------|---------------------------------------------------------------------------------|
+| `?ts=0` (default)| **Dropdown**: a lookup input with the active theme's preview on its left; typing filters by name, key and description; ↓/↑ move through the options, Enter picks, Esc closes |
+| `?ts=1`          | **Gallery**: the radio grid of large previews (works without JS when server-rendered, see Level 2) |
+| `?so=1`          | **Save order**: remember which themes the user picked and list the most recently selected first, so favourites are one click away. Off by default; read [Privacy](#privacy-the-recently-used-order) before turning it on |
+
+Combine them with `&`: `THEMES/js/themes.js?v=1.12.0&ts=1&so=1`.
+
 | Helper call                                    | Does                                                              |
 |------------------------------------------------|-------------------------------------------------------------------|
 | `MilessicThemes.apply(key)`                    | Sets `data-theme`, swaps the link (new sheet loads before the old one is dropped), stores in `localStorage` |
 | `MilessicThemes.current()`                     | Active key                                                        |
 | `MilessicThemes.list()`                        | `Promise` of `/api/themes`                                        |
-| `MilessicThemes.mountPicker(el, {onChange, apply, name, label})` | Renders the radio picker; `apply: false` + `onChange` to save server-side instead |
+| `MilessicThemes.mountPicker(el, {onChange, apply, name, label})` | Renders the picker chosen by `?ts`; `apply: false` + `onChange` to save server-side instead |
+| `MilessicThemes.recent()`                      | With `?so=1`: theme keys, most recently selected first (else `[]`) |
+| `MilessicThemes.forgetRecent()`                | Erases the recently-used list from this browser                   |
 | `document` event `milessic:themechange`        | Fired on every switch (`e.detail.key`), e.g. to redraw canvas charts |
-| `<script data-persist="false">`                | Don't use `localStorage`                                          |
+| `<script data-persist="false">`                | Don't use `localStorage` (also turns `?so=1` off)                 |
 | `<script data-restore="false">`                | Don't re-apply the stored theme on load (server decides)          |
 | `<script data-themes="system,dark,bevel">`     | Offer only these themes (picker, `list()`, `apply()`)             |
 | `<script data-exclude="console,glass">`        | Hide these themes; wins over `data-themes`                        |
@@ -145,6 +157,40 @@ A settings form can reuse the picker markup from base.css (radio inputs, so it w
 Level 2 + helper: render the user's theme on the server, load the helper with
 `data-restore="false"`, and call `mountPicker(el, {onChange: key => fetch("/settings/theme", …)})`
 for instant switching that is also saved.
+
+### Privacy: the recently-used order
+
+Under the EU ePrivacy Directive (2002/58/EC, Art. 5(3)) writing anything to a visitor's device,
+`localStorage` included (EDPB Guidelines 2/2023), needs prior consent **unless it is strictly
+necessary for a service the user explicitly asked for**. Remembering an interface choice the user
+made themselves, such as a theme, is the textbook example of that exemption (Article 29 Working Party,
+Opinion 04/2012, "user-interface customisation"). The helper keeps both of its entries inside it:
+
+| `localStorage` key       | Written when                            | Holds                                   | Turned off by |
+|--------------------------|-----------------------------------------|-----------------------------------------|---------------|
+| `milessic-theme`         | the user picks a theme                  | one theme key, e.g. `"bevel"`           | `data-persist="false"` |
+| `milessic-theme-recent`  | the user picks a theme, **only with `?so=1`** | theme keys, newest first, at most 50: no timestamps, ids or anything else | leaving out `?so=1`, or `data-persist="false"` |
+
+* **Off by default.** The order is only kept when the app opts in with `?so=1`.
+* **Only on an explicit choice.** Nothing is written on page load, on hover or while searching.
+* **Stays on the device.** Neither entry is ever sent to the themes server or to your app; there are
+  no cookies, so nothing travels with requests.
+* **The user can erase it.** The dropdown ends with *Forget recently used* whenever the list is not
+  empty; apps can call `MilessicThemes.forgetRecent()`, e.g. from their own settings or privacy page.
+
+What stays with you as the app operator:
+
+* **Say it in your privacy / cookie notice**: name both keys, their purpose (remember the chosen
+  theme and the order of recently used themes), that they stay in the browser until cleared, and how to
+  clear them. The exemption waives consent, not transparency.
+* **Don't move the list off the device** (e.g. `onChange` posting it to your server, analytics, or
+  joining it to an account) without your own GDPR legal basis and notice: at that point it is personal
+  data you process. Saving the user's *current* theme to their account (Level 2) is ordinary
+  preference storage under your terms of service.
+* National implementations of Art. 5(3) differ in detail; if your regulator is stricter, gate
+  `?so=1` behind your consent banner (load the script with it only after consent).
+
+This section describes how the helper is built to fit the exemption; it is not legal advice.
 
 ---
 
@@ -195,7 +241,7 @@ from them before inventing new ones. The gallery (`/`) shows each one in each th
 | Tables    | `table.data` · `th`/`td.num` `.actions` · `tr.dim` · `.sort-btn` + `th[aria-sort]` · `table.selectable` + `tr.selected` |
 | Labels    | `.tag` · `.status.on` / `.status.off` · `.dot` (`style="--dot-color:#hex"`) |
 | Data      | tone classes `.tone-ok` `.tone-fail` `.tone-warn` `.tone-caution` `.tone-neutral` on `.badge` `.swatch` `.distribution .seg` `.meter-fill` · `.legend` · `.tiles` › `.tile` › `.tile-label` + `.tile-value` · `.meter` › `.meter-fill` |
-| Picker    | `.theme-grid` › `label.theme-option` › radio + `.theme-preview.tp-KEY` + `.theme-label` |
+| Picker    | gallery: `.theme-grid` › `label.theme-option` › radio + `.theme-preview.tp-KEY` + `.theme-label` · dropdown: `.theme-dropdown` › `.theme-swatch` + `input[role=combobox]` + `.menu[role=listbox]` › `button[role=option]` › `.theme-swatch` + `.theme-label` (`.theme-swatch` › `.theme-preview.tp-KEY` is the preview at 40%) |
 
 Markup rules:
 
@@ -336,6 +382,7 @@ The contract won't cover everything. For an app widget:
 - [ ] Status colors use `tone-*` classes plus a text label
 - [ ] Version pinned with `?v=`; outage fallback decided
 - [ ] Every screen checked in System (light + dark), 1-bit and Bevel
+- [ ] With `?so=1`: `milessic-theme` and `milessic-theme-recent` are listed in your privacy notice
 - [ ] Attribution link to milessic-themes is visible (see §10)
 
 ---
